@@ -9,6 +9,14 @@ document.addEventListener('DOMContentLoaded', () => {
     makeDraggable(document.getElementById('main-window'), document.getElementById('window-titlebar'));
     makeDraggable(document.getElementById('about-dialog'), document.querySelector('.dialog-titlebar'));
 
+    // Double-click on main window titlebar to maximize/restore
+    const titlebar = document.getElementById('window-titlebar');
+    if (titlebar) {
+        titlebar.addEventListener('dblclick', () => {
+            toggleMaximizeWindow('main-window');
+        });
+    }
+
     // 3. Play Windows XP Startup Sound on first user interaction
     document.body.addEventListener('click', () => {
         const startupSound = document.getElementById('sound-startup');
@@ -92,7 +100,7 @@ function closeWindow(windowId) {
 
 function minimizeWindow(windowId) {
     const win = document.getElementById(windowId);
-    if (win) win.style.display = 'none';
+    if (win) win.classList.add('minimized');
 
     const taskbarItem = document.getElementById(`taskbar-${windowId}`);
     if (taskbarItem) taskbarItem.classList.remove('active');
@@ -102,6 +110,9 @@ function openWindow(windowId) {
     const win = document.getElementById(windowId);
     if (win) {
         win.style.display = 'flex';
+        // Force reflow to register display change before transition
+        void win.offsetWidth;
+        win.classList.remove('minimized');
         // Bring to front
         bringToFront(win);
     }
@@ -117,12 +128,14 @@ function toggleWindowMinimization(windowId) {
     const win = document.getElementById(windowId);
     const taskbarItem = document.getElementById(`taskbar-${windowId}`);
     
-    if (win.style.display === 'none') {
+    if (win.classList.contains('minimized') || win.style.display === 'none') {
         win.style.display = 'flex';
+        void win.offsetWidth;
+        win.classList.remove('minimized');
         bringToFront(win);
         if (taskbarItem) taskbarItem.classList.add('active');
     } else {
-        win.style.display = 'none';
+        win.classList.add('minimized');
         if (taskbarItem) taskbarItem.classList.remove('active');
     }
 }
@@ -133,12 +146,19 @@ function toggleMaximizeWindow(windowId) {
 
     if (win.classList.contains('maximized')) {
         win.classList.remove('maximized');
-        win.style.width = '860px';
-        win.style.height = '650px';
-        win.style.top = '50%';
-        win.style.left = '50%';
-        win.style.transform = 'translate(-50%, -52%)';
+        win.style.width = win.dataset.preMaxWidth || '860px';
+        win.style.height = win.dataset.preMaxHeight || '650px';
+        win.style.top = win.dataset.preMaxTop || '50%';
+        win.style.left = win.dataset.preMaxLeft || '50%';
+        win.style.transform = win.dataset.preMaxTransform || 'translate(-50%, -52%)';
     } else {
+        // Save current styles before maximizing
+        win.dataset.preMaxWidth = win.style.width || '860px';
+        win.dataset.preMaxHeight = win.style.height || '650px';
+        win.dataset.preMaxTop = win.style.top || '50%';
+        win.dataset.preMaxLeft = win.style.left || '50%';
+        win.dataset.preMaxTransform = win.style.transform || 'translate(-50%, -52%)';
+
         win.classList.add('maximized');
         win.style.width = '100vw';
         win.style.height = 'calc(100vh - 30px)'; // Taskbar is 30px
@@ -179,6 +199,7 @@ function makeDraggable(windowEl, titlebarEl) {
         }
 
         bringToFront(windowEl);
+        windowEl.classList.add('dragging');
         
         // Get mouse cursor position at startup
         pos3 = e.clientX;
@@ -210,6 +231,7 @@ function makeDraggable(windowEl, titlebarEl) {
     }
 
     function closeDragElement() {
+        windowEl.classList.remove('dragging');
         // Stop moving when mouse button is released
         document.onmouseup = null;
         document.onmousemove = null;
