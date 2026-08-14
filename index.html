@@ -230,17 +230,42 @@
                 </div>
             </div>
             <div class="start-menu-footer">
-                <button class="start-footer-btn shutdown" onclick="alert('Apagando sistema virtual... ¡Gracias por su visita!');">
+                <button class="start-footer-btn shutdown" onclick="showShutdownDialog('apagar')">
                     <div class="footer-btn-icon shutdown-icon"></div>
                     <span>Apagar equipo</span>
                 </button>
-                <button class="start-footer-btn logoff" onclick="alert('Cerrando sesión de Hector Daniel Ayarachi...');">
+                <button class="start-footer-btn logoff" onclick="showShutdownDialog('sesion')">
                     <div class="footer-btn-icon logoff-icon"></div>
                     <span>Cerrar sesión</span>
                 </button>
             </div>
         </div>
 
+    </div>
+
+    <!-- Shutdown / Logoff Modal -->
+    <div id="shutdown-overlay" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.75); z-index:99999; display:none; align-items:center; justify-content:center;">
+        <div id="shutdown-dialog" style="background:#ECE9D8; border:2px solid #0054E3; border-radius:8px; box-shadow:4px 4px 20px rgba(0,0,0,0.6); width:360px; font-family:'Tahoma','Segoe UI',sans-serif; overflow:hidden;">
+            <!-- Titlebar -->
+            <div style="background:linear-gradient(to right, #0054E3, #2E9AFF); padding:5px 8px; display:flex; align-items:center; gap:8px;">
+                <img src="assets/iconos/computer_explorer-4.png" style="width:16px; height:16px;" alt="">
+                <span style="color:white; font-weight:bold; font-size:12px; flex:1;">Windows XP</span>
+            </div>
+            <!-- Body -->
+            <div style="padding:20px 24px; display:flex; align-items:flex-start; gap:16px;">
+                <div id="shutdown-icon-wrap" style="flex-shrink:0; width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center;">
+                    <span id="shutdown-emoji" style="font-size:28px;">💻</span>
+                </div>
+                <div>
+                    <p id="shutdown-title" style="margin:0 0 4px; font-weight:bold; font-size:13px; color:#003087;"></p>
+                    <p id="shutdown-msg" style="margin:0; font-size:12px; color:#333; line-height:1.5;"></p>
+                </div>
+            </div>
+            <!-- Progress bar -->
+            <div style="margin:0 24px 16px; background:#C2C2C2; border-radius:4px; height:14px; overflow:hidden; border:1px solid #999;">
+                <div id="shutdown-progress" style="height:100%; width:0%; background:linear-gradient(to right, #2563eb, #60a5fa); border-radius:4px; transition:width 0.3s ease;"></div>
+            </div>
+        </div>
     </div>
 
     <!-- Audio effects (retro windows XP sounds using public links or synth audio fallback) -->

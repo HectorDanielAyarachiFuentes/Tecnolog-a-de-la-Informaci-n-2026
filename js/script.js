@@ -364,3 +364,49 @@ function toggleExpandPDF() {
         }
     }
 }
+
+// Shutdown / Logoff custom dialog
+function showShutdownDialog(tipo) {
+    // Cerrar el menú inicio si está abierto
+    const startMenu = document.getElementById('start-menu');
+    if (startMenu) startMenu.style.display = 'none';
+
+    const overlay   = document.getElementById('shutdown-overlay');
+    const emoji     = document.getElementById('shutdown-emoji');
+    const title     = document.getElementById('shutdown-title');
+    const msg       = document.getElementById('shutdown-msg');
+    const progress  = document.getElementById('shutdown-progress');
+
+    if (!overlay) return;
+
+    if (tipo === 'apagar') {
+        emoji.textContent = '🔌';
+        title.textContent = 'Apagando el equipo...';
+        msg.textContent   = 'Windows XP está apagando el sistema virtual. Gracias por su visita.';
+    } else {
+        emoji.textContent = '👤';
+        title.textContent = 'Cerrando sesión...';
+        msg.textContent   = 'Cerrando sesión de Hector Daniel Ayarachi Fuentes. Hasta luego.';
+    }
+
+    // Reiniciar barra de progreso
+    progress.style.width = '0%';
+    overlay.style.display = 'flex';
+
+    // Animar barra de progreso durante ~2 segundos
+    let pct = 0;
+    const interval = setInterval(() => {
+        pct += 2;
+        progress.style.width = pct + '%';
+        if (pct >= 100) {
+            clearInterval(interval);
+            setTimeout(() => {
+                window.close();
+                // Fallback si el browser bloquea window.close()
+                overlay.style.transition = 'opacity 0.8s';
+                overlay.style.opacity = '0';
+            }, 400);
+        }
+    }, 40);
+}
+
