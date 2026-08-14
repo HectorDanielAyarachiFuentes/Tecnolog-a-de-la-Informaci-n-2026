@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tecnologías de la Información 2026 - Hector Daniel Ayarachi Fuentes</title>
+    <title>TecnologÃ­as de la InformaciÃ³n 2026 - Hector Daniel Ayarachi Fuentes</title>
     <!-- Favicon retro opcional -->
-    <link rel="icon" type="image/png" href="https://win98icons.alexmeub.com/icons/png/computer_explorer-4.png">
+    <link rel="icon" type="image/png" href="iconos/computer_explorer-4.png">
     <!-- Google Fonts for custom styling, though we'll use Tahoma-like fonts for XP feel -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,20 +17,20 @@
         <!-- Desktop Shortcuts -->
         <div class="desktop-icons">
             <div class="desktop-icon" id="icon-my-computer" onclick="openWindow('main-window')">
-                <img src="https://win98icons.alexmeub.com/icons/png/computer_explorer-5.png" alt="Mi PC">
+                <img src="iconos/computer_explorer-5.png" alt="Mi PC">
                 <span>Mi PC</span>
             </div>
             <div class="desktop-icon" id="icon-my-documents" onclick="openWindow('main-window'); switchTab('tab-act1');">
-                <img src="https://win98icons.alexmeub.com/icons/png/directory_closed-4.png" alt="Actividades">
+                <img src="iconos/directory_closed-4.png" alt="Actividades">
                 <span>Actividades</span>
             </div>
             <div class="desktop-icon" id="icon-pdf" onclick="openWindow('main-window'); switchTab('tab-act1');">
-                <img src="https://win98icons.alexmeub.com/icons/png/notepad-0.png" alt="Reporte Prompts">
+                <img src="iconos/notepad-0.png" alt="Reporte Prompts">
                 <span>Reporte Prompts.pdf</span>
             </div>
             <div class="desktop-icon" id="icon-about" onclick="openAboutModal()">
-                <img src="https://win98icons.alexmeub.com/icons/png/help_book_big-0.png" alt="Sobre Mí">
-                <span>Sobre mí</span>
+                <img src="iconos/help_book_big-0.png" alt="Sobre MÃ­">
+                <span>Sobre mÃ­</span>
             </div>
         </div>
 
@@ -38,8 +38,8 @@
         <div class="window xp-window" id="main-window">
             <div class="window-titlebar" id="window-titlebar">
                 <div class="titlebar-left">
-                    <img src="https://win98icons.alexmeub.com/icons/png/computer_explorer-4.png" class="titlebar-icon" alt="Icon">
-                    <span class="titlebar-text">Tecnologías de la Información 2026</span>
+                    <img src="iconos/computer_explorer-4.png" class="titlebar-icon" alt="Icon">
+                    <span class="titlebar-text">TecnologÃ­as de la InformaciÃ³n 2026</span>
                 </div>
                 <div class="titlebar-controls">
                     <button class="titlebar-button btn-minimize" onclick="minimizeWindow('main-window')" title="Minimizar"></button>
@@ -51,7 +51,7 @@
             <!-- Window Menu Bar -->
             <div class="window-menubar">
                 <span class="menu-item"><u>A</u>rchivo</span>
-                <span class="menu-item"><u>E</u>dición</span>
+                <span class="menu-item"><u>E</u>diciÃ³n</span>
                 <span class="menu-item"><u>V</u>er</span>
                 <span class="menu-item"><u>F</u>avoritos</span>
                 <span class="menu-item">Herra<u>m</u>ientas</span>
@@ -61,7 +61,7 @@
             <!-- Window Header (User Name and Subject) -->
             <div class="window-header-banner">
                 <div class="banner-content">
-                    <h1>TECNOLOGÍAS DE LA INFORMACIÓN 2026</h1>
+                    <h1>TECNOLOGÃAS DE LA INFORMACIÃ“N 2026</h1>
                     <h2>Hector Daniel Ayarachi Fuentes</h2>
                 </div>
                 <div class="banner-decor">
@@ -84,14 +84,14 @@
                     <div class="xp-tab-panel active" id="tab-act1">
                         <div class="activities-viewer" style="height: 100%;">
                             <div class="viewer-toolbar">
-                                <div class="toolbar-btn disabled"><img src="https://win98icons.alexmeub.com/icons/png/arrow_left-0.png" alt="Atrás"> Atrás</div>
-                                <div class="toolbar-btn disabled"><img src="https://win98icons.alexmeub.com/icons/png/arrow_right-0.png" alt="Adelante"> Adelante</div>
+                                <div class="toolbar-btn disabled"><img src="iconos/ArrowLeft.svg" alt="AtrÃ¡s"> AtrÃ¡s</div>
+                                <div class="toolbar-btn disabled"><img src="iconos/ArrowRight.svg" alt="Adelante"> Adelante</div>
                                 <div class="toolbar-separator"></div>
-                                <div class="toolbar-btn" onclick="refreshPDF()"><img src="https://win98icons.alexmeub.com/icons/png/message_warn-0.png" alt="Actualizar" style="filter: hue-rotate(120deg)"> Recargar</div>
+                                <div class="toolbar-btn" onclick="refreshPDF()"><img src="iconos/Sync.svg" alt="Actualizar"> Recargar</div>
                                 <div class="toolbar-separator"></div>
-                                <div class="toolbar-btn" onclick="openAboutModal()"><img src="https://win98icons.alexmeub.com/icons/png/help_question_mark-0.png" alt="Sobre mí"> Sobre mí</div>
+                                <div class="toolbar-btn" onclick="openAboutModal()"><img src="iconos/help_question_mark-0.png" alt="Sobre mÃ­"> Sobre mÃ­</div>
                                 <div class="toolbar-separator"></div>
-                                <span class="viewer-path-label">Dirección:</span>
+                                <span class="viewer-path-label">DirecciÃ³n:</span>
                                 <div class="viewer-path-bar">
                                     C:\TI-2026\Actividades\reporte-laboratorio-prompts.pdf
                                 </div>
@@ -100,8 +100,8 @@
                                 <!-- PDF Embedded Viewer with fallback -->
                                 <iframe id="pdf-iframe" src="reporte-laboratorio-prompts.pdf" type="application/pdf" style="width: 100%; height: 100%; border: none;">
                                     <div class="pdf-fallback">
-                                        <img src="https://win98icons.alexmeub.com/icons/png/msg_error-0.png" alt="Error">
-                                        <h3>Tu navegador no soporta visualización directa de PDFs.</h3>
+                                        <img src="iconos/msg_error-0.png" alt="Error">
+                                        <h3>Tu navegador no soporta visualizaciÃ³n directa de PDFs.</h3>
                                         <p>Puedes descargar el archivo directamente para leerlo en tu computadora:</p>
                                         <a href="reporte-laboratorio-prompts.pdf" download class="xp-btn-classic">Descargar reporte-laboratorio-prompts.pdf</a>
                                     </div>
@@ -113,9 +113,9 @@
                     <!-- Tab Panel 2: Actividad 2 -->
                     <div class="xp-tab-panel" id="tab-act2">
                         <div class="empty-activity-view">
-                            <img src="https://win98icons.alexmeub.com/icons/png/directory_open-4.png" alt="Carpeta vacía">
+                            <img src="iconos/directory_open-4.png" alt="Carpeta vacÃ­a">
                             <h3>Actividad 2</h3>
-                            <p>Esta actividad estará disponible próximamente en el semestre 2026.</p>
+                            <p>Esta actividad estarÃ¡ disponible prÃ³ximamente en el semestre 2026.</p>
                         </div>
                     </div>
                 </div>
@@ -125,7 +125,7 @@
             <div class="window-statusbar">
                 <div class="statusbar-pane pane-status">Listo</div>
                 <div class="statusbar-pane pane-info">Hector Daniel Ayarachi Fuentes</div>
-                <div class="statusbar-pane pane-zone"><img src="https://win98icons.alexmeub.com/icons/png/world-0.png" alt="Internet"> Mi PC | Zona de Intranet local</div>
+                <div class="statusbar-pane pane-zone"><img src="iconos/world-0.png" alt="Internet"> Mi PC | Zona de Intranet local</div>
             </div>
         </div>
 
@@ -134,8 +134,8 @@
             <div class="window xp-dialog" id="about-dialog">
                 <div class="window-titlebar dialog-titlebar">
                     <div class="titlebar-left">
-                        <img src="https://win98icons.alexmeub.com/icons/png/help_book_small-0.png" class="titlebar-icon" alt="Info">
-                        <span class="titlebar-text">Información del Estudiante</span>
+                        <img src="iconos/help_book_small-0.png" class="titlebar-icon" alt="Info">
+                        <span class="titlebar-text">InformaciÃ³n del Estudiante</span>
                     </div>
                     <div class="titlebar-controls">
                         <button class="titlebar-button btn-close" onclick="closeAboutModal()"></button>
@@ -143,12 +143,12 @@
                 </div>
                 <div class="dialog-body">
                     <div class="dialog-message-container">
-                        <img src="https://win98icons.alexmeub.com/icons/png/help_question_mark-0.png" class="dialog-icon" alt="Question">
+                        <img src="iconos/help_question_mark-0.png" class="dialog-icon" alt="Question">
                         <div class="dialog-message">
                             <h3>Sobre Hector Daniel Ayarachi Fuentes</h3>
-                            <p>Esta página web ha sido diseñada para la materia <strong>Tecnologías de la Información 2026</strong>.</p>
-                            <p>El primer reporte presentado es el laboratorio sobre <strong>Ingeniería de Prompts y Modelos de Lenguaje</strong>.</p>
-                            <p class="dialog-system-info">Sistema Operativo Simulado: Windows XP Professional (Edición 2026)</p>
+                            <p>Esta pÃ¡gina web ha sido diseÃ±ada para la materia <strong>TecnologÃ­as de la InformaciÃ³n 2026</strong>.</p>
+                            <p>El primer reporte presentado es el laboratorio sobre <strong>IngenierÃ­a de Prompts y Modelos de Lenguaje</strong>.</p>
+                            <p class="dialog-system-info">Sistema Operativo Simulado: Windows XP Professional (EdiciÃ³n 2026)</p>
                         </div>
                     </div>
                     <div class="dialog-buttons">
@@ -169,16 +169,16 @@
             <!-- Active Tasks -->
             <div class="taskbar-tasks">
                 <div class="taskbar-item active" id="taskbar-main-window" onclick="toggleWindowMinimization('main-window')">
-                    <img src="https://win98icons.alexmeub.com/icons/png/computer_explorer-4.png" alt="TI 2026">
-                    <span class="taskbar-item-text">Tecnologías de la...</span>
+                    <img src="iconos/computer_explorer-4.png" alt="TI 2026">
+                    <span class="taskbar-item-text">TecnologÃ­as de la...</span>
                 </div>
             </div>
 
             <!-- System Tray -->
             <div class="system-tray">
                 <div class="tray-icons">
-                    <img src="https://win98icons.alexmeub.com/icons/png/loudspeaker_rays-1.png" alt="Volumen" title="Volumen" class="tray-icon">
-                    <img src="https://win98icons.alexmeub.com/icons/png/network_normal_two_pcs-2.png" alt="Red" title="Red Local" class="tray-icon">
+                    <img src="iconos/loudspeaker_rays-1.png" alt="Volumen" title="Volumen" class="tray-icon">
+                    <img src="iconos/network_normal_two_pcs-2.png" alt="Red" title="Red Local" class="tray-icon">
                 </div>
                 <div class="system-clock" id="system-clock">
                     12:00 PM
@@ -189,54 +189,54 @@
         <!-- Start Menu -->
         <div class="start-menu" id="start-menu">
             <div class="start-menu-header">
-                <img src="https://win98icons.alexmeub.com/icons/png/users-1.png" class="start-user-avatar" alt="Avatar">
+                <img src="iconos/users-1.png" class="start-user-avatar" alt="Avatar">
                 <span class="start-user-name">Hector Daniel Ayarachi Fuentes</span>
             </div>
             <div class="start-menu-body">
                 <div class="start-menu-left">
                     <div class="start-menu-item" onclick="openWindow('main-window'); switchTab('tab-act1'); toggleStartMenu();">
-                        <img src="https://win98icons.alexmeub.com/icons/png/directory_closed-4.png" alt="Actividades">
+                        <img src="iconos/directory_closed-4.png" alt="Actividades">
                         <div class="start-item-text">
                             <strong>Actividades del Semestre</strong>
                             <span>Ver tareas y reportes del curso</span>
                         </div>
                     </div>
                     <div class="start-menu-item" onclick="openAboutModal(); toggleStartMenu();">
-                        <img src="https://win98icons.alexmeub.com/icons/png/help_book_big-0.png" alt="Acerca de">
+                        <img src="iconos/help_book_big-0.png" alt="Acerca de">
                         <div class="start-item-text">
-                            <strong>Sobre mí</strong>
-                            <span>Conoce al autor de la página</span>
+                            <strong>Sobre mÃ­</strong>
+                            <span>Conoce al autor de la pÃ¡gina</span>
                         </div>
                     </div>
                 </div>
                 <div class="start-menu-right">
                     <div class="start-right-item" onclick="openWindow('main-window'); toggleStartMenu();">
-                        <img src="https://win98icons.alexmeub.com/icons/png/computer_explorer-5.png" alt="Mi PC">
+                        <img src="iconos/computer_explorer-5.png" alt="Mi PC">
                         <span>Mi PC</span>
                     </div>
                     <div class="start-right-item" onclick="openWindow('main-window'); switchTab('tab-act1'); toggleStartMenu();">
-                        <img src="https://win98icons.alexmeub.com/icons/png/notepad-0.png" alt="Reportes">
+                        <img src="iconos/notepad-0.png" alt="Reportes">
                         <span>Mis Documentos</span>
                     </div>
                     <hr class="start-menu-divider">
-                    <div class="start-right-item" onclick="alert('Abriendo Panel de Control... Simulación 2026'); toggleStartMenu();">
-                        <img src="https://win98icons.alexmeub.com/icons/png/control_panel-4.png" alt="Panel de Control">
+                    <div class="start-right-item" onclick="alert('Abriendo Panel de Control... SimulaciÃ³n 2026'); toggleStartMenu();">
+                        <img src="iconos/control_panel-4.png" alt="Panel de Control">
                         <span>Panel de Control</span>
                     </div>
-                    <div class="start-right-item" onclick="alert('Abriendo Soporte... Simulación 2026'); toggleStartMenu();">
-                        <img src="https://win98icons.alexmeub.com/icons/png/help_question_mark-0.png" alt="Ayuda y Soporte">
+                    <div class="start-right-item" onclick="alert('Abriendo Soporte... SimulaciÃ³n 2026'); toggleStartMenu();">
+                        <img src="iconos/help_question_mark-0.png" alt="Ayuda y Soporte">
                         <span>Ayuda y Soporte</span>
                     </div>
                 </div>
             </div>
             <div class="start-menu-footer">
-                <button class="start-footer-btn shutdown" onclick="alert('Apagando sistema virtual... ¡Gracias por su visita!');">
+                <button class="start-footer-btn shutdown" onclick="alert('Apagando sistema virtual... Â¡Gracias por su visita!');">
                     <div class="footer-btn-icon shutdown-icon"></div>
                     <span>Apagar equipo</span>
                 </button>
-                <button class="start-footer-btn logoff" onclick="alert('Cerrando sesión de Hector Daniel Ayarachi...');">
+                <button class="start-footer-btn logoff" onclick="alert('Cerrando sesiÃ³n de Hector Daniel Ayarachi...');">
                     <div class="footer-btn-icon logoff-icon"></div>
-                    <span>Cerrar sesión</span>
+                    <span>Cerrar sesiÃ³n</span>
                 </button>
             </div>
         </div>
@@ -250,3 +250,8 @@
     <script src="script.js"></script>
 </body>
 </html>
+
+
+
+
+
