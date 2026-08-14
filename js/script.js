@@ -318,3 +318,49 @@ function closeAboutModalOnOverlay(event) {
         closeAboutModal();
     }
 }
+
+// Toggle full screen / expanded view for PDF viewer
+function toggleExpandPDF() {
+    const viewer = document.querySelector('.activities-viewer');
+    if (!viewer) return;
+
+    const btnText = document.getElementById('text-expand-pdf');
+    const btnIcon = document.getElementById('icon-expand-pdf');
+    const desktop = document.querySelector('.desktop');
+
+    viewer.classList.toggle('expanded');
+
+    if (viewer.classList.contains('expanded')) {
+        // Create a placeholder where the viewer was originally located
+        let placeholder = document.getElementById('pdf-viewer-placeholder');
+        if (!placeholder) {
+            placeholder = document.createElement('div');
+            placeholder.id = 'pdf-viewer-placeholder';
+            placeholder.style.display = 'none';
+            viewer.parentNode.insertBefore(placeholder, viewer);
+        }
+        
+        // Move the viewer to the desktop container so it can cover the full screen
+        if (desktop) {
+            desktop.appendChild(viewer);
+        }
+
+        if (btnText) btnText.innerText = 'Contraer';
+        if (btnIcon) {
+            btnIcon.src = 'assets/iconos/collapse.svg';
+            btnIcon.alt = 'Contraer';
+        }
+    } else {
+        // Move the viewer back to its original layout position
+        const placeholder = document.getElementById('pdf-viewer-placeholder');
+        if (placeholder && placeholder.parentNode) {
+            placeholder.parentNode.insertBefore(viewer, placeholder);
+        }
+
+        if (btnText) btnText.innerText = 'Expandir';
+        if (btnIcon) {
+            btnIcon.src = 'assets/iconos/expand.svg';
+            btnIcon.alt = 'Expandir';
+        }
+    }
+}
