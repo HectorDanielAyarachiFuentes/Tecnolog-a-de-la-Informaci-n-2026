@@ -60,11 +60,11 @@ function selectActivity(activityId) {
         if (item) item.classList.add('active');
         // Update viewer path
         const pathBar = document.querySelector('.viewer-path-bar');
-        if (pathBar) pathBar.innerText = 'C:\\TI-2026\\Actividades\\reporte-laboratorio-prompts.pdf';
+        if (pathBar) pathBar.innerText = 'C:\\TI-2026\\Actividades\\Actividad-1\\reporte-laboratorio-prompts.pdf';
         
         // Show PDF
         const iframe = document.getElementById('pdf-iframe');
-        if (iframe) iframe.src = 'reporte-laboratorio-prompts.pdf';
+        if (iframe) iframe.src = 'Actividades/Actividad-1/reporte-laboratorio-prompts.pdf';
     }
 }
 
