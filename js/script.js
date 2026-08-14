@@ -1,4 +1,4 @@
-// JavaScript for Windows XP Portfolio Simulation
+﻿// JavaScript for Windows XP Portfolio Simulation
 
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Clock functionality
@@ -367,7 +367,7 @@ function toggleExpandPDF() {
 
 // Shutdown / Logoff custom dialog
 function showShutdownDialog(tipo) {
-    // Cerrar el menú inicio si está abierto
+    // Cerrar el menÃº inicio si estÃ¡ abierto
     const startMenu = document.getElementById('start-menu');
     if (startMenu) startMenu.style.display = 'none';
 
@@ -379,18 +379,21 @@ function showShutdownDialog(tipo) {
 
     if (!overlay) return;
 
-    if (tipo === 'apagar') {
-        emoji.textContent = '🔌';
+    const esApagar = tipo === 'apagar';
+    if (esApagar) {
+        emoji.textContent = 'ðŸ”Œ';
         title.textContent = 'Apagando el equipo...';
-        msg.textContent   = 'Windows XP está apagando el sistema virtual. Gracias por su visita.';
+        msg.textContent   = 'Windows XP estÃ¡ apagando el sistema virtual. Gracias por su visita.';
     } else {
-        emoji.textContent = '👤';
-        title.textContent = 'Cerrando sesión...';
-        msg.textContent   = 'Cerrando sesión de Hector Daniel Ayarachi Fuentes. Hasta luego.';
+        emoji.textContent = 'ðŸ‘¤';
+        title.textContent = 'Cerrando sesiÃ³n...';
+        msg.textContent   = 'Cerrando sesiÃ³n de Hector Daniel Ayarachi Fuentes. Hasta luego.';
     }
 
-    // Reiniciar barra de progreso
+    // Reiniciar barra de progreso y mostrar overlay
     progress.style.width = '0%';
+    overlay.style.opacity = '1';
+    overlay.style.transition = 'none';
     overlay.style.display = 'flex';
 
     // Animar barra de progreso durante ~2 segundos
@@ -401,12 +404,222 @@ function showShutdownDialog(tipo) {
         if (pct >= 100) {
             clearInterval(interval);
             setTimeout(() => {
-                window.close();
-                // Fallback si el browser bloquea window.close()
-                overlay.style.transition = 'opacity 0.8s';
-                overlay.style.opacity = '0';
+                // Mostrar pantalla negra de apagado (simula equipo apagado)
+                showBlackScreen(esApagar);
             }, 400);
         }
     }, 40);
 }
 
+// Pantalla de apagado/logoff estilo Windows XP - diseno unificado
+function showBlackScreen(isShutdown) {
+    var overlay = document.getElementById('shutdown-overlay');
+    if (overlay) overlay.style.display = 'none';
+
+    // Inyectar estilos una sola vez
+    if (!document.getElementById('xp-shutdown-styles')) {
+        var style = document.createElement('style');
+        style.id = 'xp-shutdown-styles';
+        style.textContent = [
+            '#xp-shutdown-screen {',
+            '  position:fixed; inset:0; z-index:999999;',
+            '  display:flex; flex-direction:column;',
+            '  opacity:0; transition:opacity 0.7s ease;',
+            '  pointer-events:all; cursor:default;',
+            '  background:#1660c8;',
+            '  font-family:"Franklin Gothic Medium","Arial Narrow",Arial,sans-serif;',
+            '  overflow:hidden;',
+            '}',
+            '.xp-top-stripe {',
+            '  flex-shrink:0;',
+            '  background:linear-gradient(to bottom,#2272e0 0%,#0e4db8 100%);',
+            '  border-bottom:2px solid #f0c000;',
+            '  padding:16px 48px;',
+            '  display:flex; align-items:center; gap:14px;',
+            '}',
+            '.xp-body {',
+            '  flex:1;',
+            '  background:linear-gradient(160deg,#1e68d0 0%,#1050a8 40%,#0a3585 100%);',
+            '  display:flex; align-items:stretch;',
+            '}',
+            /* Left panel: XP logo + subtitle */
+            '.xp-left-panel {',
+            '  width:38%; border-right:1px solid rgba(255,255,255,0.15);',
+            '  display:flex; flex-direction:column;',
+            '  align-items:flex-start; justify-content:center;',
+            '  padding:32px 40px;',
+            '  gap:14px;',
+            '}',
+            '.xp-left-title {',
+            '  color:#fff; font-size:14px; font-weight:400;',
+            '  font-family:Tahoma,sans-serif; line-height:1.5;',
+            '  text-shadow:0 1px 2px rgba(0,0,0,0.6);',
+            '}',
+            /* Right panel: user list */
+            '.xp-right-panel {',
+            '  flex:1;',
+            '  display:flex; flex-direction:column;',
+            '  align-items:center; justify-content:center;',
+            '  padding:32px 40px; gap:20px;',
+            '}',
+            '.xp-user-row {',
+            '  display:flex; align-items:center; gap:16px;',
+            '}',
+            '.xp-user-avatar {',
+            '  width:64px; height:64px; border-radius:6px;',
+            '  background:linear-gradient(135deg,#3898e8,#1060c0);',
+            '  border:3px solid rgba(255,255,255,0.45);',
+            '  box-shadow:0 4px 16px rgba(0,0,0,0.5);',
+            '  overflow:hidden; flex-shrink:0;',
+            '  display:flex; align-items:center; justify-content:center;',
+            '}',
+            '.xp-user-avatar img { width:100%; height:100%; object-fit:cover; }',
+            '.xp-user-info {',
+            '  display:flex; flex-direction:column; gap:4px;',
+            '}',
+            '.xp-user-name {',
+            '  color:#fff; font-size:15px; font-weight:700;',
+            '  text-shadow:0 1px 4px rgba(0,0,0,0.6);',
+            '  font-family:Tahoma,"Segoe UI",sans-serif;',
+            '}',
+            '.xp-status-text {',
+            '  color:#c0d8f8; font-size:12px;',
+            '  font-family:Tahoma,"Segoe UI",sans-serif;',
+            '  text-shadow:0 1px 2px rgba(0,0,0,0.7);',
+            '}',
+            /* Progress bar marquee */
+            '.xp-progress-track {',
+            '  width:160px; height:11px;',
+            '  background:rgba(0,0,0,0.35);',
+            '  border:1px solid rgba(255,255,255,0.15);',
+            '  border-radius:2px; overflow:hidden; position:relative;',
+            '}',
+            '.xp-progress-marquee {',
+            '  position:absolute; top:0; left:-55px;',
+            '  width:55px; height:100%;',
+            '  background:linear-gradient(to right,transparent,#3ad53a 35%,#80ff80 50%,#3ad53a 65%,transparent);',
+            '  animation:xp-marquee 1.3s linear infinite;',
+            '}',
+            '@keyframes xp-marquee { from{left:-55px} to{left:160px} }',
+            /* Bottom stripe */
+            '.xp-bottom-stripe {',
+            '  flex-shrink:0; height:52px;',
+            '  background:linear-gradient(to top,#0e4db8 0%,#2272e0 100%);',
+            '  border-top:2px solid #f0c000;',
+            '}',
+            /* Flag logo */
+            '.xp-flag {',
+            '  display:grid; grid-template-columns:1fr 1fr;',
+            '  grid-template-rows:1fr 1fr;',
+            '  gap:3px; width:46px; height:46px;',
+            '  transform:perspective(100px) rotateY(-6deg) rotateX(3deg);',
+            '  filter:drop-shadow(0 3px 8px rgba(0,0,0,0.5));',
+            '  flex-shrink:0;',
+            '}',
+            '.xp-flag-q { border-radius:2px; }',
+            '.xp-flag-q1 { background:radial-gradient(circle at 60% 60%,#f04020,#c03010); }',
+            '.xp-flag-q2 { background:radial-gradient(circle at 40% 60%,#60c000,#409000); }',
+            '.xp-flag-q3 { background:radial-gradient(circle at 60% 40%,#20b0e8,#0880c0); }',
+            '.xp-flag-q4 { background:radial-gradient(circle at 40% 40%,#f8c800,#d09000); }',
+            '.xp-logo-text { display:flex; flex-direction:column; line-height:1; }',
+            '.xp-logo-microsoft { color:rgba(255,255,255,0.7); font-size:9px; letter-spacing:1px; font-style:italic; font-family:Tahoma,sans-serif; margin-bottom:1px; }',
+            '.xp-logo-windows { color:#fff; font-size:30px; font-style:italic; font-weight:400; letter-spacing:-0.5px; text-shadow:1px 1px 3px rgba(0,0,0,0.5); }',
+            '.xp-logo-xp { font-size:18px; font-style:italic; font-weight:700; background:linear-gradient(to bottom,#f9d64a,#e08000); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; letter-spacing:3px; margin-top:-3px; }',
+            /* Click hint */
+            '.xp-click-hint { position:absolute; bottom:62px; left:50%; transform:translateX(-50%); color:rgba(255,255,255,0); font-size:11px; font-family:Tahoma,sans-serif; cursor:pointer; transition:color 1s ease; white-space:nowrap; user-select:none; }',
+            '.xp-click-hint.visible { color:rgba(255,255,255,0.35); }',
+            '.xp-click-hint:hover { color:rgba(255,255,255,0.7); }'
+        ].join('\n');
+        document.head.appendChild(style);
+    }
+
+    // Eliminar pantalla anterior si existe
+    var existing = document.getElementById('xp-shutdown-screen');
+    if (existing) existing.remove();
+
+    var statusText = isShutdown ? 'Apagando el equipo...' : 'Cerrando sesion...';
+    var leftTitle  = isShutdown
+        ? 'Windows XP esta apagando<br>el sistema virtual.'
+        : 'Para iniciar sesion,<br>haz clic en tu nombre.';
+
+    var screen = document.createElement('div');
+    screen.id = 'xp-shutdown-screen';
+
+    screen.innerHTML =
+        '<div class="xp-top-stripe">' +
+            '<div class="xp-flag">' +
+                '<div class="xp-flag-q xp-flag-q1"></div>' +
+                '<div class="xp-flag-q xp-flag-q2"></div>' +
+                '<div class="xp-flag-q xp-flag-q3"></div>' +
+                '<div class="xp-flag-q xp-flag-q4"></div>' +
+            '</div>' +
+            '<div class="xp-logo-text">' +
+                '<span class="xp-logo-microsoft">Microsoft\u00ae</span>' +
+                '<span class="xp-logo-windows">Windows</span>' +
+                '<span class="xp-logo-xp">XP</span>' +
+            '</div>' +
+        '</div>' +
+        '<div class="xp-body">' +
+            '<div class="xp-left-panel">' +
+                '<div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">' +
+                    '<div class="xp-flag" style="width:56px;height:56px;">' +
+                        '<div class="xp-flag-q xp-flag-q1"></div>' +
+                        '<div class="xp-flag-q xp-flag-q2"></div>' +
+                        '<div class="xp-flag-q xp-flag-q3"></div>' +
+                        '<div class="xp-flag-q xp-flag-q4"></div>' +
+                    '</div>' +
+                    '<div class="xp-logo-text">' +
+                        '<span class="xp-logo-windows" style="font-size:36px;">Windows</span>' +
+                        '<span class="xp-logo-xp" style="font-size:22px;">XP</span>' +
+                    '</div>' +
+                '</div>' +
+                '<div style="width:100%;height:1px;background:rgba(255,255,255,0.2);margin:8px 0;"></div>' +
+                '<span class="xp-left-title">' + leftTitle + '</span>' +
+            '</div>' +
+            '<div class="xp-right-panel">' +
+                '<div class="xp-user-row">' +
+                    '<div class="xp-user-avatar">' +
+                        '<img src="assets/iconos/users-1.png" alt="Usuario" onerror="this.style.display=\'none\'">' +
+                    '</div>' +
+                    '<div class="xp-user-info">' +
+                        '<span class="xp-user-name">Hector Daniel Ayarachi Fuentes</span>' +
+                        '<span class="xp-status-text">' + statusText + '</span>' +
+                        '<div class="xp-progress-track" style="margin-top:6px;">' +
+                            '<div class="xp-progress-marquee"></div>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>' +
+            '</div>' +
+        '</div>' +
+        '<div class="xp-bottom-stripe"></div>' +
+        '<span class="xp-click-hint" id="xp-click-hint">Haz clic en cualquier lugar para volver al escritorio</span>';
+
+    document.body.appendChild(screen);
+
+    // Fade-in
+    requestAnimationFrame(function() {
+        requestAnimationFrame(function() { screen.style.opacity = '1'; });
+    });
+
+    // Tras 2.5s: hint visible + habilitar clic
+    setTimeout(function() {
+        var hint = document.getElementById('xp-click-hint');
+        if (hint) hint.classList.add('visible');
+        screen.addEventListener('click', dismissXPScreen);
+    }, 2500);
+}
+
+// Quitar pantalla XP y volver al escritorio
+function dismissXPScreen() {
+    var screen = document.getElementById('xp-shutdown-screen');
+    if (!screen) return;
+    screen.removeEventListener('click', dismissXPScreen);
+    screen.style.opacity = '0';
+    setTimeout(function() {
+        screen.remove();
+        openWindow('main-window');
+    }, 700);
+}
+
+// Alias por compatibilidad
+function dismissBlackScreen() { dismissXPScreen(); }
