@@ -5,31 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tecnologías de la Información 2026 - Hector Daniel Ayarachi Fuentes</title>
     <!-- Favicon retro opcional -->
-    <link rel="icon" type="image/png" href="iconos/computer_explorer-4.png">
+    <link rel="icon" type="image/png" href="assets/iconos/computer_explorer-4.png">
     <!-- Google Fonts for custom styling, though we'll use Tahoma-like fonts for XP feel -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="desktop">
         <!-- Desktop Shortcuts -->
         <div class="desktop-icons">
             <div class="desktop-icon" id="icon-my-computer" onclick="openWindow('main-window')">
-                <img src="iconos/computer_explorer-5.png" alt="Mi PC">
+                <img src="assets/iconos/computer_explorer-5.png" alt="Mi PC">
                 <span>Mi PC</span>
             </div>
             <div class="desktop-icon" id="icon-my-documents" onclick="openWindow('main-window'); switchTab('tab-act1');">
-                <img src="iconos/directory_closed-4.png" alt="Actividades">
+                <img src="assets/iconos/directory_closed-4.png" alt="Actividades">
                 <span>Actividades</span>
             </div>
             <div class="desktop-icon" id="icon-pdf" onclick="openWindow('main-window'); switchTab('tab-act1');">
-                <img src="iconos/notepad-0.png" alt="Reporte Prompts">
+                <img src="assets/iconos/notepad-0.png" alt="Reporte Prompts">
                 <span>Reporte Prompts.pdf</span>
             </div>
             <div class="desktop-icon" id="icon-about" onclick="openAboutModal()">
-                <img src="iconos/help_book_big-0.png" alt="Sobre Mí">
+                <img src="assets/iconos/help_book_big-0.png" alt="Sobre Mí">
                 <span>Sobre mí</span>
             </div>
         </div>
@@ -38,7 +38,7 @@
         <div class="window xp-window" id="main-window">
             <div class="window-titlebar" id="window-titlebar">
                 <div class="titlebar-left">
-                    <img src="iconos/computer_explorer-4.png" class="titlebar-icon" alt="Icon">
+                    <img src="assets/iconos/computer_explorer-4.png" class="titlebar-icon" alt="Icon">
                     <span class="titlebar-text">Tecnologías de la Información 2026</span>
                 </div>
                 <div class="titlebar-controls">
@@ -84,12 +84,12 @@
                     <div class="xp-tab-panel active" id="tab-act1">
                         <div class="activities-viewer" style="height: 100%;">
                             <div class="viewer-toolbar">
-                                <div class="toolbar-btn disabled"><img src="iconos/ArrowLeft.svg" alt="Atrás"> Atrás</div>
-                                <div class="toolbar-btn disabled"><img src="iconos/ArrowRight.svg" alt="Adelante"> Adelante</div>
+                                <div class="toolbar-btn disabled"><img src="assets/iconos/ArrowLeft.svg" alt="Atrás"> Atrás</div>
+                                <div class="toolbar-btn disabled"><img src="assets/iconos/ArrowRight.svg" alt="Adelante"> Adelante</div>
                                 <div class="toolbar-separator"></div>
-                                <div class="toolbar-btn" onclick="refreshPDF()"><img src="iconos/Sync.svg" alt="Actualizar"> Recargar</div>
+                                <div class="toolbar-btn" onclick="refreshPDF()"><img src="assets/iconos/Sync.svg" alt="Actualizar"> Recargar</div>
                                 <div class="toolbar-separator"></div>
-                                <div class="toolbar-btn" onclick="openAboutModal()"><img src="iconos/help_question_mark-0.png" alt="Sobre mí"> Sobre mí</div>
+                                <div class="toolbar-btn" onclick="openAboutModal()"><img src="assets/iconos/help_question_mark-0.png" alt="Sobre mí"> Sobre mí</div>
                                 <div class="toolbar-separator"></div>
                                 <span class="viewer-path-label">Dirección:</span>
                                 <div class="viewer-path-bar">
@@ -100,7 +100,7 @@
                                 <!-- PDF Embedded Viewer with fallback -->
                                 <iframe id="pdf-iframe" src="Actividades/Actividad-1/reporte-laboratorio-prompts.pdf" type="application/pdf" style="width: 100%; height: 100%; border: none;">
                                     <div class="pdf-fallback">
-                                        <img src="iconos/msg_error-0.png" alt="Error">
+                                        <img src="assets/iconos/msg_error-0.png" alt="Error">
                                         <h3>Tu navegador no soporta visualización directa de PDFs.</h3>
                                         <p>Puedes descargar el archivo directamente para leerlo en tu computadora:</p>
                                         <a href="Actividades/Actividad-1/reporte-laboratorio-prompts.pdf" download class="xp-btn-classic">Descargar reporte-laboratorio-prompts.pdf</a>
@@ -113,7 +113,7 @@
                     <!-- Tab Panel 2: Actividad 2 -->
                     <div class="xp-tab-panel" id="tab-act2">
                         <div class="empty-activity-view">
-                            <img src="iconos/directory_open-4.png" alt="Carpeta vacía">
+                            <img src="assets/iconos/directory_open-4.png" alt="Carpeta vacía">
                             <h3>Actividad 2</h3>
                             <p>Esta actividad estará disponible próximamente en el semestre 2026.</p>
                         </div>
@@ -125,7 +125,7 @@
             <div class="window-statusbar">
                 <div class="statusbar-pane pane-status">Listo</div>
                 <div class="statusbar-pane pane-info">Hector Daniel Ayarachi Fuentes</div>
-                <div class="statusbar-pane pane-zone"><img src="iconos/world-0.png" alt="Internet"> Mi PC | Zona de Intranet local</div>
+                <div class="statusbar-pane pane-zone"><img src="assets/iconos/world-0.png" alt="Internet"> Mi PC | Zona de Intranet local</div>
             </div>
         </div>
 
@@ -134,7 +134,7 @@
             <div class="window xp-dialog" id="about-dialog">
                 <div class="window-titlebar dialog-titlebar">
                     <div class="titlebar-left">
-                        <img src="iconos/help_book_small-0.png" class="titlebar-icon" alt="Info">
+                        <img src="assets/iconos/help_book_small-0.png" class="titlebar-icon" alt="Info">
                         <span class="titlebar-text">Información del Estudiante</span>
                     </div>
                     <div class="titlebar-controls">
@@ -143,7 +143,7 @@
                 </div>
                 <div class="dialog-body">
                     <div class="dialog-message-container">
-                        <img src="iconos/help_question_mark-0.png" class="dialog-icon" alt="Question">
+                        <img src="assets/iconos/help_question_mark-0.png" class="dialog-icon" alt="Question">
                         <div class="dialog-message">
                             <h3>Sobre Hector Daniel Ayarachi Fuentes</h3>
                             <p>Esta página web ha sido diseñada para la materia <strong>Tecnologías de la Información 2026</strong>.</p>
@@ -169,7 +169,7 @@
             <!-- Active Tasks -->
             <div class="taskbar-tasks">
                 <div class="taskbar-item active" id="taskbar-main-window" onclick="toggleWindowMinimization('main-window')">
-                    <img src="iconos/computer_explorer-4.png" alt="TI 2026">
+                    <img src="assets/iconos/computer_explorer-4.png" alt="TI 2026">
                     <span class="taskbar-item-text">Tecnologías de la...</span>
                 </div>
             </div>
@@ -177,8 +177,8 @@
             <!-- System Tray -->
             <div class="system-tray">
                 <div class="tray-icons">
-                    <img src="iconos/loudspeaker_rays-1.png" alt="Volumen" title="Volumen" class="tray-icon">
-                    <img src="iconos/network_normal_two_pcs-2.png" alt="Red" title="Red Local" class="tray-icon">
+                    <img src="assets/iconos/loudspeaker_rays-1.png" alt="Volumen" title="Volumen" class="tray-icon">
+                    <img src="assets/iconos/network_normal_two_pcs-2.png" alt="Red" title="Red Local" class="tray-icon">
                 </div>
                 <div class="system-clock" id="system-clock">
                     12:00 PM
@@ -189,20 +189,20 @@
         <!-- Start Menu -->
         <div class="start-menu" id="start-menu">
             <div class="start-menu-header">
-                <img src="iconos/users-1.png" class="start-user-avatar" alt="Avatar">
+                <img src="assets/iconos/users-1.png" class="start-user-avatar" alt="Avatar">
                 <span class="start-user-name">Hector Daniel Ayarachi Fuentes</span>
             </div>
             <div class="start-menu-body">
                 <div class="start-menu-left">
                     <div class="start-menu-item" onclick="openWindow('main-window'); switchTab('tab-act1'); toggleStartMenu();">
-                        <img src="iconos/directory_closed-4.png" alt="Actividades">
+                        <img src="assets/iconos/directory_closed-4.png" alt="Actividades">
                         <div class="start-item-text">
                             <strong>Actividades del Semestre</strong>
                             <span>Ver tareas y reportes del curso</span>
                         </div>
                     </div>
                     <div class="start-menu-item" onclick="openAboutModal(); toggleStartMenu();">
-                        <img src="iconos/help_book_big-0.png" alt="Acerca de">
+                        <img src="assets/iconos/help_book_big-0.png" alt="Acerca de">
                         <div class="start-item-text">
                             <strong>Sobre mí</strong>
                             <span>Conoce al autor de la página</span>
@@ -211,20 +211,20 @@
                 </div>
                 <div class="start-menu-right">
                     <div class="start-right-item" onclick="openWindow('main-window'); toggleStartMenu();">
-                        <img src="iconos/computer_explorer-5.png" alt="Mi PC">
+                        <img src="assets/iconos/computer_explorer-5.png" alt="Mi PC">
                         <span>Mi PC</span>
                     </div>
                     <div class="start-right-item" onclick="openWindow('main-window'); switchTab('tab-act1'); toggleStartMenu();">
-                        <img src="iconos/notepad-0.png" alt="Reportes">
+                        <img src="assets/iconos/notepad-0.png" alt="Reportes">
                         <span>Mis Documentos</span>
                     </div>
                     <hr class="start-menu-divider">
                     <div class="start-right-item" onclick="alert('Abriendo Panel de Control... Simulación 2026'); toggleStartMenu();">
-                        <img src="iconos/control_panel-4.png" alt="Panel de Control">
+                        <img src="assets/iconos/control_panel-4.png" alt="Panel de Control">
                         <span>Panel de Control</span>
                     </div>
                     <div class="start-right-item" onclick="alert('Abriendo Soporte... Simulación 2026'); toggleStartMenu();">
-                        <img src="iconos/help_question_mark-0.png" alt="Ayuda y Soporte">
+                        <img src="assets/iconos/help_question_mark-0.png" alt="Ayuda y Soporte">
                         <span>Ayuda y Soporte</span>
                     </div>
                 </div>
@@ -247,7 +247,7 @@
     <audio id="sound-error" src="https://www.soundjay.com/buttons/sounds/button-10.mp3" preload="auto"></audio>
     <audio id="sound-startup" src="https://www.winhistory.de/more/winstart/mp3/winxp.mp3" preload="auto"></audio>
     
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
 
