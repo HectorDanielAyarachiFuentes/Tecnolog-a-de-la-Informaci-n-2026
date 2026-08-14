@@ -75,6 +75,10 @@ body, html {
     transform: scale(0.95);
 }
 
+.desktop-icon.is-dragging {
+    transition: none !important;
+}
+
 .desktop-icon img {
     width: 32px;
     height: 32px;

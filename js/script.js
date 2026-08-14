@@ -17,6 +17,32 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // 4. Make Desktop Icons Draggable using Draggabilly
+    if (typeof Draggabilly !== 'undefined') {
+        const icons = document.querySelectorAll('.desktop-icon');
+        icons.forEach(icon => {
+            const draggie = new Draggabilly(icon, {
+                containment: '.desktop'
+            });
+
+            // Handle single click (without dragging) to open shortcuts
+            draggie.on('staticClick', (event, pointer) => {
+                const iconId = icon.id;
+                if (iconId === 'icon-my-computer') {
+                    openWindow('main-window');
+                } else if (iconId === 'icon-my-documents') {
+                    openWindow('main-window');
+                    switchTab('tab-act1');
+                } else if (iconId === 'icon-pdf') {
+                    openWindow('main-window');
+                    switchTab('tab-act1');
+                } else if (iconId === 'icon-about') {
+                    openAboutModal();
+                }
+            });
+        });
+    }
+
     // 3. Play Windows XP Startup Sound on first user interaction
     document.body.addEventListener('click', () => {
         const startupSound = document.getElementById('sound-startup');
