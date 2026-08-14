@@ -1,0 +1,11 @@
+id,actividad,dia,inicio,fin,modalidad,cupo,destinatarios,requisito
+T01,Introduccion a expedientes,lunes,09:00,11:00,presencial,20,personal administrativo,ninguno
+T02,Entrevistas laborales,martes,14:00,16:00,virtual,30,equipos de RRHH,ninguno
+T03,Redaccion administrativa,miercoles,10:00,12:00,presencial,18,personal administrativo,ninguno
+T04,Proteccion de datos,miercoles,15:00,17:00,virtual,40,todo el personal,ninguno
+T05,Atencion ciudadana,jueves,09:00,12:00,presencial,15,areas de atencion,ninguno
+T06,Tableros de gestion,jueves,14:00,16:00,virtual,25,equipos de gestion,planillas basicas
+T07,Seleccion sin sesgos,viernes,09:00,11:00,virtual,30,equipos de RRHH,ninguno
+T08,Compras y contrataciones,viernes,11:30,13:30,presencial,20,personal administrativo,expedientes basicos
+T09,Comunicacion accesible,martes,10:00,12:00,presencial,24,todo el personal,ninguno
+T10,Indicadores de capacitacion,lunes,15:00,17:00,virtual,20,equipos de RRHH,planillas basicas

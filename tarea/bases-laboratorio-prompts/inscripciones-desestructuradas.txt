@@ -1,0 +1,22 @@
+DATOS FICTICIOS PARA UNA ACTIVIDAD EDUCATIVA
+Registro informal de inscripciones a capacitaciones
+
+inscripción p-001: ana silva. Mail ANA.SILVA@EXAMPLE.ORG; trabaja en Atención al Público. Le interesa Redacción Administrativa, prefiere presencial. Puede lunes o miércoles por la mañana.
+
+P002 / Bruno Costa / bruno.costa@example.org / área: rrhh / modalidad VIRTUAL / disponibilidad: martes después de las 13 / interés entrevistas laborales.
+
+Carla Méndez (registro P-003). Compras y contrataciones. Correo: carla.mendez@example.org. Pertenece a Administración. No indicó modalidad. Viernes de 9 a 14.
+
+p-004 - diego torres - diego.torres@example.org. Equipo de gestión; quiere Tableros de Gestión. Virtual. jueves 14:00 a 18:00. Observación: ya maneja planillas básicas.
+
+Registro P005: Elena Ruiz, elena.ruiz@example.org, Atención ciudadana. Prefiere presencial; disponibilidad jueves por la mañana. Curso de interés: Atención Ciudadana.
+
+P-006 | Fabián Luna | SIN CORREO | Protección de datos | todo el personal | puede miércoles desde las 14 | modalidad: indistinta.
+
+P004: Diego Tórres; DIEGO.TORRES@example.org; Gestión. Curso: indicadores de capacitación. Prefiere virtual y puede los lunes de 15 a 18. Posiblemente sea una segunda solicitud de la misma persona.
+
+Registro sin identificador: Gabriela Paz. Correo gabriela.paz@example.org. Área de RR.HH.; selección sin sesgos; viernes por la mañana; no informó modalidad.
+
+Hugo Rey - p-008 - hugo.rey@example.org - administración - Introducción a expedientes - lunes 8 a 12 - presencial. Agregó en otro mensaje que también puede los miércoles de 9 a 12.
+
+Fin del registro. Los nombres, correos, áreas y preferencias son completamente ficticios.

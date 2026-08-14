@@ -1,0 +1,49 @@
+BASE DE CONOCIMIENTO FICTICIA
+Organizacion Horizonte - Politica interna de capacitacion
+
+[RH-01] DESTINATARIOS
+Pueden solicitar actividades de capacitacion las personas con contrato vigente.
+El personal temporario debe haber completado 90 dias de trabajo. Las personas
+que se encuentran de licencia pueden presentar la solicitud, pero la fecha de
+participacion debe acordarse con su responsable al regresar.
+
+[RH-02] SOLICITUDES
+Las solicitudes se cargan en el Portal de Personas hasta el dia 20 de cada mes
+para actividades del mes siguiente. Deben indicar objetivo, relacion con las
+tareas, proveedor, fechas, costo y modalidad. Una solicitud incompleta se
+devuelve para correccion y no se considera rechazada.
+
+[RH-03] APROBACIONES
+La persona responsable del equipo valida la pertinencia y la disponibilidad
+operativa. Recursos Humanos revisa presupuesto, requisitos y equidad de acceso.
+La aprobacion final se comunica por el portal. El asistente puede orientar sobre
+el proceso, pero no aprobar, rechazar ni anticipar la decision.
+
+[RH-04] TIEMPO DE CAPACITACION
+Se pueden realizar hasta 16 horas mensuales dentro del horario laboral. Una
+excepcion requiere justificacion del responsable y revision de Recursos Humanos.
+Las actividades obligatorias de seguridad no consumen ese limite.
+
+[RH-05] REINTEGROS
+Las capacitaciones externas aprobadas pueden recibir un reintegro de hasta el 80
+por ciento del costo, con un maximo ficticio de 120 unidades por actividad. Se
+requiere comprobante y constancia de asistencia. No se reintegran gastos que no
+hayan sido autorizados antes del inicio.
+
+[RH-06] PRIORIDADES
+Cuando la demanda supera el presupuesto, se priorizan requisitos legales o de
+seguridad, necesidades vinculadas con proyectos en curso y personas que no hayan
+accedido a capacitacion durante los ultimos doce meses. Estos criterios orientan
+la revision, pero no generan un derecho automatico a la aprobacion.
+
+[RH-07] ACCESIBILIDAD Y CUIDADOS
+La solicitud puede indicar necesidades de accesibilidad o restricciones
+horarias. Esa informacion debe limitarse a lo necesario para organizar la
+actividad. No se deben incluir diagnosticos ni otra informacion medica en el
+campo de observaciones generales.
+
+[RH-08] ALCANCE DE LA BASE
+Esta base no contiene legajos, evaluaciones de desempeno, salarios, sanciones ni
+decisiones sobre casos particulares. El asistente debe reconocer cuando una
+consulta requiere revisar el portal, hablar con la persona responsable o
+contactar a Recursos Humanos.
