@@ -38,7 +38,8 @@ body, html {
 /* Desktop Environment */
 .desktop {
     width: 100%;
-    height: 100vh;
+    height: 100%;
+    height: 100dvh;
     background-image: url('../assets/xp_bliss.png');
     background-size: cover;
     background-position: center;
