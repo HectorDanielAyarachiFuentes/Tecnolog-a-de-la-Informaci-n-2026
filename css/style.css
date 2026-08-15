@@ -1009,11 +1009,11 @@ body, html {
 /* Start Button */
 .start-btn {
     height: 100%;
-    background: linear-gradient(to bottom, #388e3c, #4caf50 15%, #388e3c 85%, #2e7d32 100%);
+    background: linear-gradient(to bottom, #43b246 0%, #339933 15%, #2d8c2d 50%, #247524 85%, #186018 100%);
     border: none;
     border-top-right-radius: 12px;
     border-bottom-right-radius: 12px;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+    box-shadow: inset 0px 1px 2px rgba(255, 255, 255, 0.4), inset -1px -1px 2px rgba(0, 0, 0, 0.3), 2px 0 4px rgba(0, 0, 0, 0.5);
     padding: 0 16px 0 12px;
     display: flex;
     align-items: center;
@@ -1024,20 +1024,24 @@ body, html {
 }
 
 .start-btn:hover {
-    filter: brightness(1.15) contrast(1.1);
+    background: linear-gradient(to bottom, #50c453 0%, #3ca83c 15%, #359b35 50%, #2b842b 85%, #1c6f1c 100%);
 }
 
 .start-btn:active {
-    background: linear-gradient(to bottom, #2e7d32, #388e3c);
-    box-shadow: inset 2px 2px 4px rgba(0,0,0,0.4);
+    background: linear-gradient(to bottom, #186018 0%, #247524 15%, #2d8c2d 50%, #339933 85%, #43b246 100%);
+    box-shadow: inset 2px 2px 4px rgba(0,0,0,0.6);
 }
 
 .start-btn-logo {
-    width: 18px;
-    height: 18px;
-    background-image: url('https://win98icons.alexmeub.com/icons/png/computer_explorer-4.png'); /* Classic fallback logo */
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    flex-shrink: 0;
+    background-image: url('../assets/iconos/winxp.svg');
     background-size: contain;
+    background-position: center;
     background-repeat: no-repeat;
+    filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.5)) drop-shadow(0 0 1px rgba(255,255,255,0.4));
 }
 
 .start-btn-text {
