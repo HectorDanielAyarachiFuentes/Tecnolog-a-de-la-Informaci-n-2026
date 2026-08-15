@@ -993,8 +993,7 @@ body, html {
 /* Taskbar Styles */
 .taskbar {
     height: 30px;
-    background: linear-gradient(to bottom, #245edb 0%, #3973e6 12%, #245edb 28%, #1f50c4 70%, #173fa7 100%);
-    border-top: 1px solid #1a4294;
+    background: linear-gradient(to bottom, #245edb 0%, #3f8cf3 9%, #245edb 18%, #245edb 92%, #1941a5 100%);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -1009,18 +1008,17 @@ body, html {
 /* Start Button */
 .start-btn {
     height: 100%;
-    background: linear-gradient(to bottom, #43b246 0%, #339933 15%, #2d8c2d 50%, #247524 85%, #186018 100%);
+    background: linear-gradient(to bottom, #43b246 0%, #3cae3c 15%, #2d8c2d 50%, #247524 85%, #186018 100%);
     border: none;
     border-top-right-radius: 12px;
     border-bottom-right-radius: 12px;
-    box-shadow: inset 0px 1px 2px rgba(255, 255, 255, 0.4), inset -1px -1px 2px rgba(0, 0, 0, 0.3), 2px 0 4px rgba(0, 0, 0, 0.5);
-    padding: 0 16px 0 12px;
+    box-shadow: inset 1px 1px 3px rgba(255, 255, 255, 0.5), inset -1px -1px 3px rgba(0, 0, 0, 0.4), 2px 0 5px rgba(0, 0, 0, 0.5);
+    padding: 0 16px 0 10px;
     display: flex;
     align-items: center;
     gap: 6px;
     cursor: pointer;
     outline: none;
-    transition: filter 0.1s ease;
 }
 
 .start-btn:hover {
@@ -1054,60 +1052,111 @@ body, html {
     letter-spacing: 0.5px;
 }
 
+/* Taskbar Elements: Gripper & Quick Launch */
+.taskbar-gripper {
+    width: 6px;
+    height: 24px;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.4) 1px, transparent 1px);
+    background-size: 3px 3px;
+    opacity: 0.8;
+    margin: 0 4px;
+    cursor: col-resize;
+}
+
+.quick-launch {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 0 2px;
+}
+
+.ql-icon {
+    width: 16px;
+    height: 16px;
+    padding: 2px;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.ql-icon:hover {
+    border: 1px solid rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+}
+
 /* Taskbar Tasks */
 .taskbar-tasks {
     flex-grow: 1;
     display: flex;
     align-items: center;
-    padding: 0 8px;
+    padding: 0 4px;
     gap: 4px;
     overflow: hidden;
 }
 
 .taskbar-item {
-    background: linear-gradient(to bottom, #3c8df5, #0044be);
-    border: 1px solid #002c94;
+    background: linear-gradient(to bottom, #3c8df5 0%, #245edb 10%, #245edb 90%, #0044be 100%);
     border-radius: 3px;
     padding: 2px 8px;
+    height: 24px;
     display: flex;
     align-items: center;
     gap: 6px;
+    flex-grow: 1;
     max-width: 150px;
     cursor: pointer;
     font-size: 11px;
+    box-shadow: inset 1px 1px 1px rgba(255,255,255,0.3), inset -1px -1px 1px rgba(0,0,0,0.2);
+    transition: background 0.1s;
 }
 
 .taskbar-item img {
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
 }
 
 .taskbar-item-text {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: white;
 }
 
 .taskbar-item.active {
-    background: #1e4fbd;
-    border-color: #0d297a;
-    box-shadow: inset 1px 1px 3px rgba(0,0,0,0.4);
+    background: linear-gradient(to bottom, #1e4fbd 0%, #0d297a 100%);
+    box-shadow: inset 1px 1px 3px rgba(0,0,0,0.6);
 }
 
-.taskbar-item:hover {
-    background: #5b8ff3;
+.taskbar-item:hover:not(.active) {
+    background: linear-gradient(to bottom, #5b8ff3 0%, #3f8cf3 100%);
 }
 
 /* System Tray */
 .system-tray {
-    background: linear-gradient(to bottom, #0c8df5 0%, #0c7de2 100%);
+    background: linear-gradient(to bottom, #0f86ee 0%, #0c8df5 10%, #0c7de2 90%, #0849a3 100%);
     border-left: 1px solid #0849a3;
     height: 100%;
-    padding: 0 12px;
+    padding: 0 10px;
     display: flex;
     align-items: center;
     gap: 8px;
-    box-shadow: inset 2px 0 4px rgba(0,0,0,0.2);
+    box-shadow: inset 1px 0 2px rgba(255,255,255,0.2);
+}
+
+.tray-expand {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: linear-gradient(to bottom, #245edb, #0d297a);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 9px;
+    font-weight: bold;
+    border: 1px solid #0849a3;
+    box-shadow: inset 1px 1px 2px rgba(255,255,255,0.4);
+    cursor: pointer;
 }
 
 .tray-icons {

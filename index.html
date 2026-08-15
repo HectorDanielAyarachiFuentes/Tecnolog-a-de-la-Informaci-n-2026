@@ -171,9 +171,18 @@
             <!-- Start Button -->
             <button class="start-btn" onclick="toggleStartMenu()">
                 <div class="start-btn-logo"></div>
-                <span class="start-btn-text">inicio</span>
+                <span class="start-btn-text">Inicio</span>
             </button>
 
+            <!-- Quick Launch -->
+            <div class="taskbar-gripper"></div>
+            <div class="quick-launch">
+                <img src="assets/iconos/world-0.png" class="ql-icon" alt="Internet" title="Internet Explorer">
+                <img src="assets/iconos/notepad-0.png" class="ql-icon" alt="Escritorio" title="Mostrar Escritorio">
+                <img src="assets/iconos/winamp.svg" class="ql-icon" alt="Media" title="Reproductor">
+            </div>
+
+            <div class="taskbar-gripper"></div>
             <!-- Active Tasks -->
             <div class="taskbar-tasks">
                 <div class="taskbar-item active" id="taskbar-main-window" onclick="toggleWindowMinimization('main-window')">
@@ -212,7 +221,9 @@
             </div>
 
             <!-- System Tray -->
+            <div class="taskbar-gripper"></div>
             <div class="system-tray">
+                <div class="tray-expand">&lt;</div>
                 <div class="tray-icons">
                     <img src="assets/iconos/loudspeaker_rays-1.png" alt="Volumen" title="Volumen" class="tray-icon">
                     <img src="assets/iconos/network_normal_two_pcs-2.png" alt="Red" title="Red Local" class="tray-icon">
