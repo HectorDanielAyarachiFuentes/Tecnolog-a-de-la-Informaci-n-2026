@@ -151,23 +151,23 @@ function toggleMaximizeWindow(windowId) {
     if (!win) return;
     if (win.classList.contains('maximized')) {
         win.classList.remove('maximized');
-        win.style.width     = win.dataset.preMaxWidth     || '860px';
-        win.style.height    = win.dataset.preMaxHeight    || '650px';
-        win.style.top       = win.dataset.preMaxTop       || '50%';
-        win.style.left      = win.dataset.preMaxLeft      || '50%';
-        win.style.transform = win.dataset.preMaxTransform || 'translate(-50%, -52%)';
+        win.style.width     = win.dataset.preMaxWidth     || '';
+        win.style.height    = win.dataset.preMaxHeight    || '';
+        win.style.top       = win.dataset.preMaxTop       || '';
+        win.style.left      = win.dataset.preMaxLeft      || '';
+        win.style.transform = win.dataset.preMaxTransform || '';
     } else {
-        win.dataset.preMaxWidth     = win.style.width     || '860px';
-        win.dataset.preMaxHeight    = win.style.height    || '650px';
-        win.dataset.preMaxTop       = win.style.top       || '50%';
-        win.dataset.preMaxLeft      = win.style.left      || '50%';
-        win.dataset.preMaxTransform = win.style.transform || 'translate(-50%, -52%)';
+        win.dataset.preMaxWidth     = win.style.width;
+        win.dataset.preMaxHeight    = win.style.height;
+        win.dataset.preMaxTop       = win.style.top;
+        win.dataset.preMaxLeft      = win.style.left;
+        win.dataset.preMaxTransform = win.style.transform;
         win.classList.add('maximized');
-        win.style.width     = '100vw';
-        win.style.height    = 'calc(100vh - 30px)';
-        win.style.top       = '0';
-        win.style.left      = '0';
-        win.style.transform = 'none';
+        win.style.width     = '';
+        win.style.height    = '';
+        win.style.top       = '';
+        win.style.left      = '';
+        win.style.transform = '';
     }
 }
 
