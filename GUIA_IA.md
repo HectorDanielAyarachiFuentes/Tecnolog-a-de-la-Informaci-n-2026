@@ -96,8 +96,8 @@ Módulos de aplicaciones accesorias extraídas para mantener la modularidad del 
   * Controla la ventana contenedora de video (`winamp-video-window`) sincronizando la reproducción.
 * **`gadgets/internet-explorer.js`:**
   * Simula un navegador IE6 con historial (`ieHistory`, `ieHistoryIndex`), botones Atrás/Adelante/Actualizar/Inicio.
-  * Gestiona la carga de URLs dentro de un `iframe` (`#ie-iframe`) o páginas de error personalizadas ante bloqueos por CORS o directivas X-Frame-Options.
-  * Ofrece marcadores rápidos (Google, Wikipedia, DuckDuckGo, Archive.org).
+  * Transforma de forma inteligente URLs de plataformas de video (YouTube, RuTube, Vimeo) y buscadores (Google con `igu=1`, Wikipedia Móvil, DuckDuckGo Lite) a formatos incrustables (`embed`), permitiendo **reproducir videos reales e interactuar dentro del iframe** sin bloqueos de `X-Frame-Options`.
+  * Ofrece marcadores rápidos funcionales (Google, YouTube Video, RuTube Rusia, Vimeo HD, Wikipedia, DuckDuckGo, Internet Archive, W3Schools).
 * **`gadgets/pinball.js`:**
   * Controla la apertura/cierre de la ventana del juego 3D Pinball.
   * Carga y reinicia el `iframe` apuntando a `gadgets/pinball/index.html`.
