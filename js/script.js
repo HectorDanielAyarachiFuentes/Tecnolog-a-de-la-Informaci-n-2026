@@ -623,9 +623,14 @@ function initWinamp() {
                         if (status === 'PLAYING') {
                             const webampTime = webampInstance.store.getState().media.timeElapsed;
                             const video = document.getElementById('winamp-video-element');
-                            if (video && Math.abs(video.currentTime - webampTime) > 1.5) {
-                                video.currentTime = webampTime;
+                            if (video) {
+                                if (video.paused && (!document.hidden)) video.play().catch(()=>{});
+                                if (Math.abs(video.currentTime - webampTime) > 1.5) {
+                                    video.currentTime = webampTime;
+                                }
                             }
+                            const dbVideo = document.getElementById('deskband-video');
+                            if (dbVideo && dbVideo.paused && (!document.hidden)) dbVideo.play().catch(()=>{});
                         }
                     });
                 }
@@ -819,13 +824,11 @@ function setupWinampVideoEvents() {
     video.addEventListener('play', () => {
         if (playBtn) playBtn.innerText = '⏸';
         if (overlay) overlay.style.display = 'none';
-        playAllVideos();
     });
 
     video.addEventListener('pause', () => {
         if (playBtn) playBtn.innerText = '▶';
         if (overlay) overlay.style.display = 'flex';
-        pauseAllVideos();
     });
 
     winampVideoInit = true;
@@ -869,9 +872,9 @@ function toggleWinampVideoPlay() {
     const video = document.getElementById('winamp-video-element');
     if (!video) return;
     if (video.paused) {
-        video.play();
+        playAllVideos();
     } else {
-        video.pause();
+        pauseAllVideos();
     }
 }
 
