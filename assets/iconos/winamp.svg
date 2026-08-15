@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2c2d35"/>
+      <stop offset="100%" stop-color="#121318"/>
+    </linearGradient>
+    <linearGradient id="boltGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF97A"/>
+      <stop offset="45%" stop-color="#FFB300"/>
+      <stop offset="100%" stop-color="#E64A19"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="1" dy="2" stdDeviation="1.5" flood-color="#000" flood-opacity="0.8"/>
+    </filter>
+    <linearGradient id="borderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9E9EAA"/>
+      <stop offset="100%" stop-color="#26272E"/>
+    </linearGradient>
+  </defs>
+  <!-- Base Disk/Bezel -->
+  <rect x="3" y="3" width="42" height="42" rx="9" fill="url(#bgGrad)" stroke="url(#borderGrad)" stroke-width="2" filter="url(#shadow)" />
+  <rect x="5" y="5" width="38" height="38" rx="7" fill="none" stroke="#4C4E5E" stroke-width="1" />
+  
+  <!-- Classic Winamp Lightning Bolt -->
+  <polygon points="28,6 12,25 24,25 19,42 36,20 25,20" fill="url(#boltGrad)" stroke="#FFECB3" stroke-width="1.2" stroke-linejoin="round" />
+  <!-- Bolt Highlights -->
+  <polygon points="27,8 15,24 23,24 20,38 33,22 25,22" fill="none" stroke="#FFFFFF" stroke-width="0.8" opacity="0.75" />
+</svg>

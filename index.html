@@ -28,6 +28,10 @@
                 <img src="assets/iconos/notepad-0.png" alt="Reporte Prompts">
                 <span>Reporte Prompts.pdf</span>
             </div>
+            <div class="desktop-icon" id="icon-winamp">
+                <img src="assets/iconos/winamp.svg" alt="Winamp">
+                <span>Winamp</span>
+            </div>
             <div class="desktop-icon" id="icon-about">
                 <img src="assets/iconos/help_book_big-0.png" alt="Sobre Mí">
                 <span>Sobre mí</span>
@@ -172,6 +176,31 @@
                     <img src="assets/iconos/computer_explorer-4.png" alt="TI 2026">
                     <span class="taskbar-item-text">Tecnologías de la...</span>
                 </div>
+                <div class="taskbar-item taskbar-winamp-deskband" id="taskbar-winamp" style="display:none;" onclick="handleWinampTaskbarClick(event)">
+                    <div class="deskband-thumb" onclick="toggleWinampVideoWindow(event)" title="Hacer clic para ver en pantalla grande">
+                        <video id="deskband-video" playsinline muted loop>
+                            <source src="Musica/Mirtha%20P%C3%A9rez%20-%20La%20Nave%20Del%20Olvido.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="deskband-info" title="Mirtha Pérez - La Nave Del Olvido">
+                        <span class="deskband-title" id="deskband-title">Mirtha Pérez - La Nave...</span>
+                    </div>
+                    <div class="deskband-controls">
+                        <button class="deskband-btn" id="db-btn-play" onclick="toggleWinampDeskbandPlay(event)" title="Play / Pausa">⏸</button>
+                        <button class="deskband-btn" onclick="toggleWinampVideoWindow(event)" title="Pantalla de Video">📺</button>
+                        <button class="deskband-btn" onclick="restoreWinamp(event)" title="Restaurar Winamp">🗖</button>
+                    </div>
+
+                    <!-- Live Taskbar Video Popup (Windows Media Player DeskBand Preview) -->
+                    <div class="deskband-hover-popup" id="deskband-hover-popup">
+                        <div class="popup-title">Mirtha Pérez - La Nave Del Olvido</div>
+                        <div class="popup-video-wrap">
+                            <video id="popup-video" playsinline muted loop>
+                                <source src="Musica/Mirtha%20P%C3%A9rez%20-%20La%20Nave%20Del%20Olvido.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- System Tray -->
@@ -199,6 +228,13 @@
                         <div class="start-item-text">
                             <strong>Actividades del Semestre</strong>
                             <span>Ver tareas y reportes del curso</span>
+                        </div>
+                    </div>
+                    <div class="start-menu-item" onclick="openWinamp(); toggleStartMenu();">
+                        <img src="assets/iconos/winamp.svg" alt="Winamp">
+                        <div class="start-item-text">
+                            <strong>Winamp</strong>
+                            <span>Reproductor multimedia clásico</span>
                         </div>
                     </div>
                     <div class="start-menu-item" onclick="openAboutModal(); toggleStartMenu();">
@@ -241,6 +277,54 @@
             </div>
         </div>
 
+        <!-- Winamp Video Window (Classic Winamp A/V Window) -->
+        <div class="window winamp-video-window" id="winamp-video-window" style="display:none;">
+            <div class="winamp-video-titlebar" id="winamp-video-titlebar">
+                <div class="winamp-title-left">
+                    <img src="assets/iconos/winamp.svg" class="winamp-mini-icon" alt="Winamp">
+                    <span class="winamp-title-text">WINAMP VIDEO [Mirtha Pérez - La Nave Del Olvido]</span>
+                </div>
+                <div class="winamp-title-controls">
+                    <button class="winamp-btn-min" onclick="toggleWinampVideoMin()" title="Minimizar"></button>
+                    <button class="winamp-btn-max" onclick="toggleWinampVideoSize()" id="wv-title-size-btn" title="1X / 2X"></button>
+                    <button class="winamp-btn-close" onclick="closeWinampVideo()" title="Cerrar"></button>
+                </div>
+            </div>
+            <div class="winamp-video-body">
+                <div class="winamp-video-screen-container">
+                    <video id="winamp-video-element" playsinline muted preload="metadata">
+                        <source src="Musica/Mirtha%20P%C3%A9rez%20-%20La%20Nave%20Del%20Olvido.mp4" type="video/mp4">
+                        Tu navegador no soporta reproducción de video HTML5.
+                    </video>
+                    <div class="winamp-video-overlay-play" id="winamp-video-play-overlay" onclick="toggleWinampVideoPlay()">
+                        <div class="play-triangle"></div>
+                    </div>
+                </div>
+                <!-- Winamp Video Controls Toolbar -->
+                <div class="winamp-video-controls">
+                    <div class="winamp-btn-group">
+                        <button class="wv-btn" id="wv-btn-play" onclick="toggleWinampVideoPlay()" title="Play / Pausa">▶</button>
+                        <button class="wv-btn" id="wv-btn-stop" onclick="stopWinampVideo()" title="Detener">⏹</button>
+                    </div>
+                    <!-- Seek bar & LCD Timer -->
+                    <div class="winamp-video-seek-wrap">
+                        <input type="range" id="winamp-video-seekbar" min="0" max="100" value="0" step="0.1" oninput="seekWinampVideo(this.value)">
+                    </div>
+                    <div class="winamp-video-time" id="winamp-video-time-display">00:00</div>
+                    <!-- Volume & Fullscreen -->
+                    <div class="winamp-video-right-controls">
+                        <span class="wv-vol-icon" id="wv-vol-icon" onclick="toggleWinampVideoMute()" title="Silenciar">🔊</span>
+                        <input type="range" id="winamp-video-volume" min="0" max="1" step="0.05" value="0.8" oninput="setWinampVideoVolume(this.value)" title="Volumen">
+                        <button class="wv-btn-scale" onclick="toggleWinampVideoSize()" id="wv-scale-label" title="1x / 2x">1X</button>
+                        <button class="wv-btn-scale" onclick="fullscreenWinampVideo()" title="Pantalla Completa">⛶</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Webamp Container (Modular retro Winamp 2.91) -->
+        <div id="webamp-container"></div>
+
     </div>
 
     <!-- Shutdown / Logoff Modal -->
@@ -272,6 +356,7 @@
     <audio id="sound-error" src="https://www.soundjay.com/buttons/sounds/button-10.mp3" preload="auto"></audio>
     <audio id="sound-startup" src="https://www.winhistory.de/more/winstart/mp3/winxp.mp3" preload="auto"></audio>
     
+    <script src="https://unpkg.com/webamp@1.5.0/built/webamp.bundle.min.js"></script>
     <script src="js/draggabilly.pkgd.min.js"></script>
     <script src="js/script.js"></script>
 </body>

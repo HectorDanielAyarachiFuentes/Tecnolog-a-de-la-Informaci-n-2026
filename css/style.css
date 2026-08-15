@@ -1348,3 +1348,452 @@ body, html {
     border-radius: 0 !important;
     border: none !important;
 }
+
+/* Webamp Retro Winamp 2.91 Integration */
+#webamp-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: calc(100vh - 30px);
+    pointer-events: none;
+    z-index: 60;
+}
+
+#webamp {
+    pointer-events: auto !important;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ── Winamp Video Window (Classic A/V Window) ─────────────── */
+.winamp-video-window {
+    background-color: #292a35;
+    border: 2px solid #14151b;
+    border-radius: 4px;
+    box-shadow: inset 1px 1px 0 #585b73, inset -1px -1px 0 #0d0e12, 0 10px 30px rgba(0, 0, 0, 0.6);
+    position: absolute;
+    top: 25%;
+    left: 45%;
+    transform: none;
+    z-index: 55;
+    display: flex;
+    flex-direction: column;
+    width: 460px;
+    transition: width 0.2s ease;
+}
+
+.winamp-video-window.size-2x {
+    width: 720px !important;
+}
+
+.winamp-video-titlebar {
+    background: linear-gradient(to right, #1f212c 0%, #353849 50%, #1f212c 100%);
+    border-bottom: 1px solid #14151b;
+    padding: 3px 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: move;
+    user-select: none;
+}
+
+.winamp-title-left {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    overflow: hidden;
+}
+
+.winamp-mini-icon {
+    width: 14px;
+    height: 14px;
+}
+
+.winamp-title-text {
+    color: #00ff66;
+    font-size: 10px;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 4px rgba(0, 255, 102, 0.6);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.winamp-title-controls {
+    display: flex;
+    gap: 3px;
+}
+
+.winamp-btn-min, .winamp-btn-max, .winamp-btn-close {
+    width: 13px;
+    height: 13px;
+    background: #3a3c4c;
+    border: 1px solid #5a5d74;
+    border-right-color: #1a1b22;
+    border-bottom-color: #1a1b22;
+    cursor: pointer;
+    position: relative;
+    padding: 0;
+}
+
+.winamp-btn-min:active, .winamp-btn-max:active, .winamp-btn-close:active {
+    border: 1px solid #1a1b22;
+    border-right-color: #5a5d74;
+    border-bottom-color: #5a5d74;
+}
+
+.winamp-btn-min::after {
+    content: "";
+    position: absolute;
+    bottom: 2px;
+    left: 2px;
+    width: 7px;
+    height: 2px;
+    background: #fff;
+}
+
+.winamp-btn-max::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 7px;
+    height: 7px;
+    border: 1px solid #fff;
+}
+
+.winamp-btn-close::after {
+    content: "✕";
+    position: absolute;
+    top: -2px;
+    left: 1px;
+    font-size: 9px;
+    color: #fff;
+    font-weight: bold;
+}
+
+.winamp-video-body {
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background-color: #1a1b23;
+}
+
+.winamp-video-screen-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    border: 1px solid #0a0b0e;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 2px;
+}
+
+.winamp-video-screen-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #000;
+    cursor: pointer;
+}
+
+.winamp-video-overlay-play {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.65);
+    border: 2px solid #00ff66;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(0, 255, 102, 0.4);
+    transition: transform 0.15s ease, opacity 0.2s ease;
+}
+
+.winamp-video-overlay-play:hover {
+    transform: scale(1.1);
+    background: rgba(0, 255, 102, 0.25);
+}
+
+.play-triangle {
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 16px solid #00ff66;
+    margin-left: 3px;
+}
+
+/* Winamp Video Controls */
+.winamp-video-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(to bottom, #2d2f3d 0%, #1e2029 100%);
+    border: 1px solid #3d4052;
+    border-bottom-color: #121318;
+    border-right-color: #121318;
+    padding: 4px 6px;
+    border-radius: 2px;
+}
+
+.winamp-btn-group {
+    display: flex;
+    gap: 2px;
+}
+
+.wv-btn {
+    background: #373949;
+    border: 1px solid #5a5d74;
+    border-right-color: #1a1b22;
+    border-bottom-color: #1a1b22;
+    color: #e2e8f0;
+    font-size: 10px;
+    padding: 2px 6px;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.wv-btn:active {
+    border: 1px solid #1a1b22;
+    border-right-color: #5a5d74;
+    border-bottom-color: #5a5d74;
+}
+
+.winamp-video-seek-wrap {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+.winamp-video-seek-wrap input[type="range"] {
+    width: 100%;
+    accent-color: #00ff66;
+    height: 5px;
+    cursor: pointer;
+}
+
+.winamp-video-time {
+    background: #000;
+    color: #00ff66;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 2px 5px;
+    border-radius: 2px;
+    border: 1px solid #222;
+    text-shadow: 0 0 4px #00ff66;
+    min-width: 44px;
+    text-align: center;
+}
+
+.winamp-video-right-controls {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.wv-vol-icon {
+    font-size: 11px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.winamp-video-right-controls input[type="range"] {
+    width: 45px;
+    accent-color: #00e5ff;
+    height: 4px;
+    cursor: pointer;
+}
+
+.wv-btn-scale {
+    background: #373949;
+    border: 1px solid #5a5d74;
+    border-right-color: #1a1b22;
+    border-bottom-color: #1a1b22;
+    color: #fff;
+    font-size: 9px;
+    font-weight: bold;
+    padding: 2px 4px;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.wv-btn-scale:active {
+    border: 1px solid #1a1b22;
+    border-right-color: #5a5d74;
+    border-bottom-color: #5a5d74;
+}
+
+/* ── Windows XP Taskbar DeskBand Player (Live Mini Video Player) ── */
+.taskbar-winamp-deskband {
+    max-width: 240px !important;
+    min-width: 190px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 1px 4px !important;
+    background: linear-gradient(to bottom, #1d4dbd 0%, #0d328c 100%) !important;
+    border: 1px solid #082260 !important;
+    border-radius: 3px;
+    box-shadow: inset 1px 1px 0 rgba(255,255,255,0.25);
+    user-select: none;
+    position: relative;
+    overflow: visible !important;
+}
+
+.taskbar-winamp-deskband:hover {
+    background: linear-gradient(to bottom, #3267df 0%, #1545b5 100%) !important;
+}
+
+.taskbar-winamp-deskband.active {
+    background: linear-gradient(to bottom, #10389c 0%, #061f5e 100%) !important;
+    border-color: #031138 !important;
+    box-shadow: inset 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.deskband-thumb {
+    position: relative;
+    width: 44px;
+    height: 22px;
+    background: #000;
+    border: 1px solid #03153d;
+    border-radius: 2px;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.deskband-thumb:hover {
+    transform: scale(1.08);
+    border-color: #00e5ff;
+}
+
+.deskband-thumb video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.deskband-info {
+    flex-grow: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 10px;
+    color: #ffffff;
+    font-weight: 500;
+    line-height: 1;
+}
+
+.deskband-title {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.8);
+}
+
+.deskband-controls {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    flex-shrink: 0;
+}
+
+.deskband-btn {
+    background: linear-gradient(to bottom, #4d87f0 0%, #1c52bd 100%);
+    border: 1px solid #0b2d78;
+    color: white;
+    width: 17px;
+    height: 17px;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    cursor: pointer;
+    padding: 0;
+}
+
+.deskband-btn:hover {
+    background: linear-gradient(to bottom, #6fa4ff 0%, #2f69db 100%);
+}
+
+.deskband-btn:active {
+    background: #0d3999;
+    box-shadow: inset 1px 1px 2px rgba(0,0,0,0.6);
+}
+
+/* Hover Live Video Preview Popup (Windows Media Player DeskBand style) */
+.deskband-hover-popup {
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    width: 220px;
+    background: #ECE9D8;
+    border: 2px solid #0054E3;
+    border-radius: 6px 6px 0 0;
+    box-shadow: 3px -3px 15px rgba(0,0,0,0.5);
+    padding: 4px;
+    display: none;
+    flex-direction: column;
+    gap: 3px;
+    z-index: 9999;
+    pointer-events: none;
+    animation: fadeInPopup 0.15s ease-out;
+}
+
+@keyframes fadeInPopup {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.taskbar-winamp-deskband:hover .deskband-hover-popup {
+    display: flex;
+}
+
+.popup-title {
+    font-size: 10px;
+    font-weight: bold;
+    color: #003087;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 1px 2px;
+    font-family: var(--font-classic);
+}
+
+.popup-video-wrap {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    border: 1px solid #716f64;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.popup-video-wrap video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+
+
+
