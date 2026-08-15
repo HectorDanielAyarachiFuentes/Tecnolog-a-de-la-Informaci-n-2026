@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     makeDraggable(document.getElementById('main-window'), document.getElementById('window-titlebar'));
     makeDraggable(document.getElementById('about-dialog'), document.querySelector('.dialog-titlebar'));
     makeDraggable(document.getElementById('winamp-video-window'), document.getElementById('winamp-video-titlebar'));
+    makeDraggable(document.getElementById('pinball-window'), document.getElementById('pinball-titlebar'));
 
     // Double-click on main window titlebar to maximize/restore
     const titlebar = document.getElementById('window-titlebar');
@@ -37,6 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     openAboutModal();
                 } else if (iconId === 'icon-winamp') {
                     openWinamp();
+                } else if (iconId === 'icon-pinball') {
+                    openPinball();
                 }
             });
         });
@@ -889,6 +892,72 @@ function fullscreenWinampVideo() {
         video.webkitRequestFullscreen();
     }
 }
+
+// ── 3D Pinball: Space Cadet Controller ──────────────────────
+function openPinball() {
+    const win = document.getElementById('pinball-window');
+    const iframe = document.getElementById('pinball-iframe');
+    const loading = document.getElementById('pinball-loading');
+    
+    if (win) {
+        win.style.display = 'flex';
+        win.classList.remove('minimized');
+        bringToFront(win);
+        
+        const taskItem = document.getElementById('taskbar-pinball-window');
+        if (taskItem) {
+            taskItem.style.display = 'flex';
+            taskItem.classList.add('active');
+        }
+        
+        if (iframe && (!iframe.src || iframe.src === 'about:blank' || iframe.src.indexOf('pinball/index.html') === -1)) {
+            if (loading) loading.style.display = 'flex';
+            iframe.src = 'pinball/index.html';
+            iframe.onload = () => {
+                if (loading) loading.style.display = 'none';
+                setTimeout(() => {
+                    try {
+                        iframe.focus();
+                        if (iframe.contentWindow) iframe.contentWindow.focus();
+                    } catch(e){}
+                }, 300);
+            };
+        } else if (iframe) {
+            try {
+                iframe.focus();
+                if (iframe.contentWindow) iframe.contentWindow.focus();
+            } catch(e){}
+        }
+    }
+}
+
+function closePinball() {
+    closeWindow('pinball-window');
+    const iframe = document.getElementById('pinball-iframe');
+    if (iframe) iframe.src = 'about:blank';
+}
+
+function restartPinball() {
+    const iframe = document.getElementById('pinball-iframe');
+    const loading = document.getElementById('pinball-loading');
+    if (iframe) {
+        if (loading) loading.style.display = 'flex';
+        iframe.src = 'about:blank';
+        setTimeout(() => { 
+            iframe.src = 'pinball/index.html'; 
+            iframe.onload = () => {
+                if (loading) loading.style.display = 'none';
+                setTimeout(() => {
+                    try {
+                        iframe.focus();
+                        if (iframe.contentWindow) iframe.contentWindow.focus();
+                    } catch(e){}
+                }, 300);
+            };
+        }, 150);
+    }
+}
+
 
 
 

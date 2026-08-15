@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title>3D Pinball for Windows - Space Cadet</title>
+    <style>
+        :root {
+            --Background: #000000;
+        }
+        html, body {
+            font-family: Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--Background);
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .titlebar {
+            display: none !important;
+        }
+        .window {
+            font-size: 8pt;
+            background-color: transparent;
+            border: none;
+            box-shadow: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+        canvas.emscripten {
+            border: 0 none;
+            background-color: #000;
+            image-rendering: pixelated;
+            outline: none;
+            cursor: default;
+        }
+        #status {
+            margin: 20px;
+            color: #38bdf8;
+            font-family: Tahoma, sans-serif;
+            font-size: 13px;
+        }
+        progress {
+            accent-color: #2563eb;
+            width: 200px;
+            height: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="active window">
+        <div class="emscripten" id="status">Cargando Space Cadet...</div>
+        <div class="emscripten"><progress hidden id="progress" max="100" value="0"></progress></div>
+        <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" style="display:none" tabindex="-1"></canvas>
+    </div>
+
+    <script>
+        var statusElement = document.getElementById("status");
+        var progressElement = document.getElementById("progress");
+        
+        var Module = {
+            preRun: [],
+            postRun: [
+                function() {
+                    setTimeout(function() {
+                        var canvas = document.getElementById("canvas");
+                        if (canvas) {
+                            canvas.focus();
+                            // Wake up SDL render loop
+                            canvas.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+                        }
+                    }, 100);
+                }
+            ],
+            print: function() {
+                var e = document.getElementById("output");
+                return e && (e.value = ""), function(e) {
+                    arguments.length > 1 && (e = Array.prototype.slice.call(arguments).join(" ")), console.log(e);
+                };
+            }(),
+            printErr: function(e) {
+                arguments.length > 1 && (e = Array.prototype.slice.call(arguments).join(" ")), console.error(e);
+            },
+            canvas: function() {
+                var e = document.getElementById("canvas");
+                return e.addEventListener("webglcontextlost", (function(e) {
+                    alert("WebGL context lost. Recarga la página.");
+                    e.preventDefault();
+                }), !1), e;
+            }(),
+            setStatus: function(e) {
+                if (Module.setStatus.last || (Module.setStatus.last = { time: Date.now(), text: "" }), e !== Module.setStatus.last.text) {
+                    var t = e.match(/([^(]+)\((\d+(\.\d+)?)\/(\d+)\)/),
+                        n = Date.now();
+                    if (!(t && n - Module.setStatus.last.time < 30)) {
+                        if (Module.setStatus.last.time = n, Module.setStatus.last.text = e, t) {
+                            e = t[1];
+                            progressElement.value = 100 * parseInt(t[2]);
+                            progressElement.max = 100 * parseInt(t[4]);
+                            progressElement.hidden = !1;
+                        } else {
+                            progressElement.value = null;
+                            progressElement.max = null;
+                            progressElement.hidden = !0;
+                            document.getElementById("canvas").style.display = "";
+                        }
+                        statusElement.innerHTML = e;
+                        if ("" === e) {
+                            statusElement.style.display = "none";
+                            progressElement.style.display = "none";
+                            var canvas = document.getElementById("canvas");
+                            if (canvas) {
+                                canvas.focus();
+                                canvas.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+                            }
+                        } else {
+                            statusElement.style.display = "";
+                            progressElement.style.display = "";
+                        }
+                    }
+                }
+            },
+            totalDependencies: 0,
+            monitorRunDependencies: function(e) {
+                this.totalDependencies = Math.max(this.totalDependencies, e);
+                Module.setStatus(e ? "Preparando (" + (this.totalDependencies - e) + "/" + this.totalDependencies + ")..." : "");
+            }
+        };
+
+        Module.setStatus("Cargando Space Cadet...");
+        window.onerror = function() {
+            Module.setStatus("Error al cargar 3D Pinball");
+            Module.setStatus = function(e) {
+                e && Module.printErr("[post-exception status] " + e);
+            };
+        };
+
+        window.addEventListener('click', function() {
+            var c = document.getElementById('canvas');
+            if (c) c.focus();
+        });
+        window.addEventListener('keydown', function() {
+            var c = document.getElementById('canvas');
+            if (c && document.activeElement !== c) c.focus();
+        });
+    </script>
+    <script async src="SpaceCadetPinball.js"></script>
+</body>
+</html>
