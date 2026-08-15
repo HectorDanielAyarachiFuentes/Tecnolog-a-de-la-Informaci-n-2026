@@ -48,10 +48,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Play Windows XP Startup Sound on first user interaction
     document.body.addEventListener('click', () => {
         const startupSound = document.getElementById('sound-startup');
-        if (startupSound && startupSound.paused && !window.hasPlayedStartup) {
+        if (startupSound && startupSound.paused && !sessionStorage.getItem('hasPlayedStartup')) {
             startupSound.volume = 0.4;
             startupSound.play().catch(e => console.log('Audio playback blocked by browser:', e));
-            window.hasPlayedStartup = true;
+            sessionStorage.setItem('hasPlayedStartup', 'true');
         }
     }, { once: true });
 });
@@ -603,7 +603,35 @@ function initWinamp() {
             isWebampOpen = true;
             isWebampMinimized = false;
             updateWinampTaskbar(true, true);
-            playAllVideos();
+
+            // Sincronizar estado de webamp hacia los videos
+            try {
+                if (webampInstance.store) {
+                    let lastStatus = webampInstance.store.getState().media.status;
+                    webampInstance.store.subscribe(() => {
+                        const status = webampInstance.store.getState().media.status;
+                        if (status !== lastStatus) {
+                            lastStatus = status;
+                            if (status === 'PLAYING') {
+                                playAllVideos(true);
+                            } else if (status === 'PAUSED' || status === 'STOPPED') {
+                                pauseAllVideos(true);
+                            }
+                        }
+                        
+                        // Sincronizar tiempo
+                        if (status === 'PLAYING') {
+                            const webampTime = webampInstance.store.getState().media.timeElapsed;
+                            const video = document.getElementById('winamp-video-element');
+                            if (video && Math.abs(video.currentTime - webampTime) > 1.5) {
+                                video.currentTime = webampTime;
+                            }
+                        }
+                    });
+                }
+            } catch(e) {
+                console.warn('No se pudo enlazar el estado de webamp', e);
+            }
 
             const webampEl = document.getElementById('webamp');
             if (webampEl) {
@@ -626,7 +654,6 @@ function minimizeAllWinamp() {
     const winVid = document.getElementById('winamp-video-window');
     if (winVid) winVid.style.display = 'none';
     updateWinampTaskbar(true, false);
-    playAllVideos();
 }
 
 function restoreAllWinamp() {
@@ -642,7 +669,6 @@ function restoreAllWinamp() {
         winVid.style.zIndex = '65';
     }
     updateWinampTaskbar(true, true);
-    playAllVideos();
 }
 
 function hideAllWinampWindows() {
@@ -692,36 +718,52 @@ function toggleWinamp() {
 }
 
 // ── Videos Synchronization & Playback ───────────────────────
-function playAllVideos() {
+let isSyncingPlayState = false;
+
+function playAllVideos(fromWebamp = false) {
+    if (isSyncingPlayState) return;
     const dbVideo = document.getElementById('deskband-video');
     const popVideo = document.getElementById('popup-video');
     const mainVideo = document.getElementById('winamp-video-element');
     const btn = document.getElementById('db-btn-play');
     const wvBtn = document.getElementById('wv-btn-play');
 
-    if (dbVideo) dbVideo.play().catch(() => {});
-    if (popVideo) popVideo.play().catch(() => {});
-    if (mainVideo && isVideoWindowOpen) mainVideo.play().catch(() => {});
+    if (dbVideo && dbVideo.paused) dbVideo.play().catch(() => {});
+    if (popVideo && popVideo.paused) popVideo.play().catch(() => {});
+    if (mainVideo && mainVideo.paused) mainVideo.play().catch(() => {});
 
     if (btn) btn.innerText = '⏸';
     if (wvBtn) wvBtn.innerText = '⏸';
     isDeskbandPlaying = true;
+    
+    if (!fromWebamp && webampInstance && typeof webampInstance.play === 'function') {
+        isSyncingPlayState = true;
+        try { webampInstance.play(); } catch(e){}
+        isSyncingPlayState = false;
+    }
 }
 
-function pauseAllVideos() {
+function pauseAllVideos(fromWebamp = false) {
+    if (isSyncingPlayState) return;
     const dbVideo = document.getElementById('deskband-video');
     const popVideo = document.getElementById('popup-video');
     const mainVideo = document.getElementById('winamp-video-element');
     const btn = document.getElementById('db-btn-play');
     const wvBtn = document.getElementById('wv-btn-play');
 
-    if (dbVideo) dbVideo.pause();
-    if (popVideo) popVideo.pause();
-    if (mainVideo) mainVideo.pause();
+    if (dbVideo && !dbVideo.paused) dbVideo.pause();
+    if (popVideo && !popVideo.paused) popVideo.pause();
+    if (mainVideo && !mainVideo.paused) mainVideo.pause();
 
     if (btn) btn.innerText = '▶';
     if (wvBtn) wvBtn.innerText = '▶';
     isDeskbandPlaying = false;
+    
+    if (!fromWebamp && webampInstance && typeof webampInstance.pause === 'function') {
+        isSyncingPlayState = true;
+        try { webampInstance.pause(); } catch(e){}
+        isSyncingPlayState = false;
+    }
 }
 
 function toggleWinampDeskbandPlay(event) {
@@ -730,14 +772,8 @@ function toggleWinampDeskbandPlay(event) {
     if (!v) return;
     if (v.paused) {
         playAllVideos();
-        if (webampInstance && typeof webampInstance.play === 'function') {
-            try { webampInstance.play(); } catch(e){}
-        }
     } else {
         pauseAllVideos();
-        if (webampInstance && typeof webampInstance.pause === 'function') {
-            try { webampInstance.pause(); } catch(e){}
-        }
     }
 }
 
@@ -856,6 +892,10 @@ function seekWinampVideo(percent) {
         const popV = document.getElementById('popup-video');
         if (dbV) dbV.currentTime = video.currentTime;
         if (popV) popV.currentTime = video.currentTime;
+        
+        if (webampInstance && typeof webampInstance.seekToTime === 'function') {
+            try { webampInstance.seekToTime(video.currentTime); } catch(e){}
+        }
     }
 }
 
