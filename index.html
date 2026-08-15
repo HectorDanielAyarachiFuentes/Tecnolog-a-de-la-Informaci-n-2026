@@ -36,6 +36,10 @@
                 <img src="assets/iconos/pinball.svg" alt="3D Pinball">
                 <span>3D Pinball</span>
             </div>
+            <div class="desktop-icon" id="icon-ie">
+                <img src="assets/iconos/world-0.png" alt="Internet Explorer">
+                <span>Internet Explorer</span>
+            </div>
             <div class="desktop-icon" id="icon-about">
                 <img src="assets/iconos/help_book_big-0.png" alt="Sobre Mí">
                 <span>Sobre mí</span>
@@ -177,7 +181,7 @@
             <!-- Quick Launch -->
             <div class="taskbar-gripper"></div>
             <div class="quick-launch">
-                <img src="assets/iconos/world-0.png" class="ql-icon" alt="Internet" title="Internet Explorer">
+                <img src="assets/iconos/world-0.png" class="ql-icon" alt="Internet" title="Internet Explorer" onclick="openIE()">
                 <img src="assets/iconos/notepad-0.png" class="ql-icon" alt="Escritorio" title="Mostrar Escritorio">
                 <img src="assets/iconos/winamp.svg" class="ql-icon" alt="Media" title="Reproductor">
             </div>
@@ -213,6 +217,10 @@
                             </video>
                         </div>
                     </div>
+                </div>
+                <div class="taskbar-item" id="taskbar-ie-window" style="display:none;" onclick="toggleWindowMinimization('ie-window')">
+                    <img src="assets/iconos/world-0.png" alt="IE">
+                    <span class="taskbar-item-text">Internet Explorer</span>
                 </div>
                 <div class="taskbar-item" id="taskbar-pinball-window" style="display:none;" onclick="toggleWindowMinimization('pinball-window')">
                     <img src="assets/iconos/pinball.svg" alt="Pinball">
@@ -261,6 +269,13 @@
                         <div class="start-item-text">
                             <strong>Winamp</strong>
                             <span>Reproductor multimedia clásico</span>
+                        </div>
+                    </div>
+                    <div class="start-menu-item" onclick="openIE(); toggleStartMenu();">
+                        <img src="assets/iconos/world-0.png" alt="Internet Explorer">
+                        <div class="start-item-text">
+                            <strong>Internet Explorer</strong>
+                            <span>Navegador web clásico</span>
                         </div>
                     </div>
                     <div class="start-menu-item" onclick="openAboutModal(); toggleStartMenu();">
@@ -385,6 +400,138 @@
             </div>
         </div>
 
+        <!-- Internet Explorer 6 Window -->
+        <div class="window xp-window ie-window" id="ie-window" style="display:none; z-index: 25;">
+            <div class="window-titlebar" id="ie-titlebar">
+                <div class="titlebar-left">
+                    <img src="assets/iconos/world-0.png" class="titlebar-icon" alt="IE">
+                    <span class="titlebar-text" id="ie-title-text">Internet Explorer</span>
+                </div>
+                <div class="titlebar-controls">
+                    <button class="titlebar-button btn-minimize" onclick="minimizeWindow('ie-window')" title="Minimizar"></button>
+                    <button class="titlebar-button btn-maximize" onclick="toggleMaximizeWindow('ie-window')" title="Maximizar"></button>
+                    <button class="titlebar-button btn-close" onclick="closeIE()" title="Cerrar"></button>
+                </div>
+            </div>
+
+            <!-- Menu Bar -->
+            <div class="window-menubar">
+                <span class="menu-item"><u>A</u>rchivo</span>
+                <span class="menu-item"><u>E</u>dición</span>
+                <span class="menu-item"><u>V</u>er</span>
+                <span class="menu-item" onclick="ieGoHome()"><u>F</u>avoritos</span>
+                <span class="menu-item">Herra<u>m</u>ientas</span>
+                <span class="menu-item">A<u>y</u>uda</span>
+            </div>
+
+            <!-- IE Toolbar -->
+            <div class="ie-toolbar">
+                <div class="ie-toolbar-btn" id="ie-btn-back" onclick="ieGoBack()">
+                    <img src="assets/iconos/ArrowLeft.svg" alt="Atrás">
+                    <span>Atrás</span>
+                </div>
+                <div class="ie-toolbar-btn disabled" id="ie-btn-forward" onclick="ieGoForward()">
+                    <img src="assets/iconos/ArrowRight.svg" alt="Adelante">
+                    <span>Adelante</span>
+                </div>
+                <div class="ie-toolbar-separator"></div>
+                <div class="ie-toolbar-btn" onclick="ieStopLoading()">
+                    <img src="assets/iconos/msg_error-0.png" alt="Detener">
+                    <span>Detener</span>
+                </div>
+                <div class="ie-toolbar-btn" onclick="ieRefresh()">
+                    <img src="assets/iconos/Sync.svg" alt="Actualizar">
+                    <span>Actualizar</span>
+                </div>
+                <div class="ie-toolbar-btn" onclick="ieGoHome()">
+                    <img src="assets/iconos/computer_explorer-5.png" alt="Inicio">
+                    <span>Inicio</span>
+                </div>
+                <div class="ie-toolbar-separator"></div>
+                <div style="flex-grow:1;"></div>
+                <div class="ie-throbber" id="ie-throbber"></div>
+            </div>
+
+            <!-- Address Bar -->
+            <div class="ie-address-bar">
+                <span class="ie-address-label">Dirección</span>
+                <div class="ie-address-input-wrap">
+                    <img src="assets/iconos/world-0.png" class="ie-address-icon" alt="">
+                    <input type="text" class="ie-address-input" id="ie-address-input" 
+                           placeholder="https://" 
+                           onkeydown="if(event.key==='Enter') ieNavigate()">
+                </div>
+                <button class="ie-go-btn" onclick="ieNavigate()">
+                    <img src="assets/iconos/ArrowRight.svg" alt="">
+                    Ir
+                </button>
+            </div>
+
+            <!-- Loading Bar -->
+            <div class="ie-loading-bar" id="ie-loading-bar">
+                <div class="ie-loading-progress"></div>
+            </div>
+
+            <!-- Content Area -->
+            <div class="ie-content">
+                <iframe id="ie-iframe" referrerpolicy="no-referrer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:none;"></iframe>
+                
+                <!-- Homepage -->
+                <div class="ie-homepage" id="ie-homepage">
+                    <div class="ie-homepage-logo">
+                        <img src="assets/iconos/world-0.png" alt="IE">
+                        <h2>Internet <span>Explorer</span></h2>
+                    </div>
+                    <div class="ie-homepage-search">
+                        <div class="ie-homepage-search-box">
+                            <input type="text" id="ie-search-input" placeholder="Buscar en la web..." 
+                                   onkeydown="if(event.key==='Enter') ieSearchFromHome()">
+                            <button onclick="ieSearchFromHome()">Buscar</button>
+                        </div>
+                    </div>
+                    <div class="ie-homepage-links">
+                        <div class="ie-homepage-link" onclick="ieNavigateTo('https://www.google.com/webhp?igu=1')">
+                            <img src="assets/iconos/world-0.png" alt=""> Google
+                        </div>
+                        <div class="ie-homepage-link" onclick="ieNavigateTo('https://www.youtube.com')">
+                            <img src="assets/iconos/video_player.svg" alt=""> YouTube
+                        </div>
+                        <div class="ie-homepage-link" onclick="ieNavigateTo('https://es.wikipedia.org')">
+                            <img src="assets/iconos/help_book_big-0.png" alt=""> Wikipedia
+                        </div>
+                        <div class="ie-homepage-link" onclick="ieNavigateTo('https://duckduckgo.com')">
+                            <img src="assets/iconos/world-0.png" alt=""> DuckDuckGo
+                        </div>
+                        <div class="ie-homepage-link" onclick="ieNavigateTo('https://news.ycombinator.com')">
+                            <img src="assets/iconos/notepad-0.png" alt=""> Hacker News
+                        </div>
+                        <div class="ie-homepage-link" onclick="ieNavigateTo('https://www.reddit.com')">
+                            <img src="assets/iconos/world-0.png" alt=""> Reddit
+                        </div>
+                    </div>
+                    <p class="ie-homepage-tip">
+                        💡 Escribe una URL en la barra de direcciones y presiona "Ir" para navegar.<br>
+                        Algunos sitios modernos pueden no cargar correctamente debido a restricciones de seguridad.
+                    </p>
+                </div>
+
+                <!-- Error Page -->
+                <div class="ie-error-page" id="ie-error-page">
+                    <img src="assets/iconos/msg_error-0.png" alt="Error">
+                    <h3>No se puede mostrar la página web</h3>
+                    <p id="ie-error-msg">La página que buscas no se puede cargar en este momento. El sitio puede estar bloqueando la conexión o no estar disponible.</p>
+                    <button class="xp-btn-classic ie-error-retry" onclick="ieRefresh()">Reintentar</button>
+                </div>
+            </div>
+
+            <!-- Status Bar -->
+            <div class="window-statusbar">
+                <div class="statusbar-pane pane-status" id="ie-status-text">Listo</div>
+                <div class="statusbar-pane pane-info" id="ie-status-url"></div>
+                <div class="statusbar-pane pane-zone"><img src="assets/iconos/world-0.png" alt="Internet"> Internet</div>
+            </div>
+        </div>
+
         <!-- Webamp Container (Modular retro Winamp 2.91) -->
         <div id="webamp-container"></div>
 
@@ -422,6 +569,9 @@
     <script src="https://unpkg.com/webamp@1.5.0/built/webamp.bundle.min.js"></script>
     <script src="js/draggabilly.pkgd.min.js"></script>
     <script src="js/script.js"></script>
+    <script src="gadgets/pinball.js"></script>
+    <script src="gadgets/winamp.js"></script>
+    <script src="gadgets/internet-explorer.js"></script>
 </body>
 </html>
 

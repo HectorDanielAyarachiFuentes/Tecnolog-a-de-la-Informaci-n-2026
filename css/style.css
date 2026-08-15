@@ -53,55 +53,59 @@ body, html {
 /* Desktop Icons */
 .desktop-icons {
     position: absolute;
-    top: 20px;
-    left: 20px;
+    top: 15px;
+    left: 15px;
+    height: calc(100% - 60px);
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 4px 14px;
     z-index: 10;
+    pointer-events: none; /* Let clicks pass through container */
 }
 
 .desktop-icon {
+    pointer-events: auto; /* Enable clicks on icons */
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    width: 80px;
+    justify-content: flex-start;
+    width: 76px;
+    padding: 4px 2px;
+    border-radius: 2px;
     cursor: pointer;
     text-align: center;
-    transition: transform 0.1s ease;
-}
-
-.desktop-icon:active {
-    transform: scale(0.95);
 }
 
 .desktop-icon.is-dragging {
     transition: none !important;
+    z-index: 100;
 }
 
 .desktop-icon img {
     width: 32px;
     height: 32px;
     image-rendering: pixelated;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
     filter: drop-shadow(1px 2px 2px rgba(0, 0, 0, 0.6));
+    pointer-events: none;
 }
 
 .desktop-icon span {
     color: #ffffff;
     font-size: 11px;
     font-weight: 500;
+    line-height: 1.2;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9), -1px -1px 3px rgba(0, 0, 0, 0.9);
-    padding: 2px 4px;
+    padding: 1px 3px;
     border-radius: 2px;
     word-break: break-word;
-    border: 1px dashed transparent;
-}
-
-.desktop-icon:hover span {
-    background-color: rgba(49, 112, 232, 0.5);
-    border: 1px dashed rgba(255, 255, 255, 0.6);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    pointer-events: none;
 }
 
 /* Windows XP Window Styles */
@@ -1937,7 +1941,417 @@ body, html {
     50% { transform: scale(1.15) rotate(180deg); }
 }
 
+/* ── Internet Explorer 6 Window ──────────────────────────── */
+.ie-window {
+    width: 900px !important;
+    height: 620px !important;
+    min-width: 400px;
+    max-width: 98vw;
+}
 
+/* IE Toolbar */
+.ie-toolbar {
+    background-color: var(--xp-bg-gray);
+    border-bottom: 1px solid #aca899;
+    padding: 2px 4px;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    flex-shrink: 0;
+}
+
+.ie-toolbar-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3px 6px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    cursor: pointer;
+    gap: 1px;
+    min-width: 40px;
+}
+
+.ie-toolbar-btn:hover {
+    background: linear-gradient(to bottom, #fff, #e5e2d3);
+    border-color: #aca899;
+}
+
+.ie-toolbar-btn:active {
+    background: #d0cfc7;
+    border-color: #716f64;
+}
+
+.ie-toolbar-btn.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.ie-toolbar-btn img {
+    width: 20px;
+    height: 20px;
+    image-rendering: auto;
+}
+
+.ie-toolbar-btn span {
+    font-size: 9px;
+    color: #333;
+    white-space: nowrap;
+}
+
+.ie-toolbar-separator {
+    width: 1px;
+    height: 28px;
+    background: linear-gradient(to bottom, transparent 10%, #aca899 50%, transparent 90%);
+    margin: 0 2px;
+}
+
+/* IE Address Bar */
+.ie-address-bar {
+    background-color: var(--xp-bg-gray);
+    border-bottom: 1px solid #aca899;
+    padding: 3px 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.ie-address-label {
+    font-size: 11px;
+    color: #333;
+    white-space: nowrap;
+    font-weight: 500;
+}
+
+.ie-address-input-wrap {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    border: 1px solid #7f9db9;
+    border-radius: 1px;
+    overflow: hidden;
+}
+
+.ie-address-icon {
+    width: 16px;
+    height: 16px;
+    padding: 2px;
+    flex-shrink: 0;
+    margin-left: 2px;
+}
+
+.ie-address-input {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    font-family: var(--font-classic);
+    font-size: 12px;
+    padding: 3px 4px;
+    background: transparent;
+    color: #000;
+    user-select: text;
+}
+
+.ie-go-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 10px;
+    background: linear-gradient(to bottom, #fcfcfc, #e5e5e5);
+    border: 1px solid #aca899;
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 500;
+    color: #333;
+    white-space: nowrap;
+}
+
+.ie-go-btn:hover {
+    background: linear-gradient(to bottom, #fff, #f0efe4);
+    border-color: #7f9db9;
+}
+
+.ie-go-btn:active {
+    background: #d0cfc7;
+}
+
+.ie-go-btn img {
+    width: 14px;
+    height: 14px;
+}
+
+/* IE Loading Bar */
+.ie-loading-bar {
+    height: 3px;
+    background-color: #d0cfc7;
+    flex-shrink: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.ie-loading-bar.loading {
+    background-color: #d0cfc7;
+}
+
+.ie-loading-progress {
+    position: absolute;
+    top: 0;
+    left: -40%;
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(to right, transparent, #3170e8, #5b8ff3, #3170e8, transparent);
+    animation: ieLoadingSlide 1.2s ease-in-out infinite;
+    display: none;
+}
+
+.ie-loading-bar.loading .ie-loading-progress {
+    display: block;
+}
+
+@keyframes ieLoadingSlide {
+    0% { left: -40%; }
+    100% { left: 100%; }
+}
+
+/* IE Content Area */
+.ie-content {
+    flex-grow: 1;
+    background-color: #ffffff;
+    position: relative;
+    overflow: hidden;
+}
+
+.ie-content iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: #fff;
+}
+
+/* IE Homepage */
+.ie-homepage {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, #e8f4fd 0%, #ffffff 30%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 40px;
+    overflow-y: auto;
+}
+
+.ie-homepage-logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.ie-homepage-logo img {
+    width: 48px;
+    height: 48px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+.ie-homepage-logo h2 {
+    font-family: 'Trebuchet MS', var(--font-classic);
+    font-size: 24px;
+    color: #003399;
+    font-weight: normal;
+}
+
+.ie-homepage-logo h2 span {
+    color: #ff8c00;
+    font-weight: bold;
+}
+
+.ie-homepage-search {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 480px;
+}
+
+.ie-homepage-search-box {
+    display: flex;
+    width: 100%;
+    border: 2px solid #3170e8;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.ie-homepage-search-box input {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    padding: 10px 14px;
+    font-family: var(--font-classic);
+    user-select: text;
+}
+
+.ie-homepage-search-box button {
+    background: linear-gradient(to bottom, #3170e8, #245edb);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: var(--font-classic);
+}
+
+.ie-homepage-search-box button:hover {
+    background: linear-gradient(to bottom, #5b8ff3, #3170e8);
+}
+
+.ie-homepage-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.ie-homepage-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    color: #003399;
+    text-decoration: none;
+    transition: all 0.15s ease;
+}
+
+.ie-homepage-link:hover {
+    background: #e8f0ff;
+    border-color: #3170e8;
+    color: #0044be;
+}
+
+.ie-homepage-link img {
+    width: 16px;
+    height: 16px;
+}
+
+.ie-homepage-tip {
+    margin-top: 16px;
+    font-size: 10px;
+    color: #888;
+    text-align: center;
+    line-height: 1.5;
+    max-width: 400px;
+}
+
+/* IE Error Page */
+.ie-error-page {
+    position: absolute;
+    inset: 0;
+    background: #ffffff;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 40px;
+    text-align: center;
+}
+
+.ie-error-page.visible {
+    display: flex;
+}
+
+.ie-error-page img {
+    width: 48px;
+    height: 48px;
+}
+
+.ie-error-page h3 {
+    color: #c00;
+    font-size: 16px;
+}
+
+.ie-error-page p {
+    color: #555;
+    font-size: 12px;
+    line-height: 1.5;
+    max-width: 420px;
+}
+
+.ie-error-retry {
+    margin-top: 8px;
+}
+
+/* IE Throbber (spinning globe animation) */
+.ie-throbber {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 40%, #6bc6ff, #2288cc, #005599);
+    box-shadow: inset -2px -2px 4px rgba(0,0,0,0.3), 0 0 2px rgba(0,0,0,0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.ie-throbber.spinning {
+    animation: ieThrobberSpin 1s linear infinite;
+}
+
+.ie-throbber::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 7px;
+    height: 7px;
+    background: rgba(255,255,255,0.5);
+    border-radius: 50%;
+}
+
+@keyframes ieThrobberSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive IE */
+@media (max-width: 768px) {
+    .ie-window {
+        width: 100vw !important;
+        height: calc(100vh - 30px) !important;
+        top: 0 !important;
+        left: 0 !important;
+        transform: none !important;
+        max-width: 100vw !important;
+    }
+
+    .ie-toolbar-btn span {
+        display: none;
+    }
+
+    .ie-toolbar-btn {
+        min-width: 28px;
+        padding: 3px 4px;
+    }
+
+    .ie-homepage-logo h2 {
+        font-size: 18px;
+    }
+}
 
 
 
