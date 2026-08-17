@@ -5,43 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tecnologías de la Información para la Gestión 2026 - Hector Daniel Ayarachi Fuentes</title>
     <!-- Favicon retro opcional -->
-    <link rel="icon" type="image/png" href="assets/iconos/computer_explorer-4.png">
+    <link rel="icon" type="image/png" href="public/assets/iconos/computer_explorer-4.png">
     <!-- Google Fonts for custom styling, though we'll use Tahoma-like fonts for XP feel -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="src/css/style.css">
 </head>
 <body>
     <div class="desktop">
         <!-- Desktop Shortcuts -->
         <div class="desktop-icons">
             <div class="desktop-icon" id="icon-my-computer">
-                <img src="assets/iconos/computer_explorer-5.png" alt="Mi PC">
+                <img src="public/assets/iconos/computer_explorer-5.png" alt="Mi PC">
                 <span>Mi PC</span>
             </div>
             <div class="desktop-icon" id="icon-my-documents">
-                <img src="assets/iconos/directory_closed-4.png" alt="Actividades">
+                <img src="public/assets/iconos/directory_closed-4.png" alt="Actividades">
                 <span>Actividades</span>
             </div>
             <div class="desktop-icon" id="icon-pdf">
-                <img src="assets/iconos/notepad-0.png" alt="Reporte Prompts">
+                <img src="public/assets/iconos/notepad-0.png" alt="Reporte Prompts">
                 <span>Reporte Prompts.pdf</span>
             </div>
             <div class="desktop-icon" id="icon-winamp">
-                <img src="assets/iconos/winamp.svg" alt="Winamp">
+                <img src="public/assets/iconos/winamp.svg" alt="Winamp">
                 <span>Winamp</span>
             </div>
             <div class="desktop-icon" id="icon-pinball">
-                <img src="assets/iconos/pinball.svg" alt="3D Pinball">
+                <img src="public/assets/iconos/pinball.svg" alt="3D Pinball">
                 <span>3D Pinball</span>
             </div>
             <div class="desktop-icon" id="icon-ie">
-                <img src="assets/iconos/world-0.png" alt="Internet Explorer">
+                <img src="public/assets/iconos/world-0.png" alt="Internet Explorer">
                 <span>Internet Explorer</span>
             </div>
             <div class="desktop-icon" id="icon-about">
-                <img src="assets/iconos/help_book_big-0.png" alt="Sobre Mí">
+                <img src="public/assets/iconos/help_book_big-0.png" alt="Sobre Mí">
                 <span>Sobre mí</span>
             </div>
         </div>
@@ -50,7 +50,7 @@
         <div class="window xp-window" id="main-window">
             <div class="window-titlebar" id="window-titlebar">
                 <div class="titlebar-left">
-                    <img src="assets/iconos/computer_explorer-4.png" class="titlebar-icon" alt="Icon">
+                    <img src="public/assets/iconos/computer_explorer-4.png" class="titlebar-icon" alt="Icon">
                     <span class="titlebar-text">Tecnologías de la Información para la Gestión 2026</span>
                 </div>
                 <div class="titlebar-controls">
@@ -96,26 +96,26 @@
                     <div class="xp-tab-panel active" id="tab-act1">
                         <div class="activities-viewer" style="height: 100%;">
                             <div class="viewer-toolbar">
-                                <div class="toolbar-btn disabled"><img src="assets/iconos/ArrowLeft.svg" alt="Atrás"> Atrás</div>
-                                <div class="toolbar-btn disabled"><img src="assets/iconos/ArrowRight.svg" alt="Adelante"> Adelante</div>
+                                <div class="toolbar-btn disabled"><img src="public/assets/iconos/ArrowLeft.svg" alt="Atrás"> Atrás</div>
+                                <div class="toolbar-btn disabled"><img src="public/assets/iconos/ArrowRight.svg" alt="Adelante"> Adelante</div>
                                 <div class="toolbar-separator"></div>
-                                <div class="toolbar-btn" onclick="refreshPDF()"><img src="assets/iconos/Sync.svg" alt="Actualizar"> Recargar</div>
+                                <div class="toolbar-btn" onclick="refreshPDF()"><img src="public/assets/iconos/Sync.svg" alt="Actualizar"> Recargar</div>
                                 <div class="toolbar-separator"></div>
-                                <div class="toolbar-btn" id="btn-expand-pdf" onclick="toggleExpandPDF()"><img id="icon-expand-pdf" src="assets/iconos/expand.svg" alt="Expandir"> <span id="text-expand-pdf">Expandir</span></div>
+                                <div class="toolbar-btn" id="btn-expand-pdf" onclick="toggleExpandPDF()"><img id="icon-expand-pdf" src="public/assets/iconos/expand.svg" alt="Expandir"> <span id="text-expand-pdf">Expandir</span></div>
                                 <div class="toolbar-separator"></div>
                                 <span class="viewer-path-label">Dirección:</span>
                                 <div class="viewer-path-bar">
-                                    C:\TI-2026\Actividades\Actividad-1\reporte-laboratorio-prompts.pdf
+                                    C:\TI-2026\content\Actividad-1\reporte-laboratorio-prompts.pdf
                                 </div>
                             </div>
                             <div class="viewer-body" style="flex-grow: 1; height: calc(100% - 31px);">
                                 <!-- PDF Embedded Viewer with fallback -->
-                                <iframe id="pdf-iframe" src="Actividades/Actividad-1/reporte-laboratorio-prompts.pdf" type="application/pdf" style="width: 100%; height: 100%; border: none;">
+                                <iframe id="pdf-iframe" src="public/content/Actividad-1/reporte-laboratorio-prompts.pdf" type="application/pdf" style="width: 100%; height: 100%; border: none;">
                                     <div class="pdf-fallback">
-                                        <img src="assets/iconos/msg_error-0.png" alt="Error">
+                                        <img src="public/assets/iconos/msg_error-0.png" alt="Error">
                                         <h3>Tu navegador no soporta visualización directa de PDFs.</h3>
                                         <p>Puedes descargar el archivo directamente para leerlo en tu computadora:</p>
-                                        <a href="Actividades/Actividad-1/reporte-laboratorio-prompts.pdf" download class="xp-btn-classic">Descargar reporte-laboratorio-prompts.pdf</a>
+                                        <a href="public/content/Actividad-1/reporte-laboratorio-prompts.pdf" download class="xp-btn-classic">Descargar reporte-laboratorio-prompts.pdf</a>
                                     </div>
                                 </iframe>
                             </div>
@@ -125,7 +125,7 @@
                     <!-- Tab Panel 2: Actividad 2 -->
                     <div class="xp-tab-panel" id="tab-act2">
                         <div class="empty-activity-view">
-                            <img src="assets/iconos/directory_open-4.png" alt="Carpeta vacía">
+                            <img src="public/assets/iconos/directory_open-4.png" alt="Carpeta vacía">
                             <h3>Actividad 2</h3>
                             <p>Esta actividad estará disponible próximamente en el semestre 2026.</p>
                         </div>
@@ -137,7 +137,7 @@
             <div class="window-statusbar">
                 <div class="statusbar-pane pane-status">Listo</div>
                 <div class="statusbar-pane pane-info">Hector Daniel Ayarachi Fuentes</div>
-                <div class="statusbar-pane pane-zone"><img src="assets/iconos/world-0.png" alt="Internet"> Mi PC | Zona de Intranet local</div>
+                <div class="statusbar-pane pane-zone"><img src="public/assets/iconos/world-0.png" alt="Internet"> Mi PC | Zona de Intranet local</div>
             </div>
         </div>
 
@@ -146,7 +146,7 @@
             <div class="window xp-dialog" id="about-dialog">
                 <div class="window-titlebar dialog-titlebar">
                     <div class="titlebar-left">
-                        <img src="assets/iconos/help_book_small-0.png" class="titlebar-icon" alt="Info">
+                        <img src="public/assets/iconos/help_book_small-0.png" class="titlebar-icon" alt="Info">
                         <span class="titlebar-text">Información del Estudiante</span>
                     </div>
                     <div class="titlebar-controls">
@@ -155,7 +155,7 @@
                 </div>
                 <div class="dialog-body">
                     <div class="dialog-message-container">
-                        <img src="assets/iconos/help_question_mark-0.png" class="dialog-icon" alt="Question">
+                        <img src="public/assets/iconos/help_question_mark-0.png" class="dialog-icon" alt="Question">
                         <div class="dialog-message">
                             <h3>Sobre Hector Daniel Ayarachi Fuentes</h3>
                             <p>Esta página web ha sido diseñada para la materia <strong>Tecnologías de la Información para la Gestión 2026</strong>.</p>
@@ -181,22 +181,22 @@
             <!-- Quick Launch -->
             <div class="taskbar-gripper"></div>
             <div class="quick-launch">
-                <img src="assets/iconos/world-0.png" class="ql-icon" alt="Internet" title="Internet Explorer" onclick="openIE()">
-                <img src="assets/iconos/notepad-0.png" class="ql-icon" alt="Escritorio" title="Mostrar Escritorio">
-                <img src="assets/iconos/winamp.svg" class="ql-icon" alt="Media" title="Reproductor">
+                <img src="public/assets/iconos/world-0.png" class="ql-icon" alt="Internet" title="Internet Explorer" onclick="openIE()">
+                <img src="public/assets/iconos/notepad-0.png" class="ql-icon" alt="Escritorio" title="Mostrar Escritorio">
+                <img src="public/assets/iconos/winamp.svg" class="ql-icon" alt="Media" title="Reproductor">
             </div>
 
             <div class="taskbar-gripper"></div>
             <!-- Active Tasks -->
             <div class="taskbar-tasks">
                 <div class="taskbar-item active" id="taskbar-main-window" onclick="toggleWindowMinimization('main-window')">
-                    <img src="assets/iconos/computer_explorer-4.png" alt="TI 2026">
+                    <img src="public/assets/iconos/computer_explorer-4.png" alt="TI 2026">
                     <span class="taskbar-item-text">Tecnologías de la...</span>
                 </div>
                 <div class="taskbar-item taskbar-winamp-deskband" id="taskbar-winamp" style="display:none;" onclick="handleWinampTaskbarClick(event)">
                     <div class="deskband-thumb" onclick="toggleWinampVideoWindow(event)" title="Hacer clic para ver en pantalla grande">
                         <video id="deskband-video" playsinline muted loop>
-                            <source src="Musica/Mirtha%20P%C3%A9rez%20-%20La%20Nave%20Del%20Olvido.mp4" type="video/mp4">
+                            <source src="public/media/Mirtha%20P%C3%A9rez%20-%20La%20Nave%20Del%20Olvido.mp4" type="video/mp4">
                         </video>
                     </div>
                     <div class="deskband-info" title="Mirtha Pérez - La Nave Del Olvido">
@@ -213,17 +213,17 @@
                         <div class="popup-title">Mirtha Pérez - La Nave Del Olvido</div>
                         <div class="popup-video-wrap">
                             <video id="popup-video" playsinline muted loop>
-                                <source src="Musica/Mirtha%20P%C3%A9rez%20-%20La%20Nave%20Del%20Olvido.mp4" type="video/mp4">
+                                <source src="public/media/Mirtha%20P%C3%A9rez%20-%20La%20Nave%20Del%20Olvido.mp4" type="video/mp4">
                             </video>
                         </div>
                     </div>
                 </div>
                 <div class="taskbar-item" id="taskbar-ie-window" style="display:none;" onclick="toggleWindowMinimization('ie-window')">
-                    <img src="assets/iconos/world-0.png" alt="IE">
+                    <img src="public/assets/iconos/world-0.png" alt="IE">
                     <span class="taskbar-item-text">Internet Explorer</span>
                 </div>
                 <div class="taskbar-item" id="taskbar-pinball-window" style="display:none;" onclick="toggleWindowMinimization('pinball-window')">
-                    <img src="assets/iconos/pinball.svg" alt="Pinball">
+                    <img src="public/assets/iconos/pinball.svg" alt="Pinball">
                     <span class="taskbar-item-text">3D Pinball para Windows</span>
                 </div>
             </div>
@@ -233,8 +233,8 @@
             <div class="system-tray">
                 <div class="tray-expand">&lt;</div>
                 <div class="tray-icons">
-                    <img src="assets/iconos/loudspeaker_rays-1.png" alt="Volumen" title="Volumen" class="tray-icon">
-                    <img src="assets/iconos/network_normal_two_pcs-2.png" alt="Red" title="Red Local" class="tray-icon">
+                    <img src="public/assets/iconos/loudspeaker_rays-1.png" alt="Volumen" title="Volumen" class="tray-icon">
+                    <img src="public/assets/iconos/network_normal_two_pcs-2.png" alt="Red" title="Red Local" class="tray-icon">
                 </div>
                 <div class="system-clock" id="system-clock">
                     12:00 PM
@@ -245,41 +245,41 @@
         <!-- Start Menu -->
         <div class="start-menu" id="start-menu">
             <div class="start-menu-header">
-                <img src="assets/iconos/users-1.png" class="start-user-avatar" alt="Avatar">
+                <img src="public/assets/iconos/users-1.png" class="start-user-avatar" alt="Avatar">
                 <span class="start-user-name">Hector Daniel Ayarachi Fuentes</span>
             </div>
             <div class="start-menu-body">
                 <div class="start-menu-left">
                     <div class="start-menu-item" onclick="openWindow('main-window'); switchTab('tab-act1'); toggleStartMenu();">
-                        <img src="assets/iconos/directory_closed-4.png" alt="Actividades">
+                        <img src="public/assets/iconos/directory_closed-4.png" alt="Actividades">
                         <div class="start-item-text">
                             <strong>Actividades del Semestre</strong>
                             <span>Ver tareas y reportes del curso</span>
                         </div>
                     </div>
                     <div class="start-menu-item" onclick="openPinball(); toggleStartMenu();">
-                        <img src="assets/iconos/pinball.svg" alt="Pinball">
+                        <img src="public/assets/iconos/pinball.svg" alt="Pinball">
                         <div class="start-item-text">
                             <strong>3D Pinball Space Cadet</strong>
                             <span>Juego clásico de Windows XP</span>
                         </div>
                     </div>
                     <div class="start-menu-item" onclick="openWinamp(); toggleStartMenu();">
-                        <img src="assets/iconos/winamp.svg" alt="Winamp">
+                        <img src="public/assets/iconos/winamp.svg" alt="Winamp">
                         <div class="start-item-text">
                             <strong>Winamp</strong>
                             <span>Reproductor multimedia clásico</span>
                         </div>
                     </div>
                     <div class="start-menu-item" onclick="openIE(); toggleStartMenu();">
-                        <img src="assets/iconos/world-0.png" alt="Internet Explorer">
+                        <img src="public/assets/iconos/world-0.png" alt="Internet Explorer">
                         <div class="start-item-text">
                             <strong>Internet Explorer</strong>
                             <span>Navegador web clásico</span>
                         </div>
                     </div>
                     <div class="start-menu-item" onclick="openAboutModal(); toggleStartMenu();">
-                        <img src="assets/iconos/help_book_big-0.png" alt="Acerca de">
+                        <img src="public/assets/iconos/help_book_big-0.png" alt="Acerca de">
                         <div class="start-item-text">
                             <strong>Sobre mí</strong>
                             <span>Conoce al autor de la página</span>
@@ -288,20 +288,20 @@
                 </div>
                 <div class="start-menu-right">
                     <div class="start-right-item" onclick="openWindow('main-window'); toggleStartMenu();">
-                        <img src="assets/iconos/computer_explorer-5.png" alt="Mi PC">
+                        <img src="public/assets/iconos/computer_explorer-5.png" alt="Mi PC">
                         <span>Mi PC</span>
                     </div>
                     <div class="start-right-item" onclick="openWindow('main-window'); switchTab('tab-act1'); toggleStartMenu();">
-                        <img src="assets/iconos/notepad-0.png" alt="Reportes">
+                        <img src="public/assets/iconos/notepad-0.png" alt="Reportes">
                         <span>Mis Documentos</span>
                     </div>
                     <hr class="start-menu-divider">
                     <div class="start-right-item" onclick="alert('Abriendo Panel de Control... Simulación 2026'); toggleStartMenu();">
-                        <img src="assets/iconos/control_panel-4.png" alt="Panel de Control">
+                        <img src="public/assets/iconos/control_panel-4.png" alt="Panel de Control">
                         <span>Panel de Control</span>
                     </div>
                     <div class="start-right-item" onclick="alert('Abriendo Soporte... Simulación 2026'); toggleStartMenu();">
-                        <img src="assets/iconos/help_question_mark-0.png" alt="Ayuda y Soporte">
+                        <img src="public/assets/iconos/help_question_mark-0.png" alt="Ayuda y Soporte">
                         <span>Ayuda y Soporte</span>
                     </div>
                 </div>
@@ -322,7 +322,7 @@
         <div class="window winamp-video-window" id="winamp-video-window" style="display:none;">
             <div class="winamp-video-titlebar" id="winamp-video-titlebar">
                 <div class="winamp-title-left">
-                    <img src="assets/iconos/winamp.svg" class="winamp-mini-icon" alt="Winamp">
+                    <img src="public/assets/iconos/winamp.svg" class="winamp-mini-icon" alt="Winamp">
                     <span class="winamp-title-text">WINAMP VIDEO [Mirtha Pérez - La Nave Del Olvido]</span>
                 </div>
                 <div class="winamp-title-controls">
@@ -334,7 +334,7 @@
             <div class="winamp-video-body">
                 <div class="winamp-video-screen-container">
                     <video id="winamp-video-element" playsinline muted preload="metadata">
-                        <source src="Musica/Mirtha%20P%C3%A9rez%20-%20La%20Nave%20Del%20Olvido.mp4" type="video/mp4">
+                        <source src="public/media/Mirtha%20P%C3%A9rez%20-%20La%20Nave%20Del%20Olvido.mp4" type="video/mp4">
                         Tu navegador no soporta reproducción de video HTML5.
                     </video>
                     <div class="winamp-video-overlay-play" id="winamp-video-play-overlay" onclick="toggleWinampVideoPlay()">
@@ -367,7 +367,7 @@
         <div class="window xp-window pinball-window" id="pinball-window" style="display:none; z-index: 25;">
             <div class="window-titlebar" id="pinball-titlebar">
                 <div class="titlebar-left">
-                    <img src="assets/iconos/pinball.svg" class="titlebar-icon" alt="Pinball">
+                    <img src="public/assets/iconos/pinball.svg" class="titlebar-icon" alt="Pinball">
                     <span class="titlebar-text">3D Pinball para Windows - Space Cadet</span>
                 </div>
                 <div class="titlebar-controls">
@@ -388,7 +388,7 @@
             <div class="pinball-body" style="flex-grow: 1; background: #000; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
                 <iframe id="pinball-iframe" src="" style="width: 100%; height: 100%; border: none;" allow="autoplay" tabindex="0"></iframe>
                 <div class="pinball-loading" id="pinball-loading">
-                    <img src="assets/iconos/pinball.svg" class="pinball-loading-icon" alt="Pinball">
+                    <img src="public/assets/iconos/pinball.svg" class="pinball-loading-icon" alt="Pinball">
                     <span>Iniciando 3D Pinball Space Cadet...</span>
                 </div>
             </div>
@@ -404,7 +404,7 @@
         <div class="window xp-window ie-window" id="ie-window" style="display:none; z-index: 25;">
             <div class="window-titlebar" id="ie-titlebar">
                 <div class="titlebar-left">
-                    <img src="assets/iconos/world-0.png" class="titlebar-icon" alt="IE">
+                    <img src="public/assets/iconos/world-0.png" class="titlebar-icon" alt="IE">
                     <span class="titlebar-text" id="ie-title-text">Internet Explorer</span>
                 </div>
                 <div class="titlebar-controls">
@@ -427,24 +427,24 @@
             <!-- IE Toolbar -->
             <div class="ie-toolbar">
                 <div class="ie-toolbar-btn" id="ie-btn-back" onclick="ieGoBack()">
-                    <img src="assets/iconos/ArrowLeft.svg" alt="Atrás">
+                    <img src="public/assets/iconos/ArrowLeft.svg" alt="Atrás">
                     <span>Atrás</span>
                 </div>
                 <div class="ie-toolbar-btn disabled" id="ie-btn-forward" onclick="ieGoForward()">
-                    <img src="assets/iconos/ArrowRight.svg" alt="Adelante">
+                    <img src="public/assets/iconos/ArrowRight.svg" alt="Adelante">
                     <span>Adelante</span>
                 </div>
                 <div class="ie-toolbar-separator"></div>
                 <div class="ie-toolbar-btn" onclick="ieStopLoading()">
-                    <img src="assets/iconos/msg_error-0.png" alt="Detener">
+                    <img src="public/assets/iconos/msg_error-0.png" alt="Detener">
                     <span>Detener</span>
                 </div>
                 <div class="ie-toolbar-btn" onclick="ieRefresh()">
-                    <img src="assets/iconos/Sync.svg" alt="Actualizar">
+                    <img src="public/assets/iconos/Sync.svg" alt="Actualizar">
                     <span>Actualizar</span>
                 </div>
                 <div class="ie-toolbar-btn" onclick="ieGoHome()">
-                    <img src="assets/iconos/computer_explorer-5.png" alt="Inicio">
+                    <img src="public/assets/iconos/computer_explorer-5.png" alt="Inicio">
                     <span>Inicio</span>
                 </div>
                 <div class="ie-toolbar-separator"></div>
@@ -456,13 +456,13 @@
             <div class="ie-address-bar">
                 <span class="ie-address-label">Dirección</span>
                 <div class="ie-address-input-wrap">
-                    <img src="assets/iconos/world-0.png" class="ie-address-icon" alt="">
+                    <img src="public/assets/iconos/world-0.png" class="ie-address-icon" alt="">
                     <input type="text" class="ie-address-input" id="ie-address-input" 
                            placeholder="https://" 
                            onkeydown="if(event.key==='Enter') ieNavigate()">
                 </div>
                 <button class="ie-go-btn" onclick="ieNavigate()">
-                    <img src="assets/iconos/ArrowRight.svg" alt="">
+                    <img src="public/assets/iconos/ArrowRight.svg" alt="">
                     Ir
                 </button>
             </div>
@@ -479,7 +479,7 @@
                 <!-- Homepage -->
                 <div class="ie-homepage" id="ie-homepage">
                     <div class="ie-homepage-logo">
-                        <img src="assets/iconos/world-0.png" alt="IE">
+                        <img src="public/assets/iconos/world-0.png" alt="IE">
                         <h2>Internet <span>Explorer</span></h2>
                     </div>
                     <div class="ie-homepage-search">
@@ -491,22 +491,22 @@
                     </div>
                     <div class="ie-homepage-links">
                         <div class="ie-homepage-link" onclick="ieNavigateTo('https://www.google.com/webhp?igu=1')">
-                            <img src="assets/iconos/world-0.png" alt=""> Google
+                            <img src="public/assets/iconos/world-0.png" alt=""> Google
                         </div>
                         <div class="ie-homepage-link" onclick="ieNavigateTo('https://www.youtube.com')">
-                            <img src="assets/iconos/video_player.svg" alt=""> YouTube
+                            <img src="public/assets/iconos/video_player.svg" alt=""> YouTube
                         </div>
                         <div class="ie-homepage-link" onclick="ieNavigateTo('https://es.wikipedia.org')">
-                            <img src="assets/iconos/help_book_big-0.png" alt=""> Wikipedia
+                            <img src="public/assets/iconos/help_book_big-0.png" alt=""> Wikipedia
                         </div>
                         <div class="ie-homepage-link" onclick="ieNavigateTo('https://duckduckgo.com')">
-                            <img src="assets/iconos/world-0.png" alt=""> DuckDuckGo
+                            <img src="public/assets/iconos/world-0.png" alt=""> DuckDuckGo
                         </div>
                         <div class="ie-homepage-link" onclick="ieNavigateTo('https://news.ycombinator.com')">
-                            <img src="assets/iconos/notepad-0.png" alt=""> Hacker News
+                            <img src="public/assets/iconos/notepad-0.png" alt=""> Hacker News
                         </div>
                         <div class="ie-homepage-link" onclick="ieNavigateTo('https://www.reddit.com')">
-                            <img src="assets/iconos/world-0.png" alt=""> Reddit
+                            <img src="public/assets/iconos/world-0.png" alt=""> Reddit
                         </div>
                     </div>
                     <p class="ie-homepage-tip">
@@ -517,7 +517,7 @@
 
                 <!-- Error Page -->
                 <div class="ie-error-page" id="ie-error-page">
-                    <img src="assets/iconos/msg_error-0.png" alt="Error">
+                    <img src="public/assets/iconos/msg_error-0.png" alt="Error">
                     <h3>No se puede mostrar la página web</h3>
                     <p id="ie-error-msg">La página que buscas no se puede cargar en este momento. El sitio puede estar bloqueando la conexión o no estar disponible.</p>
                     <button class="xp-btn-classic ie-error-retry" onclick="ieRefresh()">Reintentar</button>
@@ -528,7 +528,7 @@
             <div class="window-statusbar">
                 <div class="statusbar-pane pane-status" id="ie-status-text">Listo</div>
                 <div class="statusbar-pane pane-info" id="ie-status-url"></div>
-                <div class="statusbar-pane pane-zone"><img src="assets/iconos/world-0.png" alt="Internet"> Internet</div>
+                <div class="statusbar-pane pane-zone"><img src="public/assets/iconos/world-0.png" alt="Internet"> Internet</div>
             </div>
         </div>
 
@@ -542,7 +542,7 @@
         <div id="shutdown-dialog" style="background:#ECE9D8; border:2px solid #0054E3; border-radius:8px; box-shadow:4px 4px 20px rgba(0,0,0,0.6); width:360px; font-family:'Tahoma','Segoe UI',sans-serif; overflow:hidden;">
             <!-- Titlebar -->
             <div style="background:linear-gradient(to right, #0054E3, #2E9AFF); padding:5px 8px; display:flex; align-items:center; gap:8px;">
-                <img src="assets/iconos/computer_explorer-4.png" style="width:16px; height:16px;" alt="">
+                <img src="public/assets/iconos/computer_explorer-4.png" style="width:16px; height:16px;" alt="">
                 <span style="color:white; font-weight:bold; font-size:12px; flex:1;">Windows XP</span>
             </div>
             <!-- Body -->
@@ -567,11 +567,11 @@
     <audio id="sound-startup" src="https://www.winhistory.de/more/winstart/mp3/winxp.mp3" preload="auto"></audio>
     
     <script src="https://unpkg.com/webamp@1.5.0/built/webamp.bundle.min.js"></script>
-    <script src="js/draggabilly.pkgd.min.js"></script>
-    <script src="js/script.js"></script>
-    <script src="gadgets/pinball.js"></script>
-    <script src="gadgets/winamp.js"></script>
-    <script src="gadgets/internet-explorer.js"></script>
+    <script src="src/js/draggabilly.pkgd.min.js"></script>
+    <script src="src/js/script.js"></script>
+    <script src="src/gadgets/pinball.js"></script>
+    <script src="src/gadgets/winamp.js"></script>
+    <script src="src/gadgets/internet-explorer.js"></script>
 </body>
 </html>
 

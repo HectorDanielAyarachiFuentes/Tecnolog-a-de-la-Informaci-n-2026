@@ -88,7 +88,7 @@ function selectActivity(activityId) {
         const pathBar = document.querySelector('.viewer-path-bar');
         if (pathBar) pathBar.innerText = 'C:\\TI-2026\\Actividades\\Actividad-1\\reporte-laboratorio-prompts.pdf';
         const iframe = document.getElementById('pdf-iframe');
-        if (iframe) iframe.src = 'Actividades/Actividad-1/reporte-laboratorio-prompts.pdf';
+        if (iframe) iframe.src = 'public/content/Actividad-1/reporte-laboratorio-prompts.pdf';
     }
 }
 
@@ -282,12 +282,12 @@ function toggleExpandPDF() {
         }
         if (desktop) desktop.appendChild(viewer);
         if (btnText) btnText.innerText = 'Contraer';
-        if (btnIcon) { btnIcon.src = 'assets/iconos/collapse.svg'; btnIcon.alt = 'Contraer'; }
+        if (btnIcon) { btnIcon.src = 'public/assets/iconos/collapse.svg'; btnIcon.alt = 'Contraer'; }
     } else {
         const ph = document.getElementById('pdf-viewer-placeholder');
         if (ph && ph.parentNode) ph.parentNode.insertBefore(viewer, ph);
         if (btnText) btnText.innerText = 'Expandir';
-        if (btnIcon) { btnIcon.src = 'assets/iconos/expand.svg'; btnIcon.alt = 'Expandir'; }
+        if (btnIcon) { btnIcon.src = 'public/assets/iconos/expand.svg'; btnIcon.alt = 'Expandir'; }
     }
 }
 
@@ -497,7 +497,7 @@ function showXPScreen(isShutdown) {
             '<div class="xp-right">' +
                 '<div class="xp-user-row">' +
                     '<div class="xp-avatar">' +
-                        '<img src="assets/iconos/users-1.png" alt="Usuario" ' +
+                        '<img src="public/assets/iconos/users-1.png" alt="Usuario" ' +
                             'onerror="this.style.display=\'none\';this.parentNode.innerHTML=\'<svg viewBox=&quot;0 0 24 24&quot; fill=&quot;rgba(255,255,255,0.7)&quot; width=&quot;40&quot;><path d=&quot;M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z&quot;/></svg>\'">' +
                     '</div>' +
                     '<div class="xp-user-info">' +

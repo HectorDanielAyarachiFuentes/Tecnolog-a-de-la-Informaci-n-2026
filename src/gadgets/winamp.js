@@ -23,7 +23,7 @@ function initWinamp() {
                         artist: "Mirtha Pérez",
                         title: "La Nave Del Olvido"
                     },
-                    url: "Musica/Mirtha%20P%C3%A9rez%20-%20La%20Nave%20Del%20Olvido.mp4"
+                    url: "public/media/Mirtha%20P%C3%A9rez%20-%20La%20Nave%20Del%20Olvido.mp4"
                 },
                 {
                     metaData: {

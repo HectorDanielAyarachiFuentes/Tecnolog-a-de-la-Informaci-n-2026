@@ -18,9 +18,9 @@ function openPinball() {
             taskItem.classList.add('active');
         }
         
-        if (iframe && (!iframe.src || iframe.src === 'about:blank' || iframe.src.indexOf('gadgets/pinball/index.html') === -1)) {
+        if (iframe && (!iframe.src || iframe.src === 'about:blank' || iframe.src.indexOf('src/gadgets/pinball/index.html') === -1)) {
             if (loading) loading.style.display = 'flex';
-            iframe.src = 'gadgets/pinball/index.html';
+            iframe.src = 'src/gadgets/pinball/index.html';
             iframe.onload = () => {
                 if (loading) loading.style.display = 'none';
                 setTimeout(() => {
@@ -52,7 +52,7 @@ function restartPinball() {
         if (loading) loading.style.display = 'flex';
         iframe.src = 'about:blank';
         setTimeout(() => { 
-            iframe.src = 'gadgets/pinball/index.html'; 
+            iframe.src = 'src/gadgets/pinball/index.html'; 
             iframe.onload = () => {
                 if (loading) loading.style.display = 'none';
                 setTimeout(() => {
