@@ -35,4 +35,4 @@ Visita `http://localhost:8000` en tu navegador.
 
 ## 🤖 Guía para IAs y Colaboradores
 
-Si eres una Inteligencia Artificial asistiendo en el desarrollo o un colaborador humano, por favor lee las instrucciones detalladas en [`GUIA_IA.md`](GUIA_IA.md) y [`AGENTS.md`](AGENTS.md) antes de realizar modificaciones estructurales.
+Si eres una Inteligencia Artificial asistiendo en el desarrollo o un colaborador humano, las reglas del proyecto, estilo y arquitectura se encuentran en la carpeta `.agents/rules/`. Estas reglas son absorbidas automáticamente por el IDE para mantener siempre el contexto del proyecto al día.
