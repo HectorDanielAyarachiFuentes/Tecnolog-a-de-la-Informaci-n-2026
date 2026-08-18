@@ -1923,6 +1923,14 @@ body, html {
     max-width: 95vw;
 }
 
+.pinball-window.maximized {
+    width: 100% !important;
+    width: 100vw !important;
+    height: calc(100vh - 30px) !important;
+    max-width: 100vw !important;
+    max-height: calc(100vh - 30px) !important;
+}
+
 .pinball-loading {
     position: absolute;
     inset: 0;

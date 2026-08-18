@@ -12,13 +12,16 @@ document.addEventListener('DOMContentLoaded', () => {
     makeDraggable(document.getElementById('pinball-window'), document.getElementById('pinball-titlebar'));
     makeDraggable(document.getElementById('ie-window'), document.getElementById('ie-titlebar'));
 
-    // Double-click on main window titlebar to maximize/restore
-    const titlebar = document.getElementById('window-titlebar');
-    if (titlebar) {
-        titlebar.addEventListener('dblclick', () => {
-            toggleMaximizeWindow('main-window');
-        });
-    }
+    // Double-click on window titlebars to maximize/restore
+    ['window-titlebar', 'pinball-titlebar', 'ie-titlebar'].forEach(id => {
+        const tb = document.getElementById(id);
+        if (tb) {
+            tb.addEventListener('dblclick', () => {
+                const winId = id === 'window-titlebar' ? 'main-window' : (id === 'pinball-titlebar' ? 'pinball-window' : 'ie-window');
+                toggleMaximizeWindow(winId);
+            });
+        }
+    });
 
     // Make Desktop Icons Draggable using Draggabilly
     if (typeof Draggabilly !== 'undefined') {
@@ -168,6 +171,17 @@ function toggleMaximizeWindow(windowId) {
         win.style.top       = '';
         win.style.left      = '';
         win.style.transform = '';
+    }
+    if (windowId === 'pinball-window') {
+        const iframe = document.getElementById('pinball-iframe');
+        if (iframe) {
+            setTimeout(() => {
+                try {
+                    iframe.focus();
+                    if (iframe.contentWindow) iframe.contentWindow.focus();
+                } catch(e){}
+            }, 100);
+        }
     }
 }
 
