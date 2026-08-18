@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>3D Pinball Space Cadet</title>
+		<link rel="icon" sizes="16x16" type="image/png" href="img/icon-16.png">
+		<link rel="icon" sizes="192x192" type="image/png" href="img/icon-192.png">
+		<link rel="stylesheet" href="css/style.css">
+	</head>
+	<body>
+		<div class="pleasewait"><div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>
+		<canvas id="canvas"></canvas>
+		<div class="gui_container">
+			<div class="gui_background"></div>
+			<div class="gui_controls"><span class="gui_controls_key">LEFT FLIPPER = </span>Z&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gui_controls_key">RIGHT FLIPPER = </span>C<br><span class="gui_controls_key">TILT FLIPPER TABLE = </span>X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gui_controls_key">LAUNCH BALL = </span>SPACE<br><span class="gui_controls_key">RESTART GAME = </span>R&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gui_controls_key">ENABLE/DISABLE SOUND = </span>T</div>
+
+			<div class="gui_start"></div>
+		</div>
+		<button id="fullscreen-btn" class="fullscreen-btn">Fullscreen</button>
+		<audio id="bg-music" src="pinball-music.mp3" loop></audio>
+		<script src="js/script.js"></script>
+	</body>
+</html>
