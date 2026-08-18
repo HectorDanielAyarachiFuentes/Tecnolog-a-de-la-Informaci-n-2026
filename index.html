@@ -381,8 +381,11 @@
             <div class="window-menubar">
                 <span class="menu-item" onclick="restartPinball()"><u>J</u>uego</span>
                 <span class="menu-item" onclick="restartPinball()"><u>O</u>pciones</span>
+                <span class="menu-item" onclick="togglePinballMusic()"><u>M</u>úsica</span>
+                <span class="menu-item" onclick="togglePinballSounds()"><u>S</u>onidos</span>
                 <span class="menu-item" onclick="alert('Controles de 3D Pinball:\n- Espacio: Lanzar bola (mantener presionado)\n- Z / Flecha Izq: Paleta izquierda\n- / / Flecha Der: Paleta derecha\n- X / . : Empujar mesa (Tilt)\n- F2: Nuevo Juego')">A<u>y</u>uda</span>
             </div>
+            <audio id="pinball-music" src="src/gadgets/pinball/pinball-music.mp3" loop></audio>
 
             <!-- Pinball Game Body / Iframe -->
             <div class="pinball-body" style="flex-grow: 1; background: #000; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
