@@ -2363,3 +2363,34 @@ body, html {
 
 
 
+
+/* Window Menu Bar Dropdown */
+.menu-item.dropdown-wrapper {
+    position: relative;
+}
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #ece9d8;
+    border: 1px solid #999;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    z-index: 200;
+    padding: 2px;
+    min-width: 100px;
+    cursor: default;
+}
+.menu-item.dropdown-wrapper:hover .dropdown-menu {
+    display: block;
+}
+.dropdown-menu div {
+    padding: 3px 15px 3px 15px;
+    color: #000;
+    cursor: default;
+    font-size: 11px;
+}
+.dropdown-menu div:hover {
+    background: #316ac5;
+    color: #fff;
+}

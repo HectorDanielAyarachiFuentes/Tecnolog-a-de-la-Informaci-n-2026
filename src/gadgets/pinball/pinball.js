@@ -131,3 +131,23 @@ function togglePinballSounds() {
         }, 10);
     }
 }
+function pausePinball() {
+    const iframe = document.getElementById('pinball-iframe');
+    if (iframe && iframe.contentWindow) {
+        try {
+            const canvas = iframe.contentDocument.getElementById('canvas');
+            if (canvas) {
+                const keyEventDown = new KeyboardEvent('keydown', { key: 'F3', code: 'F3', which: 114, keyCode: 114, bubbles: true, cancelable: true });
+                const keyEventUp = new KeyboardEvent('keyup', { key: 'F3', code: 'F3', which: 114, keyCode: 114, bubbles: true, cancelable: true });
+                canvas.dispatchEvent(keyEventDown);
+                canvas.dispatchEvent(keyEventUp);
+            }
+        } catch(e) {
+            console.log('Could not pause game:', e);
+        }
+        setTimeout(() => {
+            iframe.focus();
+            if (iframe.contentWindow) iframe.contentWindow.focus();
+        }, 10);
+    }
+}
