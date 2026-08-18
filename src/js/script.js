@@ -109,7 +109,10 @@ function closeWindow(windowId) {
     const win = document.getElementById(windowId);
     if (win) win.style.display = 'none';
     const item = document.getElementById(`taskbar-${windowId}`);
-    if (item) item.classList.remove('active');
+    if (item) {
+        item.classList.remove('active');
+        item.style.display = 'none';
+    }
 }
 
 function minimizeWindow(windowId) {

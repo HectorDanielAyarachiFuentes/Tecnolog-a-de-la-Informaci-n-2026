@@ -46,6 +46,8 @@ function openPinball() {
 
 function closePinball() {
     closeWindow('pinball-window');
+    const iframe = document.getElementById('pinball-iframe');
+    if (iframe) iframe.src = 'about:blank';
     const audio = document.getElementById('pinball-music');
     if (audio) audio.pause();
 }
