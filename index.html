@@ -44,6 +44,10 @@
                 <img src="public/assets/iconos/help_book_big-0.png" alt="Sobre Mí">
                 <span>Sobre mí</span>
             </div>
+            <div class="desktop-icon" id="icon-file-explorer">
+                <img src="public/assets/iconos/directory_open-4.png" alt="Mi PC - Explorador">
+                <span>Explorador</span>
+            </div>
         </div>
 
         <!-- Main Window (Windows XP Style) -->
@@ -226,6 +230,10 @@
                     <img src="src/gadgets/pinball/img/3D_Pinball_Space_Cadet_icon.png" alt="Pinball">
                     <span class="taskbar-item-text">3D Pinball para Windows</span>
                 </div>
+                <div class="taskbar-item" id="taskbar-fe-window" style="display:none;" onclick="toggleWindowMinimization('fe-window')">
+                    <img src="public/assets/iconos/directory_open-4.png" alt="Explorador">
+                    <span class="taskbar-item-text">Explorador de Windows</span>
+                </div>
             </div>
 
             <!-- System Tray -->
@@ -250,6 +258,13 @@
             </div>
             <div class="start-menu-body">
                 <div class="start-menu-left">
+                    <div class="start-menu-item" onclick="openFileExplorer(); toggleStartMenu();">
+                        <img src="public/assets/iconos/directory_open-4.png" alt="Explorador">
+                        <div class="start-item-text">
+                            <strong>Explorador de Windows</strong>
+                            <span>Ver la estructura del sitio</span>
+                        </div>
+                    </div>
                     <div class="start-menu-item" onclick="openWindow('main-window'); switchTab('tab-act1'); toggleStartMenu();">
                         <img src="public/assets/iconos/directory_closed-4.png" alt="Actividades">
                         <div class="start-item-text">
@@ -568,6 +583,101 @@
         <!-- Webamp Container (Modular retro Winamp 2.91) -->
         <div id="webamp-container"></div>
 
+        <!-- ═══ FILE EXPLORER WINDOW (Windows XP Classic Folder Viewer) ═══ -->
+        <div class="window fe-window" id="fe-window" style="display:none; z-index:24; width:820px; height:530px; left:80px; top:25px; position:absolute; flex-direction:column; transform:none; max-height:none;">
+            <!-- Titlebar -->
+            <div class="window-titlebar" id="fe-titlebar">
+                <div class="titlebar-left">
+                    <img src="public/assets/iconos/computer_explorer-4.png" class="titlebar-icon" alt="Explorador">
+                    <span class="titlebar-text" id="fe-title-text">Explorador de Windows</span>
+                </div>
+                <div class="titlebar-controls">
+                    <button class="titlebar-button btn-minimize" onclick="minimizeWindow('fe-window')" title="Minimizar"></button>
+                    <button class="titlebar-button btn-maximize" onclick="toggleMaximizeWindow('fe-window')" title="Maximizar"></button>
+                    <button class="titlebar-button btn-close" onclick="closeFileExplorer()" title="Cerrar"></button>
+                </div>
+            </div>
+
+            <!-- Menu Bar -->
+            <div class="window-menubar">
+                <span class="menu-item"><u>A</u>rchivo</span>
+                <span class="menu-item"><u>E</u>dición</span>
+                <span class="menu-item"><u>V</u>er</span>
+                <span class="menu-item"><u>F</u>avoritos</span>
+                <span class="menu-item">Herra<u>m</u>ientas</span>
+                <span class="menu-item">A<u>y</u>uda</span>
+            </div>
+
+            <!-- Navigation Toolbar -->
+            <div class="fe-toolbar">
+                <button class="fe-nav-btn" id="fe-btn-back" onclick="feGoBack()" title="Atrás" disabled>
+                    <img src="public/assets/iconos/ArrowLeft.svg" alt="Atrás"> Atrás
+                </button>
+                <button class="fe-nav-btn" id="fe-btn-forward" onclick="feGoForward()" title="Adelante" disabled>
+                    <img src="public/assets/iconos/ArrowRight.svg" alt="Adelante"> Adelante
+                </button>
+                <button class="fe-nav-btn" id="fe-btn-up" onclick="feGoUp()" title="Arriba" disabled>
+                    &#8593; Arriba
+                </button>
+                <div class="fe-toolbar-sep"></div>
+                <span class="fe-toolbar-label">Dirección:</span>
+                <div class="fe-address-bar" id="fe-address-bar"></div>
+                <div class="fe-toolbar-sep"></div>
+                <button class="fe-view-btn" id="fe-view-icons" onclick="feSetView('icons')" title="Iconos" class="active">&#9639;</button>
+                <button class="fe-view-btn" id="fe-view-list" onclick="feSetView('list')" title="Lista">&#9776;</button>
+                <button class="fe-view-btn" id="fe-view-details" onclick="feSetView('details')" title="Detalles">&#9783;</button>
+            </div>
+
+            <!-- Explorer Body: Tree + Content -->
+            <div class="fe-body">
+                <!-- Left: Folders Tree Panel -->
+                <div class="fe-left-panel">
+                    <div class="fe-panel-header">Carpetas</div>
+                    <div class="fe-tree-panel" id="fe-tree-panel"></div>
+                </div>
+
+                <!-- Splitter -->
+                <div class="fe-splitter" id="fe-splitter"></div>
+
+                <!-- Right: Content + Info -->
+                <div class="fe-right-area">
+                    <!-- WXP-style left info strip (shown on left side of content) -->
+                    <div class="fe-info-panel">
+                        <div class="fe-info-header">Información</div>
+                        <div id="fe-info-content" class="fe-info-content"></div>
+                        <div class="fe-info-section-header">Estructura del sitio</div>
+                        <div class="fe-site-info">
+                            <p>Este sitio web simula un escritorio <strong>Windows XP</strong> completo.</p>
+                            <p><strong>Tecnología:</strong></p>
+                            <ul>
+                                <li>HTML5 (SPA)</li>
+                                <li>CSS3 Vanilla</li>
+                                <li>JavaScript ES6+</li>
+                                <li>WebAssembly (Pinball)</li>
+                            </ul>
+                            <p><strong>Gadgets:</strong></p>
+                            <ul>
+                                <li>&#127925; Winamp</li>
+                                <li>&#127760; Internet Explorer</li>
+                                <li>&#127918; 3D Pinball</li>
+                                <li>&#128193; Explorador (este)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Main content panel -->
+                    <div class="fe-content-panel" id="fe-content-panel"></div>
+                </div>
+            </div>
+
+            <!-- Status Bar -->
+            <div class="window-statusbar">
+                <div class="statusbar-pane pane-status" id="fe-status-text">Listo</div>
+                <div class="statusbar-pane pane-info">TI-2026 | Hector D. Ayarachi Fuentes</div>
+                <div class="statusbar-pane pane-zone"><img src="public/assets/iconos/computer_explorer-4.png" alt=""> Mi PC</div>
+            </div>
+        </div>
+
     </div>
 
     <!-- Shutdown / Logoff Modal -->
@@ -605,6 +715,7 @@
     <script src="src/gadgets/pinball/pinball.js"></script>
     <script src="src/gadgets/winamp.js"></script>
     <script src="src/gadgets/internet-explorer.js"></script>
+    <script src="src/gadgets/file-explorer.js"></script>
 </body>
 </html>
 

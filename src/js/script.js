@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     makeDraggable(document.getElementById('winamp-video-window'), document.getElementById('winamp-video-titlebar'));
     makeDraggable(document.getElementById('pinball-window'), document.getElementById('pinball-titlebar'));
     makeDraggable(document.getElementById('ie-window'), document.getElementById('ie-titlebar'));
+    makeDraggable(document.getElementById('fe-window'), document.getElementById('fe-titlebar'));
 
     // Double-click on window titlebars to maximize/restore
     ['window-titlebar', 'pinball-titlebar', 'ie-titlebar'].forEach(id => {
@@ -46,6 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     openPinball();
                 } else if (iconId === 'icon-ie') {
                     openIE();
+                } else if (iconId === 'icon-file-explorer') {
+                    openFileExplorer();
                 }
             });
         });
