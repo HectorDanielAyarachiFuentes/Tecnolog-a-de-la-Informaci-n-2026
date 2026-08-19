@@ -92,9 +92,9 @@ function switchTab(tabId) {
 function selectActivity(activityId) {
     if (activityId === 'act1') {
         const pathBar = document.querySelector('.viewer-path-bar');
-        if (pathBar) pathBar.innerText = 'C:\\TI-2026\\Actividades\\Actividad-1\\reporte-laboratorio-prompts.pdf';
+        if (pathBar) pathBar.innerText = 'C:\\TI-2026\\Actividades\\Actividad-1\\Actividad 1 -reporte-laboratorio-prompts.pdf';
         const iframe = document.getElementById('pdf-iframe');
-        if (iframe) iframe.src = 'public/content/Actividad-1/reporte-laboratorio-prompts.pdf';
+        if (iframe) iframe.src = 'public/content/Actividad-1/Actividad 1 -reporte-laboratorio-prompts.pdf';
     }
 }
 

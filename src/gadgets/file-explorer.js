@@ -92,7 +92,7 @@ const FILE_SYSTEM = {
                             { id: 'f-inscript', name: 'inscripciones-desestructuradas.txt', type: 'txt', size: '1.7 KB', description: 'Datos de inscripciones en formato no estructurado - para practica de extraccion con prompts', action: 'open-pdf', path: 'public/content/Actividad-1/bases-laboratorio-prompts/inscripciones-desestructuradas.txt' }
                           ]
                         },
-                        { id: 'f-reporte', name: 'reporte-laboratorio-prompts.pdf', type: 'pdf', size: '44 KB', description: 'Reporte final del laboratorio de Ingenieria de Prompts. Entregable principal de la Actividad 1.', action: 'open-pdf', path: 'public/content/Actividad-1/reporte-laboratorio-prompts.pdf' }
+                        { id: 'f-reporte', name: 'Actividad 1 -reporte-laboratorio-prompts.pdf', type: 'pdf', size: '414 KB', description: 'Reporte final del laboratorio de Ingenieria de Prompts. Entregable principal de la Actividad 1.', action: 'open-pdf', path: 'public/content/Actividad-1/Actividad 1 -reporte-laboratorio-prompts.pdf' }
                       ]
                     }
                   ]
@@ -168,7 +168,7 @@ const FILE_SYSTEM = {
       type: 'special-folder',
       description: 'Documentos del estudiante Hector Daniel Ayarachi Fuentes',
       children: [
-        { id: 'link-reporte', name: 'reporte-laboratorio-prompts.pdf', type: 'pdf', size: '44 KB', description: 'Acceso directo: Reporte del Laboratorio de Prompts - Actividad 1', action: 'open-pdf', path: 'public/content/Actividad-1/reporte-laboratorio-prompts.pdf' }
+        { id: 'link-reporte', name: 'Actividad 1 -reporte-laboratorio-prompts.pdf', type: 'pdf', size: '414 KB', description: 'Acceso directo: Reporte del Laboratorio de Prompts - Actividad 1', action: 'open-pdf', path: 'public/content/Actividad-1/Actividad 1 -reporte-laboratorio-prompts.pdf' }
       ]
     },
     {
