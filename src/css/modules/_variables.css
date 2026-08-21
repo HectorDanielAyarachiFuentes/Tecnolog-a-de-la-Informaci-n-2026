@@ -1,0 +1,37 @@
+/* Windows XP Luna Blue Design System & Stylesheet */
+
+:root {
+    --xp-blue-dark: #0054e3;
+    --xp-blue-mid: #245edb;
+    --xp-blue-light: #3170e8;
+    --xp-blue-hover: #5b8ff3;
+    --xp-bg-gray: #ece9d8;
+    --xp-window-border: #0054e3;
+    --xp-window-inner-border: #ffffff;
+    --xp-text-color: #000000;
+    --xp-text-disabled: #aca899;
+    --xp-border-light: #ffffff;
+    --xp-border-shadow: #aca899;
+    --xp-border-dark: #716f64;
+    --xp-orange-dark: #d84315;
+    --xp-orange-light: #ff7043;
+    --font-classic: 'Tahoma', 'Trebuchet MS', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-modern: 'Outfit', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: var(--font-classic);
+    font-size: 12px;
+    background-color: #000;
+}
+

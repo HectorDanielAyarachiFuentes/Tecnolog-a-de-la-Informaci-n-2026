@@ -1,0 +1,1524 @@
+/* Webamp Retro Winamp 2.91 Integration */
+#webamp-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: calc(100vh - 30px);
+    pointer-events: none;
+    z-index: 60;
+}
+
+#webamp {
+    pointer-events: auto !important;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ── Winamp Video Window (Classic A/V Window) ─────────────── */
+.winamp-video-window {
+    background-color: #292a35;
+    border: 2px solid #14151b;
+    border-radius: 4px;
+    box-shadow: inset 1px 1px 0 #585b73, inset -1px -1px 0 #0d0e12, 0 10px 30px rgba(0, 0, 0, 0.6);
+    position: absolute;
+    top: 25%;
+    left: 45%;
+    transform: none;
+    z-index: 55;
+    display: flex;
+    flex-direction: column;
+    width: 460px;
+    transition: width 0.2s ease;
+}
+
+.winamp-video-window.size-2x {
+    width: 720px !important;
+}
+
+.winamp-video-titlebar {
+    background: linear-gradient(to right, #1f212c 0%, #353849 50%, #1f212c 100%);
+    border-bottom: 1px solid #14151b;
+    padding: 3px 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: move;
+    user-select: none;
+}
+
+.winamp-title-left {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    overflow: hidden;
+}
+
+.winamp-mini-icon {
+    width: 14px;
+    height: 14px;
+}
+
+.winamp-title-text {
+    color: #00ff66;
+    font-size: 10px;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 4px rgba(0, 255, 102, 0.6);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.winamp-title-controls {
+    display: flex;
+    gap: 3px;
+}
+
+.winamp-btn-min, .winamp-btn-max, .winamp-btn-close {
+    width: 13px;
+    height: 13px;
+    background: #3a3c4c;
+    border: 1px solid #5a5d74;
+    border-right-color: #1a1b22;
+    border-bottom-color: #1a1b22;
+    cursor: pointer;
+    position: relative;
+    padding: 0;
+}
+
+.winamp-btn-min:active, .winamp-btn-max:active, .winamp-btn-close:active {
+    border: 1px solid #1a1b22;
+    border-right-color: #5a5d74;
+    border-bottom-color: #5a5d74;
+}
+
+.winamp-btn-min::after {
+    content: "";
+    position: absolute;
+    bottom: 2px;
+    left: 2px;
+    width: 7px;
+    height: 2px;
+    background: #fff;
+}
+
+.winamp-btn-max::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 7px;
+    height: 7px;
+    border: 1px solid #fff;
+}
+
+.winamp-btn-close::after {
+    content: "✕";
+    position: absolute;
+    top: -2px;
+    left: 1px;
+    font-size: 9px;
+    color: #fff;
+    font-weight: bold;
+}
+
+.winamp-video-body {
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background-color: #1a1b23;
+}
+
+.winamp-video-screen-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    border: 1px solid #0a0b0e;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 2px;
+}
+
+.winamp-video-screen-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #000;
+    cursor: pointer;
+}
+
+.winamp-video-overlay-play {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.65);
+    border: 2px solid #00ff66;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(0, 255, 102, 0.4);
+    transition: transform 0.15s ease, opacity 0.2s ease;
+}
+
+.winamp-video-overlay-play:hover {
+    transform: scale(1.1);
+    background: rgba(0, 255, 102, 0.25);
+}
+
+.play-triangle {
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 16px solid #00ff66;
+    margin-left: 3px;
+}
+
+/* Winamp Video Controls */
+.winamp-video-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(to bottom, #2d2f3d 0%, #1e2029 100%);
+    border: 1px solid #3d4052;
+    border-bottom-color: #121318;
+    border-right-color: #121318;
+    padding: 4px 6px;
+    border-radius: 2px;
+}
+
+.winamp-btn-group {
+    display: flex;
+    gap: 2px;
+}
+
+.wv-btn {
+    background: #373949;
+    border: 1px solid #5a5d74;
+    border-right-color: #1a1b22;
+    border-bottom-color: #1a1b22;
+    color: #e2e8f0;
+    font-size: 10px;
+    padding: 2px 6px;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.wv-btn:active {
+    border: 1px solid #1a1b22;
+    border-right-color: #5a5d74;
+    border-bottom-color: #5a5d74;
+}
+
+.winamp-video-seek-wrap {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+.winamp-video-seek-wrap input[type="range"] {
+    width: 100%;
+    accent-color: #00ff66;
+    height: 5px;
+    cursor: pointer;
+}
+
+.winamp-video-time {
+    background: #000;
+    color: #00ff66;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 2px 5px;
+    border-radius: 2px;
+    border: 1px solid #222;
+    text-shadow: 0 0 4px #00ff66;
+    min-width: 44px;
+    text-align: center;
+}
+
+.winamp-video-right-controls {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.wv-vol-icon {
+    font-size: 11px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.winamp-video-right-controls input[type="range"] {
+    width: 45px;
+    accent-color: #00e5ff;
+    height: 4px;
+    cursor: pointer;
+}
+
+.wv-btn-scale {
+    background: #373949;
+    border: 1px solid #5a5d74;
+    border-right-color: #1a1b22;
+    border-bottom-color: #1a1b22;
+    color: #fff;
+    font-size: 9px;
+    font-weight: bold;
+    padding: 2px 4px;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.wv-btn-scale:active {
+    border: 1px solid #1a1b22;
+    border-right-color: #5a5d74;
+    border-bottom-color: #5a5d74;
+}
+
+/* ── Windows XP Taskbar DeskBand Player (Live Mini Video Player) ── */
+.taskbar-winamp-deskband {
+    max-width: 240px !important;
+    min-width: 190px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 1px 4px !important;
+    background: linear-gradient(to bottom, #1d4dbd 0%, #0d328c 100%) !important;
+    border: 1px solid #082260 !important;
+    border-radius: 3px;
+    box-shadow: inset 1px 1px 0 rgba(255,255,255,0.25);
+    user-select: none;
+    position: relative;
+    overflow: visible !important;
+}
+
+.taskbar-winamp-deskband:hover {
+    background: linear-gradient(to bottom, #3267df 0%, #1545b5 100%) !important;
+}
+
+.taskbar-winamp-deskband.active {
+    background: linear-gradient(to bottom, #10389c 0%, #061f5e 100%) !important;
+    border-color: #031138 !important;
+    box-shadow: inset 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.deskband-thumb {
+    position: relative;
+    width: 44px;
+    height: 22px;
+    background: #000;
+    border: 1px solid #03153d;
+    border-radius: 2px;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.deskband-thumb:hover {
+    transform: scale(1.08);
+    border-color: #00e5ff;
+}
+
+.deskband-thumb video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.deskband-info {
+    flex-grow: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 10px;
+    color: #ffffff;
+    font-weight: 500;
+    line-height: 1;
+}
+
+.deskband-title {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.8);
+}
+
+.deskband-controls {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    flex-shrink: 0;
+}
+
+.deskband-btn {
+    background: linear-gradient(to bottom, #4d87f0 0%, #1c52bd 100%);
+    border: 1px solid #0b2d78;
+    color: white;
+    width: 17px;
+    height: 17px;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    cursor: pointer;
+    padding: 0;
+}
+
+.deskband-btn:hover {
+    background: linear-gradient(to bottom, #6fa4ff 0%, #2f69db 100%);
+}
+
+.deskband-btn:active {
+    background: #0d3999;
+    box-shadow: inset 1px 1px 2px rgba(0,0,0,0.6);
+}
+
+/* Hover Live Video Preview Popup (Windows Media Player DeskBand style) */
+.deskband-hover-popup {
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    width: 220px;
+    background: #ECE9D8;
+    border: 2px solid #0054E3;
+    border-radius: 6px 6px 0 0;
+    box-shadow: 3px -3px 15px rgba(0,0,0,0.5);
+    padding: 4px;
+    display: none;
+    flex-direction: column;
+    gap: 3px;
+    z-index: 9999;
+    pointer-events: none;
+    animation: fadeInPopup 0.15s ease-out;
+}
+
+@keyframes fadeInPopup {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.taskbar-winamp-deskband:hover .deskband-hover-popup {
+    display: flex;
+}
+
+.popup-title {
+    font-size: 10px;
+    font-weight: bold;
+    color: #003087;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 1px 2px;
+    font-family: var(--font-classic);
+}
+
+.popup-video-wrap {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    border: 1px solid #716f64;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.popup-video-wrap video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* ── 3D Pinball Space Cadet Window ────────────────────────── */
+.pinball-window {
+    width: 630px !important;
+    height: 540px !important;
+    min-width: 320px;
+    max-width: 95vw;
+}
+
+.pinball-window.maximized {
+    width: 100% !important;
+    width: 100vw !important;
+    height: calc(100vh - 30px) !important;
+    max-width: 100vw !important;
+    max-height: calc(100vh - 30px) !important;
+}
+
+.pinball-loading {
+    position: absolute;
+    inset: 0;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: #38bdf8;
+    font-family: var(--font-classic);
+    font-size: 12px;
+    z-index: 10;
+}
+
+.pinball-loading-icon {
+    width: 48px;
+    height: 48px;
+    animation: pinballSpin 2s infinite ease-in-out;
+}
+
+@keyframes pinballSpin {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.15) rotate(180deg); }
+}
+
+/* ── Internet Explorer 6 Window ──────────────────────────── */
+.ie-window {
+    width: 900px;
+    height: 620px;
+    min-width: 400px;
+    max-width: 98vw;
+}
+
+/* IE Toolbar */
+.ie-toolbar {
+    background-color: var(--xp-bg-gray);
+    border-bottom: 1px solid #aca899;
+    padding: 2px 4px;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    flex-shrink: 0;
+}
+
+.ie-toolbar-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3px 6px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    cursor: pointer;
+    gap: 1px;
+    min-width: 40px;
+}
+
+.ie-toolbar-btn:hover {
+    background: linear-gradient(to bottom, #fff, #e5e2d3);
+    border-color: #aca899;
+}
+
+.ie-toolbar-btn:active {
+    background: #d0cfc7;
+    border-color: #716f64;
+}
+
+.ie-toolbar-btn.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.ie-toolbar-btn img {
+    width: 20px;
+    height: 20px;
+    image-rendering: auto;
+}
+
+.ie-toolbar-btn span {
+    font-size: 9px;
+    color: #333;
+    white-space: nowrap;
+}
+
+.ie-toolbar-separator {
+    width: 1px;
+    height: 28px;
+    background: linear-gradient(to bottom, transparent 10%, #aca899 50%, transparent 90%);
+    margin: 0 2px;
+}
+
+/* IE Address Bar */
+.ie-address-bar {
+    background-color: var(--xp-bg-gray);
+    border-bottom: 1px solid #aca899;
+    padding: 3px 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.ie-address-label {
+    font-size: 11px;
+    color: #333;
+    white-space: nowrap;
+    font-weight: 500;
+}
+
+.ie-address-input-wrap {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    border: 1px solid #7f9db9;
+    border-radius: 1px;
+    overflow: hidden;
+}
+
+.ie-address-icon {
+    width: 16px;
+    height: 16px;
+    padding: 2px;
+    flex-shrink: 0;
+    margin-left: 2px;
+}
+
+.ie-address-input {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    font-family: var(--font-classic);
+    font-size: 12px;
+    padding: 3px 4px;
+    background: transparent;
+    color: #000;
+    user-select: text;
+}
+
+.ie-go-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 10px;
+    background: linear-gradient(to bottom, #fcfcfc, #e5e5e5);
+    border: 1px solid #aca899;
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 500;
+    color: #333;
+    white-space: nowrap;
+}
+
+.ie-go-btn:hover {
+    background: linear-gradient(to bottom, #fff, #f0efe4);
+    border-color: #7f9db9;
+}
+
+.ie-go-btn:active {
+    background: #d0cfc7;
+}
+
+.ie-go-btn img {
+    width: 14px;
+    height: 14px;
+}
+
+/* IE Loading Bar */
+.ie-loading-bar {
+    height: 3px;
+    background-color: #d0cfc7;
+    flex-shrink: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.ie-loading-bar.loading {
+    background-color: #d0cfc7;
+}
+
+.ie-loading-progress {
+    position: absolute;
+    top: 0;
+    left: -40%;
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(to right, transparent, #3170e8, #5b8ff3, #3170e8, transparent);
+    animation: ieLoadingSlide 1.2s ease-in-out infinite;
+    display: none;
+}
+
+.ie-loading-bar.loading .ie-loading-progress {
+    display: block;
+}
+
+@keyframes ieLoadingSlide {
+    0% { left: -40%; }
+    100% { left: 100%; }
+}
+
+/* IE Content Area */
+.ie-content {
+    flex-grow: 1;
+    background-color: #ffffff;
+    position: relative;
+    overflow: hidden;
+}
+
+.ie-content iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: #fff;
+}
+
+/* IE Homepage */
+.ie-homepage {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, #e8f4fd 0%, #ffffff 30%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 40px;
+    overflow-y: auto;
+}
+
+.ie-homepage-logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.ie-homepage-logo img {
+    width: 48px;
+    height: 48px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+.ie-homepage-logo h2 {
+    font-family: 'Trebuchet MS', var(--font-classic);
+    font-size: 24px;
+    color: #003399;
+    font-weight: normal;
+}
+
+.ie-homepage-logo h2 span {
+    color: #ff8c00;
+    font-weight: bold;
+}
+
+.ie-homepage-search {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 480px;
+}
+
+.ie-homepage-search-box {
+    display: flex;
+    width: 100%;
+    border: 2px solid #3170e8;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.ie-homepage-search-box input {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    padding: 10px 14px;
+    font-family: var(--font-classic);
+    user-select: text;
+}
+
+.ie-homepage-search-box button {
+    background: linear-gradient(to bottom, #3170e8, #245edb);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: var(--font-classic);
+}
+
+.ie-homepage-search-box button:hover {
+    background: linear-gradient(to bottom, #5b8ff3, #3170e8);
+}
+
+.ie-homepage-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.ie-homepage-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    color: #003399;
+    text-decoration: none;
+    transition: all 0.15s ease;
+}
+
+.ie-homepage-link:hover {
+    background: #e8f0ff;
+    border-color: #3170e8;
+    color: #0044be;
+}
+
+.ie-homepage-link img {
+    width: 16px;
+    height: 16px;
+}
+
+.ie-homepage-tip {
+    margin-top: 16px;
+    font-size: 10px;
+    color: #888;
+    text-align: center;
+    line-height: 1.5;
+    max-width: 400px;
+}
+
+/* IE Error Page */
+.ie-error-page {
+    position: absolute;
+    inset: 0;
+    background: #ffffff;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 40px;
+    text-align: center;
+}
+
+.ie-error-page.visible {
+    display: flex;
+}
+
+.ie-error-page img {
+    width: 48px;
+    height: 48px;
+}
+
+.ie-error-page h3 {
+    color: #c00;
+    font-size: 16px;
+}
+
+.ie-error-page p {
+    color: #555;
+    font-size: 12px;
+    line-height: 1.5;
+    max-width: 420px;
+}
+
+.ie-error-retry {
+    margin-top: 8px;
+}
+
+/* IE Throbber (spinning globe animation) */
+.ie-throbber {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 40%, #6bc6ff, #2288cc, #005599);
+    box-shadow: inset -2px -2px 4px rgba(0,0,0,0.3), 0 0 2px rgba(0,0,0,0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.ie-throbber.spinning {
+    animation: ieThrobberSpin 1s linear infinite;
+}
+
+.ie-throbber::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 7px;
+    height: 7px;
+    background: rgba(255,255,255,0.5);
+    border-radius: 50%;
+}
+
+@keyframes ieThrobberSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive IE */
+@media (max-width: 768px) {
+    .ie-window {
+        width: 100vw !important;
+        height: calc(100vh - 30px) !important;
+        top: 0 !important;
+        left: 0 !important;
+        transform: none !important;
+        max-width: 100vw !important;
+    }
+
+    .ie-toolbar-btn span {
+        display: none;
+    }
+
+    .ie-toolbar-btn {
+        min-width: 28px;
+        padding: 3px 4px;
+    }
+
+    .ie-homepage-logo h2 {
+        font-size: 18px;
+    }
+}
+
+
+
+
+/* Window Menu Bar Dropdown */
+.menu-item.dropdown-wrapper {
+    position: relative;
+}
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #ece9d8;
+    border: 1px solid #999;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    z-index: 200;
+    padding: 2px;
+    min-width: 100px;
+    cursor: default;
+}
+.menu-item.dropdown-wrapper:hover .dropdown-menu {
+    display: block;
+}
+.dropdown-menu div {
+    padding: 3px 15px 3px 15px;
+    color: #000;
+    cursor: default;
+    font-size: 11px;
+}
+.dropdown-menu div:hover {
+    background: #316ac5;
+    color: #fff;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FILE EXPLORER - Windows XP Classic Folder Viewer
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Override the default .window centering transform */
+.fe-window {
+    transform: none !important;
+    top: 25px !important;
+    left: 80px !important;
+    width: 820px;
+    height: 530px;
+    max-height: none !important;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-classic);
+    font-size: 11px;
+    background: var(--xp-bg-gray);
+    /* Override transition to exclude transform - prevents centering transform animation */
+    transition: scale 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+                opacity 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+                width 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+                height 0.25s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+/* After dragging, the transform:none ensures position stays correct */
+.fe-window.dragging {
+    transform: none !important;
+    transition: none !important;
+}
+
+/* ── Toolbar ──────────────────────────────────────────────────── */
+.fe-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 3px 4px;
+    background: #ece9d8;
+    border-bottom: 1px solid #aca899;
+    flex-shrink: 0;
+    flex-wrap: nowrap;
+    overflow: hidden;
+}
+
+.fe-nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    padding: 3px 7px;
+    background: #ece9d8;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    font-family: var(--font-classic);
+    font-size: 11px;
+    cursor: default;
+    color: #000;
+    white-space: nowrap;
+    transition: background 0.1s, border-color 0.1s;
+}
+.fe-nav-btn:hover:not(:disabled) {
+    background: #d8d0c4;
+    border-color: #7d7d7d;
+}
+.fe-nav-btn:active:not(:disabled) {
+    background: #c8c0b4;
+    border-color: #555;
+    transform: translateY(1px);
+}
+.fe-nav-btn:disabled {
+    opacity: 0.45;
+    cursor: default;
+}
+.fe-nav-btn img {
+    width: 14px;
+    height: 14px;
+    filter: saturate(0.7);
+}
+
+.fe-toolbar-sep {
+    width: 1px;
+    height: 20px;
+    background: #aca899;
+    margin: 0 3px;
+    flex-shrink: 0;
+}
+
+.fe-toolbar-label {
+    font-size: 11px;
+    color: #444;
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding: 0 2px;
+}
+
+.fe-address-bar {
+    flex: 1;
+    min-width: 80px;
+    background: #fff;
+    border: 1px solid #7d7d7d;
+    border-radius: 0;
+    padding: 2px 6px;
+    font-family: var(--font-classic);
+    font-size: 11px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.fe-bc-link {
+    color: #0054e3;
+    cursor: pointer;
+    font-size: 11px;
+}
+.fe-bc-link:hover { text-decoration: underline; }
+.fe-bc-cur {
+    color: #000;
+    font-size: 11px;
+    font-weight: bold;
+}
+.fe-bc-sep {
+    color: #888;
+    font-size: 11px;
+    padding: 0 1px;
+}
+
+.fe-view-btn {
+    width: 24px;
+    height: 22px;
+    background: #ece9d8;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    cursor: default;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    flex-shrink: 0;
+    transition: background 0.1s, border-color 0.1s;
+}
+.fe-view-btn:hover { background: #d0c8bc; border-color: #aaa; }
+.fe-view-btn.active {
+    background: #c0b8ac;
+    border: 1px solid #888;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.15);
+}
+
+/* ── Body Layout ──────────────────────────────────────────────── */
+.fe-body {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    min-height: 0;
+}
+
+/* ── Left Tree Panel ──────────────────────────────────────────── */
+.fe-left-panel {
+    width: 185px;
+    min-width: 120px;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-right: 1px solid #aca899;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.fe-panel-header {
+    padding: 4px 8px 3px;
+    font-size: 11px;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(to bottom, #3f87e0, #2861c3);
+    border-bottom: 1px solid #1748aa;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+}
+
+.fe-tree-panel {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: #fff;
+    padding: 2px 0;
+}
+
+.fe-tree-panel::-webkit-scrollbar { width: 14px; }
+.fe-tree-panel::-webkit-scrollbar-track { background: #f0f0f0; }
+.fe-tree-panel::-webkit-scrollbar-thumb {
+    background: #c0bdb5;
+    border: 2px solid #f0f0f0;
+}
+.fe-tree-panel::-webkit-scrollbar-thumb:hover { background: #9e9b93; }
+
+.fe-tree-item {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    padding: 2px 4px;
+    cursor: default;
+    white-space: nowrap;
+    font-size: 11px;
+    color: #000;
+    border: 1px solid transparent;
+    transition: background 0.08s;
+}
+.fe-tree-item:hover {
+    background: #e8f0fc;
+    border-color: #84aee8;
+}
+.fe-tree-item.fe-tree-current {
+    background: #316ac5;
+    color: #fff;
+    border-color: #2150a0;
+}
+
+.fe-tree-toggle {
+    font-size: 9px;
+    width: 14px;
+    height: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #555;
+    cursor: pointer;
+    flex-shrink: 0;
+    border-radius: 2px;
+    transition: color 0.1s;
+}
+.fe-tree-toggle:hover { color: #0054e3; }
+.fe-tree-item.fe-tree-current .fe-tree-toggle { color: #cce; }
+
+.fe-tree-toggle-ph {
+    width: 14px;
+    flex-shrink: 0;
+    display: inline-block;
+}
+
+.fe-tree-icon {
+    font-size: 14px;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.fe-tree-label {
+    font-size: 11px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ── Splitter ─────────────────────────────────────────────────── */
+.fe-splitter {
+    width: 4px;
+    background: #ece9d8;
+    border-left: 1px solid #aca899;
+    border-right: 1px solid #aca899;
+    cursor: col-resize;
+    flex-shrink: 0;
+    transition: background 0.15s;
+}
+.fe-splitter:hover { background: #c8c0b4; }
+
+/* ── Right Area ───────────────────────────────────────────────── */
+.fe-right-area {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+    min-width: 0;
+}
+
+/* ── Info Panel (left side of right area, like WXP tasks panel) ── */
+.fe-info-panel {
+    width: 160px;
+    min-width: 140px;
+    background: #e8e4d8;
+    border-right: 1px solid #c8c0b0;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    overflow: hidden;
+    font-size: 11px;
+}
+
+.fe-info-header {
+    padding: 5px 8px 4px;
+    font-weight: bold;
+    font-size: 11px;
+    color: #fff;
+    background: linear-gradient(to bottom, #3f87e0, #2861c3);
+    border-bottom: 1px solid #1748aa;
+    letter-spacing: 0.3px;
+    flex-shrink: 0;
+}
+
+.fe-info-section-header {
+    padding: 5px 8px 3px;
+    font-weight: bold;
+    font-size: 10px;
+    color: #0054e3;
+    border-bottom: 1px solid #c8c0b0;
+    background: #ddd8cc;
+    flex-shrink: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.fe-info-content {
+    padding: 6px 8px;
+    flex-shrink: 0;
+    border-bottom: 1px solid #c8c0b0;
+    background: #edeae0;
+    min-height: 80px;
+}
+
+.fe-info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.fe-info-icon {
+    font-size: 28px;
+    line-height: 1;
+    margin-bottom: 2px;
+}
+
+.fe-info-name {
+    font-weight: bold;
+    font-size: 11px;
+    word-break: break-word;
+    color: #000;
+    line-height: 1.3;
+}
+
+.fe-info-type {
+    font-size: 10px;
+    color: #555;
+    font-style: italic;
+}
+
+.fe-info-size {
+    font-size: 10px;
+    color: #333;
+}
+
+.fe-info-desc {
+    font-size: 10px;
+    color: #444;
+    line-height: 1.4;
+    margin-top: 3px;
+}
+
+.fe-info-action-btn {
+    margin-top: 6px;
+    padding: 3px 10px;
+    background: linear-gradient(to bottom, #f5f3ee, #dedad0);
+    border: 1px solid #7d7d7d;
+    border-radius: 3px;
+    font-family: var(--font-classic);
+    font-size: 11px;
+    cursor: default;
+    color: #000;
+    transition: background 0.1s;
+    width: 100%;
+}
+.fe-info-action-btn:hover {
+    background: linear-gradient(to bottom, #e8e4da, #c8c0b4);
+}
+
+.fe-site-info {
+    padding: 6px 8px;
+    font-size: 10px;
+    color: #333;
+    line-height: 1.5;
+    overflow-y: auto;
+    flex: 1;
+}
+.fe-site-info p { margin: 2px 0; }
+.fe-site-info ul {
+    margin: 2px 0 4px 14px;
+    padding: 0;
+}
+.fe-site-info ul li { margin: 1px 0; }
+.fe-site-info strong { color: #0054e3; }
+
+/* ── Content Panel ────────────────────────────────────────────── */
+.fe-content-panel {
+    flex: 1;
+    overflow: auto;
+    background: #fff;
+    min-width: 0;
+}
+
+.fe-content-panel::-webkit-scrollbar { width: 14px; height: 14px; }
+.fe-content-panel::-webkit-scrollbar-track { background: #f0f0f0; }
+.fe-content-panel::-webkit-scrollbar-thumb {
+    background: #c0bdb5;
+    border: 2px solid #f0f0f0;
+}
+.fe-content-panel::-webkit-scrollbar-thumb:hover { background: #9e9b93; }
+
+/* ── Icons Grid View ──────────────────────────────────────────── */
+.fe-icons-grid {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 2px;
+    padding: 8px;
+}
+
+.fe-icon-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    width: 80px;
+    padding: 6px 4px;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    cursor: default;
+    text-align: center;
+    transition: background 0.08s, border-color 0.08s;
+}
+.fe-icon-item:hover {
+    background: #e8f0fc;
+    border-color: #84aee8;
+}
+.fe-icon-item.selected {
+    background: #316ac5;
+    border-color: #2150a0;
+}
+.fe-icon-item.selected .fe-icon-label {
+    color: #fff;
+}
+
+.fe-icon-img {
+    font-size: 32px;
+    line-height: 1;
+}
+
+.fe-icon-label {
+    font-size: 11px;
+    color: #000;
+    word-break: break-word;
+    line-height: 1.3;
+    max-width: 76px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+/* ── List View ────────────────────────────────────────────────── */
+.fe-list-view {
+    padding: 2px;
+    display: flex;
+    flex-direction: column;
+}
+
+.fe-list-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 8px;
+    border: 1px solid transparent;
+    cursor: default;
+    font-size: 11px;
+    color: #000;
+    transition: background 0.08s;
+    border-radius: 1px;
+}
+.fe-list-item:hover {
+    background: #e8f0fc;
+    border-color: #84aee8;
+}
+.fe-list-item.selected {
+    background: #316ac5;
+    border-color: #2150a0;
+    color: #fff;
+}
+.fe-list-item.selected .fe-list-icon { filter: brightness(10); }
+
+.fe-list-icon {
+    font-size: 16px;
+    flex-shrink: 0;
+}
+.fe-list-name {
+    font-size: 11px;
+}
+
+/* ── Details View ─────────────────────────────────────────────── */
+.fe-details-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+    font-family: var(--font-classic);
+}
+
+.fe-details-table thead th {
+    background: linear-gradient(to bottom, #f0ede4, #dedad0);
+    border: 1px solid #aca899;
+    border-top: none;
+    padding: 3px 8px;
+    text-align: left;
+    font-weight: bold;
+    font-size: 11px;
+    color: #000;
+    white-space: nowrap;
+    cursor: default;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.fe-details-row {
+    cursor: default;
+    border-bottom: 1px solid #f0ece4;
+    transition: background 0.07s;
+}
+.fe-details-row:hover { background: #e8f0fc; }
+.fe-details-row.selected { background: #316ac5; color: #fff; }
+.fe-details-row.selected td { color: #fff !important; }
+
+.fe-details-row td {
+    padding: 2px 8px;
+    font-size: 11px;
+    color: #000;
+    vertical-align: middle;
+}
+
+.fe-details-name {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+    min-width: 160px;
+    font-weight: normal;
+}
+
+.fe-details-desc {
+    font-size: 10px;
+    color: #555;
+    max-width: 300px;
+}
+.fe-details-row.selected .fe-details-desc { color: #cce; }
+
+/* ── Empty Folder ─────────────────────────────────────────────── */
+.fe-empty-folder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 40px 20px;
+    color: #888;
+    font-size: 12px;
+    width: 100%;
+}
+.fe-empty-folder span { font-size: 40px; }
+
+/* ── Text Viewer (for .txt files) ─────────────────────────────── */
+.fe-text-viewer {
+    padding: 8px;
+}
+.fe-text-viewer-title {
+    font-weight: bold;
+    font-size: 12px;
+    margin-bottom: 6px;
+    color: #0054e3;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.fe-text-content {
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    background: #f8f8f8;
+    border: 1px solid #ccc;
+    padding: 8px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 300px;
+    overflow-y: auto;
+    border-radius: 2px;
+    line-height: 1.4;
+    color: #222;
+    user-select: text;
+}
+
