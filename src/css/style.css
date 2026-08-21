@@ -1,9 +1,9 @@
 /* Modular Windows XP Design System */
 
-@import url('./modules/_variables.css');
-@import url('./modules/_desktop.css');
-@import url('./modules/_window.css');
-@import url('./modules/_content.css');
-@import url('./modules/_taskbar.css');
-@import url('./modules/_responsive.css');
-@import url('./modules/_apps.css');
+@import url('./modules/variables.css');
+@import url('./modules/desktop.css');
+@import url('./modules/window.css');
+@import url('./modules/content.css');
+@import url('./modules/taskbar.css');
+@import url('./modules/responsive.css');
+@import url('./modules/apps.css');
