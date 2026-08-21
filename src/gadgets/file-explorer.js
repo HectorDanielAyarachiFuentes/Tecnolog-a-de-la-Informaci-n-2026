@@ -94,6 +94,35 @@ const FILE_SYSTEM = {
                         },
                         { id: 'f-reporte', name: 'Actividad 1 -reporte-laboratorio-prompts.pdf', type: 'pdf', size: '414 KB', description: 'Reporte final del laboratorio de Ingenieria de Prompts. Entregable principal de la Actividad 1.', action: 'open-pdf', path: 'public/content/Actividad-1/Actividad 1 -reporte-laboratorio-prompts.pdf' }
                       ]
+                    },
+                    {
+                      id: 'folder-act2',
+                      name: 'Actividad-2',
+                      type: 'folder',
+                      description: 'Segunda actividad: Actividad Asincrónica 2',
+                      children: [
+                        {
+                          id: 'folder-act2-data',
+                          name: 'data',
+                          type: 'folder',
+                          description: 'Datos y recursos multimedia de la Actividad 2',
+                          children: [
+                            { id: 'f-act2-strat', name: '2026_Training_Performance_and_Strategy.pdf', type: 'pdf', size: '6.2 MB', description: 'Documento de estrategia y rendimiento de capacitación.', action: 'open-pdf', path: 'public/content/Actividad-2/data/2026_Training_Performance_and_Strategy.pdf' },
+                            { id: 'f-act2-vid', name: 'Capacitación_Puerto_Norte.mp4', type: 'mp4', size: '24.1 MB', description: 'Video de capacitación Puerto Norte.' },
+                            { id: 'f-act2-audio', name: 'Por_qué_fracasan_los_cursos_del_ayuntamiento.m4a', type: 'mp3', size: '39.1 MB', description: 'Audio sobre cursos del ayuntamiento.' },
+                            { id: 'f-act2-idea', name: 'idea 1.txt', type: 'txt', size: '42 KB', description: 'Notas e ideas de trabajo.', action: 'open-pdf', path: 'public/content/Actividad-2/data/idea 1.txt' }
+                          ]
+                        },
+                        { id: 'f-act2-pdf', name: 'Actividad asincronica 2.pdf', type: 'pdf', size: '1.07 MB', description: 'Reporte final de la Actividad Asincrónica 2.', action: 'open-pdf', path: 'public/content/Actividad-2/Actividad asincronica 2.pdf' },
+                        { id: 'f-act2-typ', name: 'Actividad asincronica 2.typ', type: 'txt', size: '52 KB', description: 'Código fuente Typst del reporte de la Actividad 2.', action: 'open-pdf', path: 'public/content/Actividad-2/Actividad asincronica 2.typ' }
+                      ]
+                    },
+                    {
+                      id: 'folder-act3',
+                      name: 'Actividad-3',
+                      type: 'folder',
+                      description: 'Tercera actividad: Próximamente disponible en el semestre 2026',
+                      children: []
                     }
                   ]
                 },
@@ -244,11 +273,23 @@ function feNavigateTo(id) {
 
   if (node.action === 'open-pdf' && node.path) {
     openWindow('main-window');
-    switchTab('tab-act1');
-    setTimeout(() => {
-      const iframe = document.getElementById('pdf-iframe');
-      if (iframe) iframe.src = node.path;
-    }, 100);
+    if (node.path.includes('Actividad-2')) {
+      switchTab('tab-act2');
+      const pathBar = document.querySelector('#tab-act2 .viewer-path-bar');
+      if (pathBar) pathBar.innerText = 'C:\\TI-2026\\' + node.path.replace(/\//g, '\\').replace(/^public\\/, '');
+      setTimeout(() => {
+        const iframe = document.getElementById('pdf-iframe-2');
+        if (iframe) iframe.src = node.path;
+      }, 100);
+    } else {
+      switchTab('tab-act1');
+      const pathBar = document.querySelector('#tab-act1 .viewer-path-bar');
+      if (pathBar) pathBar.innerText = 'C:\\TI-2026\\' + node.path.replace(/\//g, '\\').replace(/^public\\/, '');
+      setTimeout(() => {
+        const iframe = document.getElementById('pdf-iframe');
+        if (iframe) iframe.src = node.path;
+      }, 100);
+    }
     feSelectedNodeId = id;
     feRenderRightPanel();
     return;

@@ -91,15 +91,31 @@ function switchTab(tabId) {
 // ── PDF helpers ───────────────────────────────────────────────
 function selectActivity(activityId) {
     if (activityId === 'act1') {
-        const pathBar = document.querySelector('.viewer-path-bar');
-        if (pathBar) pathBar.innerText = 'C:\\TI-2026\\Actividades\\Actividad-1\\Actividad 1 -reporte-laboratorio-prompts.pdf';
+        switchTab('tab-act1');
+        const pathBar = document.querySelector('#tab-act1 .viewer-path-bar');
+        if (pathBar) pathBar.innerText = 'C:\\TI-2026\\content\\Actividad-1\\Actividad 1 -reporte-laboratorio-prompts.pdf';
         const iframe = document.getElementById('pdf-iframe');
         if (iframe) iframe.src = 'public/content/Actividad-1/Actividad 1 -reporte-laboratorio-prompts.pdf';
+    } else if (activityId === 'act2') {
+        switchTab('tab-act2');
+        const pathBar = document.querySelector('#tab-act2 .viewer-path-bar');
+        if (pathBar) pathBar.innerText = 'C:\\TI-2026\\content\\Actividad-2\\Actividad asincronica 2.pdf';
+        const iframe = document.getElementById('pdf-iframe-2');
+        if (iframe) iframe.src = 'public/content/Actividad-2/Actividad asincronica 2.pdf';
+    } else if (activityId === 'act3') {
+        switchTab('tab-act3');
     }
 }
 
-function refreshPDF() {
-    const iframe = document.getElementById('pdf-iframe');
+function refreshPDF(iframeId) {
+    let iframe;
+    if (iframeId) {
+        iframe = document.getElementById(iframeId);
+    }
+    if (!iframe) {
+        const activePanel = document.querySelector('.xp-tab-panel.active');
+        iframe = activePanel ? activePanel.querySelector('iframe') : document.getElementById('pdf-iframe');
+    }
     if (iframe) {
         const src = iframe.src;
         iframe.src = '';
@@ -283,29 +299,41 @@ function closeAboutModalOnOverlay(event) {
 }
 
 // ── PDF Expand ────────────────────────────────────────────────
-function toggleExpandPDF() {
-    const viewer  = document.querySelector('.activities-viewer');
+function toggleExpandPDF(btn) {
+    let viewer;
+    if (btn && btn.closest) {
+        viewer = btn.closest('.activities-viewer');
+    }
+    if (!viewer) {
+        const activePanel = document.querySelector('.xp-tab-panel.active');
+        viewer = activePanel ? activePanel.querySelector('.activities-viewer') : document.querySelector('.activities-viewer');
+    }
     if (!viewer) return;
-    const btnText = document.getElementById('text-expand-pdf');
-    const btnIcon = document.getElementById('icon-expand-pdf');
+
+    const btnText = viewer.querySelector('.text-expand-pdf') || viewer.querySelector('#text-expand-pdf') || document.getElementById('text-expand-pdf');
+    const btnIcon = viewer.querySelector('.icon-expand-pdf') || viewer.querySelector('#icon-expand-pdf') || document.getElementById('icon-expand-pdf');
     const desktop = document.querySelector('.desktop');
 
     viewer.classList.toggle('expanded');
 
     if (viewer.classList.contains('expanded')) {
-        let ph = document.getElementById('pdf-viewer-placeholder');
+        let ph = viewer.parentNode.querySelector('.pdf-viewer-placeholder');
         if (!ph) {
             ph = document.createElement('div');
-            ph.id = 'pdf-viewer-placeholder';
+            ph.className = 'pdf-viewer-placeholder';
             ph.style.display = 'none';
             viewer.parentNode.insertBefore(ph, viewer);
         }
+        viewer._ph = ph;
         if (desktop) desktop.appendChild(viewer);
         if (btnText) btnText.innerText = 'Contraer';
         if (btnIcon) { btnIcon.src = 'public/assets/iconos/collapse.svg'; btnIcon.alt = 'Contraer'; }
     } else {
-        const ph = document.getElementById('pdf-viewer-placeholder');
-        if (ph && ph.parentNode) ph.parentNode.insertBefore(viewer, ph);
+        const ph = viewer._ph || document.querySelector('.pdf-viewer-placeholder');
+        if (ph && ph.parentNode) {
+            ph.parentNode.insertBefore(viewer, ph);
+            ph.remove();
+        }
         if (btnText) btnText.innerText = 'Expandir';
         if (btnIcon) { btnIcon.src = 'public/assets/iconos/expand.svg'; btnIcon.alt = 'Expandir'; }
     }
