@@ -470,6 +470,22 @@ window.setVisualizationMode = function(mode) {
                     }
                 };
 
+                // Manejo silencioso: si el video externo no carga (servidor caído), volver a Album Art
+                const handleVisError = () => {
+                    if (spinner) spinner.style.display = 'none';
+                    visualizer.style.opacity = '0';
+                    visualizer.style.display = 'none';
+                    if (albumArt) albumArt.style.display = 'flex';
+                    window.activeVisMode = 'art';
+                    // Marcar Album Art como activo en el menú
+                    const visItems = document.querySelectorAll('#visMenuList .dropdown-item');
+                    if (visItems.length > 0) {
+                        visItems.forEach(item => item.classList.remove('active-state'));
+                        if (visItems[2]) visItems[2].classList.add('active-state');
+                    }
+                };
+
+                visualizer.onerror = handleVisError;
                 visualizer.onloadeddata = makeVisibleAndPlay;
                 visualizer.oncanplay = makeVisibleAndPlay;
                 visualizer.onplaying = makeVisibleAndPlay;
@@ -487,10 +503,23 @@ window.setVisualizationMode = function(mode) {
                         visualizer.style.opacity = '0';
                         if (spinner && window.activeView === 'now-playing') spinner.style.display = 'block';
                         
+                        // Verificar si el video carga antes de mostrar spinner
+                        const testVid = new Image();
+                        testVid.onerror = handleVisError;
+
                         visualizer.src = ambianceVideos[currentAmbianceIndex];
                         visualizer.load();
                         
-                        setTimeout(makeVisibleAndPlay, 1500); 
+                        // Timeout de seguridad: si en 5s no cargó nada, fallback silencioso
+                        const ambianceTimeout = setTimeout(() => {
+                            if (visualizer.readyState < 2) {
+                                handleVisError();
+                            }
+                        }, 5000);
+
+                        const originalOnLoaded = makeVisibleAndPlay;
+                        visualizer.onloadeddata = () => { clearTimeout(ambianceTimeout); originalOnLoaded(); };
+                        visualizer.oncanplay = () => { clearTimeout(ambianceTimeout); originalOnLoaded(); };
                     } else {
                         makeVisibleAndPlay();
                     }
