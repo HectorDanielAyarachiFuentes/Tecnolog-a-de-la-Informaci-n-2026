@@ -44,6 +44,10 @@
                 <img src="public/assets/iconos/help_book_big-0.png" alt="Sobre Mí">
                 <span>Sobre mí</span>
             </div>
+            <div class="desktop-icon" id="icon-wmp">
+                <img src="src/gadgets/wmp9/favicon.svg" alt="Windows Media Player">
+                <span>Windows Media Player</span>
+            </div>
             <div class="desktop-icon" id="icon-file-explorer">
                 <img src="public/assets/iconos/directory_open-4.png" alt="Mi PC - Explorador">
                 <span>Explorador</span>
@@ -168,11 +172,28 @@
                 </div>
             </div>
 
-            <!-- Window Status Bar -->
             <div class="window-statusbar">
                 <div class="statusbar-pane pane-status">Listo</div>
                 <div class="statusbar-pane pane-info">Hector Daniel Ayarachi Fuentes</div>
                 <div class="statusbar-pane pane-zone"><img src="public/assets/iconos/world-0.png" alt="Internet"> Mi PC | Zona de Intranet local</div>
+            </div>
+        </div>
+
+        <!-- Windows Media Player Window -->
+        <div class="window wmp-window" id="wmp-window" style="display: none; width: 700px; height: 500px;">
+            <div class="window-titlebar wmp-titlebar" id="wmp-titlebar">
+                <div class="titlebar-left">
+                    <img src="src/gadgets/wmp9/favicon.svg" class="titlebar-icon" alt="WMP">
+                    <span class="titlebar-text">Reproductor de Windows Media</span>
+                </div>
+                <div class="titlebar-controls">
+                    <button class="titlebar-button btn-minimize" onclick="minimizeWindow('wmp-window')" title="Minimizar"></button>
+                    <button class="titlebar-button btn-maximize" onclick="toggleMaximizeWindow('wmp-window')" title="Maximizar"></button>
+                    <button class="titlebar-button btn-close" onclick="closeWindow('wmp-window')" title="Cerrar"></button>
+                </div>
+            </div>
+            <div class="wmp-body" style="width: 100%; height: calc(100% - 31px); padding: 0;">
+                <iframe id="wmp-iframe" src="src/gadgets/wmp9/index.htm" style="width: 100%; height: 100%; border: none;"></iframe>
             </div>
         </div>
 
@@ -264,6 +285,10 @@
                 <div class="taskbar-item" id="taskbar-fe-window" style="display:none;" onclick="toggleWindowMinimization('fe-window')">
                     <img src="public/assets/iconos/directory_open-4.png" alt="Explorador">
                     <span class="taskbar-item-text">Explorador de Windows</span>
+                </div>
+                <div class="taskbar-item" id="taskbar-wmp-window" style="display:none;" onclick="toggleWindowMinimization('wmp-window')">
+                    <img src="src/gadgets/wmp9/favicon.svg" alt="WMP">
+                    <span class="taskbar-item-text">Reproductor de Windows Media</span>
                 </div>
             </div>
 
@@ -573,7 +598,7 @@
                             <img src="public/assets/iconos/world-0.png" alt=""> Google
                         </div>
                         <div class="ie-homepage-link" onclick="ieNavigateTo('https://www.youtube.com')">
-                            <img src="public/assets/iconos/video_player.svg" alt=""> YouTube
+                            <img src="src/gadgets/wmp9/favicon.svg" alt=""> YouTube
                         </div>
                         <div class="ie-homepage-link" onclick="ieNavigateTo('https://es.wikipedia.org')">
                             <img src="public/assets/iconos/help_book_big-0.png" alt=""> Wikipedia
@@ -743,15 +768,12 @@
     <script src="https://unpkg.com/webamp@1.5.0/built/webamp.bundle.min.js"></script>
     <script src="src/js/draggabilly.pkgd.min.js"></script>
     <script src="src/js/script.js"></script>
-    <script src="src/gadgets/pinball/pinball.js"></script>
+    <!-- App / Gadget Scripts -->
     <script src="src/gadgets/winamp.js"></script>
+    <script src="src/gadgets/pinball.js"></script>
     <script src="src/gadgets/internet-explorer.js"></script>
     <script src="src/gadgets/file-explorer.js"></script>
+    <script src="src/gadgets/media-player.js"></script>
 </body>
-</html>
-
-
-
-
 
 
