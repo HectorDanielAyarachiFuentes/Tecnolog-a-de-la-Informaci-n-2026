@@ -33,7 +33,15 @@
 │       └── Mirtha Pérez - La Nave Del Olvido.mp4
 ├── src/                                     # Código fuente del proyecto
 │   ├── css/
-│   │   └── style.css                        # Sistema de diseño completo estilo Windows XP Luna Blue
+│   │   ├── modules/                         # Módulos CSS separados por funcionalidad
+│   │   │   ├── _variables.css               # Variables y reset global
+│   │   │   ├── _desktop.css                 # Entorno y iconos de escritorio
+│   │   │   ├── _window.css                  # Estilos de ventanas y pestañas
+│   │   │   ├── _taskbar.css                 # Barra de tareas y menú inicio
+│   │   │   ├── _content.css                 # Contenido de actividades y panel About
+│   │   │   ├── _apps.css                    # Estilos específicos de IE6, Winamp, Pinball
+│   │   │   └── _responsive.css              # Ajustes responsivos
+│   │   └── style.css                        # Archivo principal que importa todos los módulos
 │   ├── js/
 │   │   ├── script.js                        # Lógica principal del escritorio, ventanas, reloj y pestañas
 │   │   └── draggabilly.pkgd.min.js          # Librería para arrastre suave de iconos del escritorio
@@ -71,10 +79,15 @@
 ---
 
 ### 🎨 3.2. Carpeta `src/css/`
-* **`src/css/style.css`:**
-  * **Design System XP:** Define los gradientes azules clásicos, bordes biselados, botones Luna Blue, pestañas de propiedades estilo `sys-tab` y tipografía Tahoma / Outfit.
-  * **Gestión de Ventanas:** Clases para estados activo, minimizado, maximizado, barra de título (`.window-titlebar`), botones de control (cerrar/minimizar/maximizar) y barras de estado.
-  * **Estilos de Gadgets:** Estilos personalizados para la interfaz de IE6 (barra de dirección, throbber animado, barra de progreso), reproductor mini Winamp de la barra de tareas y ventana del Pinball.
+* **`src/css/style.css`:** Archivo principal de estilos que une todos los submódulos usando `@import`.
+* **`src/css/modules/`:** 
+  * **`_variables.css`:** Define las propiedades personalizadas, reset global, gradientes clásicos y tipografía (Tahoma / Outfit).
+  * **`_desktop.css`:** Reglas para el entorno del escritorio y posicionamiento de iconos.
+  * **`_window.css`:** Clases para estados activo, minimizado, maximizado, barra de título (`.window-titlebar`), pestañas (`sys-tab`), cuadros de diálogo y botones de control.
+  * **`_taskbar.css`:** Define la barra de tareas clásica inferior, botón de inicio, menú de inicio y bandeja del sistema (System Tray).
+  * **`_content.css`:** Diseño del layout de actividades, el visor PDF intergrado y la sección "Sobre mí".
+  * **`_apps.css`:** Estilos para las aplicaciones embebidas (IE6, Winamp, Pinball Space Cadet, explorador de Windows).
+  * **`_responsive.css`:** Ajustes y media queries para pantallas de menor tamaño.
 
 ---
 
@@ -137,7 +150,7 @@ Cuando se solicite hacer cambios en el proyecto, consulta este cuadro antes de e
 | :--- | :--- |
 | **Agregar nuevo gadget o app al escritorio** | 1. Crear `src/gadgets/nombre-gadget.js`<br>2. Agregar HTML de la ventana e icono en `index.html`<br>3. Registrar evento de click en `src/js/script.js`<br>4. Ajustar estilos en `src/css/style.css` |
 | **Modificar comportamiento del Visor PDF** | 1. Modificar HTML de la toolbar en `index.html`<br>2. Editar funciones `selectActivity()` y `refreshPDF()` en `src/js/script.js` |
-| **Ajustar diseño o interfaz Windows XP** | Editar variables y clases CSS en `src/css/style.css` |
+| **Ajustar diseño o interfaz Windows XP** | Editar el módulo correspondiente dentro de `src/css/modules/` (ej. `_window.css`, `_taskbar.css`, etc.) |
 | **Modificar portada o texto del PDF** | Ejecutar script `scripts/edit_pdf.py` mediante Python |
 | **Cambiar reproductor Winamp / Canciones** | Editar objeto de configuración `webampInstance` en `src/gadgets/winamp.js` |
 
